@@ -65,12 +65,17 @@ var getVendorPrefix = function getVendorPrefix(property) {
 // CSS Object
 // 
 
+var _ = require('lodash');
+
 var CSS = function CSS(props) {
-    this.styles = props;
+    this.styles = props || {};
 };
 
 CSS.prototype.rule = function rule(name, value) {
-    this.styles[name] = value;
+    var nextStyles = {};
+    nextStyles[name] = value;
+
+    this.styles = _.defaults(nextStyles, this.styles);
 };
 
 CSS.prototype.prefix = function prefix() {
