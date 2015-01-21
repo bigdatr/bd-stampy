@@ -2,10 +2,10 @@
 var BrowserHistory = require('../utils/History'),
     _ = require('lodash');
 
-
 var Url = {
     getQueryParams: function() {
-        console.warn('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
+        // console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
+
         if (typeof window === 'undefined') {
             return {};
         }
@@ -58,6 +58,8 @@ var Url = {
     //     BrowserHistory.navigate(nextUrl, opt);
     // },
     setState: function(params, config) {
+        // console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
+
         params = params || {};
 
         var options = _.defaults(config || {}, {

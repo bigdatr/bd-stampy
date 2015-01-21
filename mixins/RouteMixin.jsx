@@ -2,7 +2,7 @@
 var React = require('react'),
     _ = require('lodash'),
     BrowserHistory = require('../utils/History'),
-    Url = require('../utils/Url');
+    UrlStore = require('../utils/UrlStore');
 
 
 function getRoutes(routes) {
@@ -86,7 +86,7 @@ function getRouteState(hash, _routes, history) {
         hash: hash,
         route: route,
         route_base: hashes[0] || '#',
-        queryString: Url.getQueryParams() || {}
+        queryString: UrlStore.getQueryParams() || {}
 
     };
 

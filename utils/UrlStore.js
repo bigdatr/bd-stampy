@@ -43,6 +43,13 @@ UrlStore.prototype.setQueryParams = function(params, config) {
     return Url.setState(params, config);
 };
 
+
+
+
+
+
+
+
 var _instance = new UrlStore();
 
 function _onHashChange(route) {
