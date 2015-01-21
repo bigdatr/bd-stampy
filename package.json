@@ -1,0 +1,46 @@
+{
+  "name": "bd-stampy",
+  "version": "0.1.0",
+  "description": "React UI Component Library",
+  "main": "lib/stampy.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bigdatr/bd-stampy.git"
+  },
+  "keywords": [
+    "react",
+    "ui"
+  ],
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/bigdatr/bd-stampy/issues"
+  },
+  "homepage": "https://github.com/bigdatr/bd-stampy",
+  "author": [
+    "Allan Hortle",
+    "Atridge D'Costa"
+  ],
+  "dependencies": {
+    "color": "^0.7.2",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.3",
+    "node-jsx": "^0.12.4",
+    "react": "^0.12.2",
+    "react-bouncefix": "^0.1.8",
+    "react-tools": "^0.12.2",
+    "rx": "^2.3.13"
+  },
+  "devDependencies": {
+    "jest": "^0.1.37",
+    "jest-cli": "^0.1.18"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
+}
