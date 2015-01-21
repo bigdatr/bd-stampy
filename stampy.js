@@ -1,1 +1,1 @@
-console.warn('bd-stampy', 'DEPRECATED: require path must be directly to the component', "require('stampy/components/Button.jsx')");
+console.warn('bd-stampy', 'DEPRECATED: require path must be directly to the component', "require('bd-stampy/components/Button.jsx')");

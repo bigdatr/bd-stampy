@@ -55,11 +55,11 @@ var FileUpload = React.createClass({
     },
     onProgress: function(e) {
         if (this.props.onProgress) {
-            var percentage = (e.loaded / e.totalSize) * 100;
+            var percentage = (e.loaded / e.total) * 100;
 
             var details = {
                 loaded: e.loaded,
-                totalSize: e.totalSize,
+                total: e.total,
                 percentage: Math.round(percentage * 100) / 100
             };
 

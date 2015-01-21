@@ -29,18 +29,20 @@
     "moment": "^2.8.3",
     "node-jsx": "^0.12.4",
     "react": "^0.12.2",
-    "react-bouncefix": "^0.1.8",
-    "react-tools": "^0.12.2",
-    "rx": "^2.3.13"
+    "react-bouncefix": "^1.0.1",
+    "react-tools": "^0.12.2"
   },
   "devDependencies": {
-    "jest": "^0.1.37",
-    "jest-cli": "^0.1.18"
+    "jest-cli": "^0.2.1",
+    "jest-reporters": "0.0.2"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/setup-jasmine-env.js",
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
-    ]
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/jest-reporters"
+    ],
+    "collectCoverage": true
   }
 }

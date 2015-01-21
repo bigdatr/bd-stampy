@@ -5,6 +5,7 @@ var BrowserHistory = require('../utils/History'),
 
 var Url = {
     getQueryParams: function() {
+        console.warn('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
         if (typeof window === 'undefined') {
             return {};
         }
