@@ -2,7 +2,7 @@
   "name": "bd-stampy",
   "version": "0.1.1",
   "description": "React UI Component Library",
-  "main": "lib/stampy.js",
+  "main": "stampy.js",
   "scripts": {
     "test": "jest"
   },
