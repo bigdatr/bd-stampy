@@ -4,7 +4,7 @@ var BrowserHistory = require('../utils/History'),
 
 var Url = {
     getQueryParams: function() {
-        // console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
+        console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
 
         if (typeof window === 'undefined') {
             return {};
@@ -35,30 +35,8 @@ var Url = {
 
         return params;
     },
-    // setQueryParams: function(nextParams, options) {
-    //     console.error('Url::setQueryParams', 'DEPRECATED, use `Stampy.Url.setState()` instead');
-
-    //     var defaultParams = {};
-    //     if (options && options.replace) {
-    //         defaultParams = this.getQueryParams();
-    //     }
-
-    //     nextParams = _.defaults(nextParams, defaultParams);
-
-    //     var q = this.paramsToQuery(nextParams);
-    //     var hash = BrowserHistory.location.hash;
-    //     var split = hash.split('?');
-
-    //     var opt = _.defaults(options || {}, {replace: true, trigger: false});
-
-    //     q = encodeURI(q);
-
-    //     var nextUrl = split[0] + q;
-
-    //     BrowserHistory.navigate(nextUrl, opt);
-    // },
     setState: function(params, config) {
-        // console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
+        console.error('stampy/utils/Url.js', 'This module will be removed in a future release, use `UrlStore` instead.');
 
         params = params || {};
 
