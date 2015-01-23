@@ -115,6 +115,8 @@ var RouteMixin = {
         if (!BrowserHistory.isStarted()) {
             BrowserHistory.start();
         }
+
+        console.warn('bd-stampy::RouteMixin', 'This mixin will be deprecated soon');
     },
     componentWillUnmount: function () {
         if (this.updateHash && this.RouteMixin_route_handler) {
