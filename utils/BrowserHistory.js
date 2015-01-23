@@ -26,8 +26,11 @@ BrowserHistory.prototype = {
         }
     },
     getHash: function() {
+        console.log(typeof window !== 'undefined' , process);
+
         // Skip this if we are running server side
-        if (typeof window !== 'undefined' && !process.env) {
+        if (typeof window !== 'undefined') {
+
             this._hash = _History.location.hash;
         }
 
