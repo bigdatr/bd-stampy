@@ -103,7 +103,6 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         return false;
     },
     getHash: function () {
-        console.log('hash');
         return BrowserHistory.getHash();
     }
 });
