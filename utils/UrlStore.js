@@ -3,17 +3,14 @@ var EventEmitter = require('events').EventEmitter;
 var BrowserHistory = require('../utils/BrowserHistory');
 var _ = require('lodash');
 
-var UrlStore = function () {
-    var _this = this;
-
-    BrowserHistory.onRouteChange(function() {
-        _this.emit('route:change');    
-    });
-};
+var UrlStore = function () {};
 
 util.inherits(UrlStore, EventEmitter);
 
 UrlStore.prototype = _.defaults(UrlStore.prototype, {
+    _onRouteChange: function(route) {
+        this.emit('route:change');
+    },
     queryStringToParams: function(queryString) {
         var params = {};
 
@@ -82,10 +79,11 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         var nextQueryString = this.paramsToQueryString(nextParams);
 
         if (currentQueryString !== nextQueryString) {
-            var nextPath = [
-                '#', BrowserHistory.getHash(),
-                '?', nextQueryString
-            ].join('');
+            var nextPath = '#' + BrowserHistory.getHash();
+
+            if (nextQueryString !== '') {
+                nextPath += '?' + nextQueryString;
+            }
 
             var options = _.defaults(config || {}, {
                 addHistoryEvent: true,      // Create a new event in the browser's history
@@ -107,4 +105,8 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
     }
 });
 
-module.exports = new UrlStore();
+var _instance = new UrlStore();
+
+BrowserHistory.onRouteChange(_instance._onRouteChange.bind(_instance));
+
+module.exports = _instance;

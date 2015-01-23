@@ -1,7 +1,10 @@
+/* global window */
+
 var _History = require('../utils/History');
 
 var BrowserHistory = function () {
     this._hash = '';
+    this._url = '';
 };
 
 BrowserHistory.prototype = {
@@ -13,37 +16,55 @@ BrowserHistory.prototype = {
     navigate: function(path, options) {
         return _History.navigate(path, options);
     },
-    setUrl: function(url) {
-        this._url = url;
+    _updateUrl: function(forcedUrl) {
+        var urlChanged = false;
 
-        var urlComponents = url.split('#');
-
-        if (urlComponents.length === 1) {
-            this._hash = '';
+        // Skip this if we are running server side
+        if (forcedUrl) {
+            this._url = forcedUrl;
+            urlChanged = true;
         }
-        else {
-            this._hash = urlComponents[1];
+        else if (typeof window !== 'undefined' && !window.spyOn) {
+            this._url = _History.location.hash;
+            urlChanged = true;
+        }
+
+        if (urlChanged) {
+            var h = this._url;
+
+            // Remove hash prefix
+            if (h.substr(0, 1) === '#') {
+                h = h.substr(1, h.length-1);
+            }
+
+            // Remove any query params
+            var parts = h.split('?');
+
+            this._hash = parts[0];
+
+            if (parts.length === 1 || parts[1] === '') {
+                this._query = '';
+            }
+            else {
+                this._query = parts[1];
+            }
+        }
+    },
+    setUrl: function(url) {
+        var hashPosition = url.indexOf('#');
+
+        if (hashPosition !== -1) {
+            url = url.substr(hashPosition, url.length - hashPosition);
+            this._updateUrl(url);
         }
     },
     getHash: function() {
-        // Skip this if we are running server side
-        if (typeof window !== 'undefined') {
-
-            this._hash = _History.location.hash;
-        }
-
+        this._updateUrl();
         return this._hash;
     },
     getQueryString: function() {
-        var hash = this.getHash();
-        var hashComponents = hash.split('?');
-
-        if (hashComponents.length === 1 || hashComponents[1] === '') {
-            return '';
-        }
-        else {
-            return hashComponents[1];
-        }
+        this._updateUrl();
+        return this._query;
     }
 };
 
