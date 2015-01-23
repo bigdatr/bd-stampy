@@ -189,6 +189,21 @@ describe('UrlStore.setQueryParams', function() {
     });
 });
 
+describe('UrlStore.getRouteBase', function() {
+    var BrowserHistory = require(base_path + 'utils/BrowserHistory');
+    var UrlStore = require(path);
+
+    it('returns returns the first hash segemnt', function() {
+        BrowserHistory.getHash.mockReturnValue('#Feed/campaigns');
+        BrowserHistory.getQueryString.mockReturnValue('brand=Toyota');
+
+        var expected = '#Feed';
+        var result = UrlStore.getRouteBase();
+
+        expect(result).toBe(expected);
+    });
+});
+
 
 
 

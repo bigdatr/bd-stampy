@@ -104,6 +104,21 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
     },
     getHash: function () {
         return BrowserHistory.getHash();
+    },
+    getRouteBase: function () {
+        var hash = BrowserHistory.getHash();
+
+        if (hash && hash !== '') {
+            
+            // Ignore query string
+            if (hash.indexOf('?') !== -1) {
+                hash = hash.split('?')[0];
+            }
+
+            hash = hash.split('/');
+        }
+
+        return hash[0] || '#';
     }
 });
 
