@@ -22,7 +22,9 @@ var Video = React.createClass({
     mixins: [ClassMixin],
     propTypes: {
         src: React.PropTypes.string,
-        poster: React.PropTypes.string
+        autoPlay: React.PropTypes.bool,
+        poster: React.PropTypes.string,
+        controls: React.PropTypes.bool
     },
     getInitialState: function() {
         return {
@@ -32,7 +34,9 @@ var Video = React.createClass({
             duration: 0,
             buffered: 0,
             currentTime: 0,
-            dragging: false
+            dragging: false,
+            controls: true,
+            autoPlay: false
         };
     },
     componentDidMount: function() {
@@ -42,8 +46,8 @@ var Video = React.createClass({
         this._video.addEventListener('loadedmetadata', this.onVideoLoaded);
         this._video.addEventListener('seeking', this.onVideoSeek);
         this._video.addEventListener('seeked', this.onVideoSought);
-
     },
+
     componentWillUnmount: function() {
         // Cleanup listeners
         clearInterval(this.bufferInterval);
@@ -149,20 +153,31 @@ var Video = React.createClass({
     render: function() {
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
-        classes.is(this.state.isDarkVideo, 'dark');
-
-        var playPauseIcon = this.state.paused ? 'play' : 'pause';
-        var fullscreenIcon = this.state.fullscreen ? 'unfullscreen' : 'fullscreen';
-        var mutedIcon = this.state.muted ? 'muted' : 'unmuted';
+        classes.is(this.state.isDarkVideo, 'dark');        
 
         return (
             <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()}>
                 <video ref="video"
+                    {...this.props}
                     onClick={this.onPlayPause}
                     src={this.props.src}
-                    poster={this.props.poster}>
+                    poster={this.props.poster}
+                    autoPlay={this.props.autoPlay}
+                    >
                     Sorry, your browser does not support embedded videos. <a href={this.props.src}>Download Instead</a>
                 </video>
+                {this.renderControls()}
+                
+            </div>
+        );
+    },
+    renderControls: function() {
+        var playPauseIcon = this.state.paused ? 'play' : 'pause';
+        var fullscreenIcon = this.state.fullscreen ? 'unfullscreen' : 'fullscreen';
+        var mutedIcon = this.state.muted ? 'muted' : 'unmuted';
+
+        if(this.props.controls) {
+            return (
                 <div className="Video_controls">
                     <div className="Video_toolbar">
                         <Icon modifier="button" className="l-right" onClick={this.onFullscreen} name={fullscreenIcon}></Icon>
@@ -174,8 +189,8 @@ var Video = React.createClass({
                         <div className="Video_bar Video_bar-progress" style={{width:this.state.currentTime + "%"}}></div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     },
     renderStyle: function () {
         // console.log(this.props.maxHeight);

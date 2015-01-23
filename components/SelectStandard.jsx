@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var ClassBuilder = require('stampy/src/utils/ClassBuilder');
+var ClassBuilder = require('bd-stampy/utils/ClassBuilder');
 
 var SelectStandard = React.createClass({
     displayName: 'SelectStandard',

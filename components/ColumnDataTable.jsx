@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var Tag = require('stampy/src/components/Tag');
+var Tag = require('bd-stampy/components/Tag');
 
 var ColumnDataTable = React.createClass({
     displayName: 'ColumnDataTable',

@@ -101,6 +101,9 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         }
 
         return false;
+    },
+    getHash: function () {
+        return BrowserHistory.getHash();
     }
 });
 
