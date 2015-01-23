@@ -24,7 +24,7 @@ BrowserHistory.prototype = {
         else {
             this._hash = urlComponents[1];
         }
-    },
+    }, 
     getHash: function() {
         // Skip this if we are running server side
         if (typeof window !== 'undefined') {
