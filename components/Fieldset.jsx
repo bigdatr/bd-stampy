@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 var Label = require('./Label');
-var Input = require('./Input');
+var Input = React.createFactory(require('./Input'));
 
 
 var FieldSet = React.createClass({
@@ -13,11 +13,12 @@ var FieldSet = React.createClass({
         onChange: React.PropTypes.func.isRequired
     },
     render() {       
-        var formItems = _(this.props.schema).map((item, key) => {
+        var keys = Object.keys(this.props.schema);
+        var formItems = keys.map((key, index) => {
             return (
                 <div key={key}>
-                    {this.renderLabel(item, key)}
-                    {this.renderFormElement(item, key)}
+                    {this.renderLabel(this.props.schema[key], keys[index])}
+                    {this.renderFormElement(this.props.schema[key], keys[index])}
                 </div>
             );
         }, this);
@@ -38,7 +39,7 @@ var FieldSet = React.createClass({
         var element = item.type || Input;
         var defaultProps = {
             onChange: this.props.onChange,
-            name: key,
+            name: key.toString(),
             defaultValue: this.props.defaultValue[key]
         };
 
