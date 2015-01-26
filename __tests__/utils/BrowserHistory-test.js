@@ -5,9 +5,8 @@ jest.dontMock(path);
 
 
 describe('BrowserHistory.getHash', function() {
-    var BrowserHistory = require(path);
-
     it('returns empty string when running server side and no url has been set', function() {
+        var BrowserHistory = require(path);
         var expected = '';
         var result = BrowserHistory.getHash();
 
@@ -15,6 +14,7 @@ describe('BrowserHistory.getHash', function() {
     });
 
     it('returns the supplied hash when running server side and a url has been set', function() {
+        var BrowserHistory = require(path);
         BrowserHistory.setUrl('/#Feed/campaigns');
 
         var expected = 'Feed/campaigns';
