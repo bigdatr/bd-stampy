@@ -104,19 +104,15 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         return BrowserHistory.getHash();
     },
     getRouteBase: function () {
-        var hash = BrowserHistory.getHash();
+        var hash = this.getHash();
 
-        if (hash && hash !== '') {
-            
-            // Ignore query string
-            if (hash.indexOf('?') !== -1) {
-                hash = hash.split('?')[0];
-            }
-
-            hash = hash.split('/');
+        if (hash === '') {
+            return '';
         }
 
-        return hash[0] || '#';
+        var fragments = hash.split('/');
+
+        return fragments[0];
     }
 });
 

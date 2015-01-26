@@ -5,6 +5,7 @@ var _History = require('../utils/History');
 var BrowserHistory = function () {
     this._hash = '';
     this._url = '';
+    this._query = '';
 };
 
 BrowserHistory.prototype = {
