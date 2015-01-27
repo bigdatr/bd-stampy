@@ -1,9 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react');
-var _ = require('lodash');
 
 var SelectStandard = require('./SelectStandard.jsx');
-var Url = require('../utils/Url.js');
+var UrlStore = require('../utils/UrlStore.js');
 
 var SelectStandardForm = React.createClass({
     displayName: 'SelectStandardForm',
@@ -17,7 +16,7 @@ var SelectStandardForm = React.createClass({
     onChange: function (e, details) {
         var query = {};
         query[details.key] = details.value;
-        Url.setState(query);
+        UrlStore.setQueryParams(query);
 
         if(this.props.onChange) {
             this.props.onChange(e, details);

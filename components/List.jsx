@@ -30,7 +30,8 @@ var List = React.createClass({
             .map(function (value) {
                 return <li>{value}</li>;
             })
-            .compact(); 
+            .compact()
+            .value(); 
     },
     showHiddenItems:function () {
         this.setState({viewHiddenItems: true});

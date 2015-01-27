@@ -2,7 +2,8 @@
 var React = require('react');
 var _ = require('lodash');
 var Label = require('./Label');
-var Input = require('./Input');
+var Input = React.createFactory(require('./Input'));
+var SelectStandard = require('./SelectStandard');
 
 
 var FieldSet = React.createClass({
@@ -13,11 +14,12 @@ var FieldSet = React.createClass({
         onChange: React.PropTypes.func.isRequired
     },
     render() {       
-        var formItems = _(this.props.schema).map((item, key) => {
+        var keys = Object.keys(this.props.schema);
+        var formItems = keys.map((key, index) => {
             return (
                 <div key={key}>
-                    {this.renderLabel(item, key)}
-                    {this.renderFormElement(item, key)}
+                    {this.renderLabel(this.props.schema[key], keys[index])}
+                    {this.renderFormElement(this.props.schema[key], keys[index])}
                 </div>
             );
         }, this);
@@ -35,20 +37,45 @@ var FieldSet = React.createClass({
         return <Label>{label}</Label>;
     },
     renderFormElement(item, key) {
-        var element = item.type || Input;
+        // console.log(item);
+        // var element = item.type || Input;
+        
+        // Defaults 
         var defaultProps = {
             onChange: this.props.onChange,
-            name: key,
+            name: key.toString(),
             defaultValue: this.props.defaultValue[key]
         };
 
-        if(typeof item === 'string') {
-            return Input(defaultProps);
+        if(item.enum) {
+            // console.log(defaultProps);
+            var options = item.enum.map((item) => {
+                return {value: item, label: item};
+            });
+            
+            return <SelectStandard {...defaultProps} value={this.props.defaultValue[key]} options={options}/>;
         }
 
-        var props = _.defaults(defaultProps, item.props);
+        if(item.type === 'string') {
+            return Input(defaultProps);
+        }
+        // var props = _.defaults(defaultProps, item.props);
 
-        return element(props);
+
+        // // // Form Element Logic
+
+        // // if(item.enum) {
+        // //     return this.renderSelect(props, item.enum);
+        // // }
+
+
+
+
+
+        return Input(defaultProps);
+    },
+    renderSelect(props, selectItems) {
+        return <DefualtSelect {...props}>{selectItems}</DefualtSelect>;
     }
 });
 
