@@ -29,7 +29,8 @@
     "moment": "^2.8.3",
     "node-jsx": "^0.12.4",
     "react": "^0.12.2",
-    "react-tools": "^0.12.2"
+    "react-tools": "^0.12.2",
+    "url-pattern": "^0.6.0"
   },
   "devDependencies": {
     "jest-cli": "^0.2.1",

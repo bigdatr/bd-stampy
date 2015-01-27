@@ -1,21 +1,29 @@
 /* global window */
 
 var _History = require('../utils/History');
+var _ = require('lodash');
 
 var BrowserHistory = function () {
     this._hash = '';
     this._url = '';
     this._query = '';
+
+    if (typeof window !== 'undefined') {
+        _History.start();
+    }
 };
 
 BrowserHistory.prototype = {
     onRouteChange: function(cb) {
         if (cb) {
+            // window.onpopstate = cb;
             return _History.route({test: function () { return true; }}, cb);
         }
     },
     navigate: function(path, options) {
-        return _History.navigate(path, options);
+        var opt = _.defaults(options, {trigger: true});
+
+        return _History.navigate(path, opt);
     },
     _updateUrl: function(forcedUrl) {
         var urlChanged = false;
