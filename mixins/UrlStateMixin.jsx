@@ -22,6 +22,8 @@ function paramsToArray(obj) {
 
 var UrlStateMixin = {
     getInitialState: function() {
+        console.warn('bd-stampy/mixins/UrlStateMixin', 'Will be deprecated soon');
+
         var nextState = {};
 
         var state_params = this.UrlStateMixin_params;
