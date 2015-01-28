@@ -17,7 +17,6 @@ var SelectStandardForm = React.createClass({
         var query = {};
         query[details.key] = details.value;
         UrlStore.setQueryParams(query);
-
         if(this.props.onChange) {
             this.props.onChange(e, details);
         }
