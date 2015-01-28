@@ -2,6 +2,7 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var BrowserHistory = require('../utils/BrowserHistory');
 var _ = require('lodash');
+var urlPattern = require('url-pattern');
 
 var UrlStore = function () {};
 
@@ -9,6 +10,7 @@ util.inherits(UrlStore, EventEmitter);
 
 UrlStore.prototype = _.defaults(UrlStore.prototype, {
     _onRouteChange: function(route) {
+        // console.debug('route:change', route);
         this.emit('route:change');
     },
     queryStringToParams: function(queryString) {
@@ -115,6 +117,10 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         var fragments = hash.split('/');
 
         return fragments[0];
+    },
+    patternMatch: function(str) {
+        var pattern = urlPattern.newPattern(str);
+        return pattern.match(this.getHash()) || {};
     }
 });
 
