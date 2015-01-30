@@ -1,4 +1,15 @@
-/** @jsx React.DOM */
+/**
+ * @fileOverview file test tasks. These tasks are intended to help you when modifying the template. If you are
+ * just using the template, don't sweat this stuff. To use these tasks, you must install grunt, if you haven't already,
+ * and install the dependencies. All of this requires node.js, of course.
+ *
+ * @module filez
+ * @requires path
+ * @requires lodash
+ * @requires http
+ * @requires async
+ * @requires fs
+ */
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 

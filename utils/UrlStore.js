@@ -83,6 +83,8 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         var currentQueryString = BrowserHistory.getQueryString();
         var nextQueryString = this.paramsToQueryString(nextParams);
 
+        // console.log(nextQueryString);
+
         if (currentQueryString !== nextQueryString) {
             var nextPath = '#' + BrowserHistory.getHash();
 
