@@ -49,8 +49,11 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
 
         return queryString.length > 0 ? queryString : '';
     },
+    getQueryString: function() {
+        return BrowserHistory.getQueryString();
+    },
     getQueryParams: function() {
-        var queryString = BrowserHistory.getQueryString();
+        var queryString = this.getQueryString();
 
         if (!queryString || queryString === '') {
             return {};
