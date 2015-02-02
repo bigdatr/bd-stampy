@@ -65,33 +65,39 @@ var TabView = React.createClass({
         }
 
         this.props.direction = (tabindex > this.state.tabindex) ? 'left' : 'right';
+
         this.setState({tabindex: tabindex});
     },
     updateChildProps: function(tabindex) {
         tabindex = tabindex || this.state.tabindex;
+
+        var _this = this;
         var tabGroup = [];
         var tabContentGroup = [];
         var tabExcludedGroup = [];
 
         React.Children.forEach(this.props.children, function(c) {
-            var t,
-                type = c.type.displayName || c.type;
+            var type = c.type.displayName || c.type;
 
             if (type === 'Tab' && !c.props.exclude) {
-                t = tabGroup.push(c);
-                c.props.tabindex = t;
-                c.props.onTabChange = this.onTabChange;
+                var nextTab = React.addons.cloneWithProps(c, {
+                    tabindex: tabGroup.length - 1,
+                    onTabChange: _this.onTabChange
+                });
+
+                tabGroup.push(nextTab);
             }
             else if (c.props.exclude) {
-                t = tabExcludedGroup.push(c);
+                tabExcludedGroup.push(c);
             }
             else if (type === 'TabContent') {
-                var isVisible = (tabContentGroup.length + 1) === tabindex;
+                var nextTabContent = React.addons.cloneWithProps(c, {
+                    visible: (tabContentGroup.length + 1) === tabindex
+                });
 
-                c.props.visible = isVisible;
-                t = tabContentGroup.push(c);
+                tabContentGroup.push(nextTabContent);
             }
-        }.bind(this));
+        });
 
         return {
             tabGroup: tabGroup,
@@ -125,15 +131,15 @@ var TabView = React.createClass({
         }.bind(this));
     },
     renderTabContent: function(content) {
-        if (this.props.transition) {
-            // var transitionName = "slide-" + this.props.direction;
+        // if (this.props.transition) {
+        //     // var transitionName = "slide-" + this.props.direction;
 
-            return (
-                <Transition transitionName="opacity" className="TabContentGroup" component={React.DOM.div}>
-                    {content}
-                </Transition>
-            );
-        }
+        //     return (
+        //         <Transition transitionName="opacity" className="TabContentGroup" component={'div'}>
+        //             {content}
+        //         </Transition>
+        //     );
+        // }
 
         return content;
     }
