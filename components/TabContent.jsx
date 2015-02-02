@@ -11,16 +11,19 @@ var TabContent = React.createClass({
     displayName: 'TabContent',
     type: 'TabContent',
     propTypes: {
-		padded: React.PropTypes.bool
+		padded: React.PropTypes.bool,
+        visible: React.PropTypes.bool
     },
     getDefaultProps: function() {
         return {
-            padded: false
+            padded: false,
+            visible: true
         };
     },
     render: function() {
     	var classes = new ClassBuilder('TabContent')
-    	    .add(this.props.padded, 'padding-hard');
+    	    .add(this.props.padded, 'padding-hard')
+            .add(this.props.visible, 'is-active', 'is-hidden');
 
         return (
             <div className={classes.className}>

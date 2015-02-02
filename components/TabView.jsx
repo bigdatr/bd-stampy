@@ -61,12 +61,14 @@ var TabView = React.createClass({
     },
     onTabChange: function(tabindex) {
         if(this.props.onChange) {
-            this.props.onChange(tabindex, this.updateChildProps());
+            this.props.onChange(tabindex, this.updateChildProps(tabindex));
         }
+
         this.props.direction = (tabindex > this.state.tabindex) ? 'left' : 'right';
         this.setState({tabindex: tabindex});
     },
-    updateChildProps: function() {
+    updateChildProps: function(tabindex) {
+        tabindex = tabindex || this.state.tabindex;
         var tabGroup = [];
         var tabContentGroup = [];
         var tabExcludedGroup = [];
@@ -75,15 +77,18 @@ var TabView = React.createClass({
             var t,
                 type = c.type.displayName || c.type;
 
-            
-
             if (type === 'Tab' && !c.props.exclude) {
                 t = tabGroup.push(c);
                 c.props.tabindex = t;
                 c.props.onTabChange = this.onTabChange;
-            } else if (c.props.exclude) {
+            }
+            else if (c.props.exclude) {
                 t = tabExcludedGroup.push(c);
-            } else if (type === 'TabContent') {
+            }
+            else if (type === 'TabContent') {
+                var isVisible = (tabContentGroup.length + 1) === tabindex;
+
+                c.props.visible = isVisible;
                 t = tabContentGroup.push(c);
             }
         }.bind(this));
@@ -98,15 +103,14 @@ var TabView = React.createClass({
         var groups = this.updateChildProps();
         var classes = this.ClassMixin_getClass('TabGroup');
 
-
         return (
             <div className="TabView">
                 <ul className={classes.className}>
                     {this.renderTab(groups.tabGroup)}
                     {this.renderExcluded(groups.tabExcludedGroup)}
                 </ul>
+
                 {this.renderTabContent(groups.tabContentGroup)}
-                
             </div>
         );
     },
@@ -120,20 +124,17 @@ var TabView = React.createClass({
             return <li className="is-excluded" key={i}>{t}</li>;
         }.bind(this));
     },
-    renderTabContent: function(tabContentGroup) {
+    renderTabContent: function(content) {
+        if (this.props.transition) {
+            // var transitionName = "slide-" + this.props.direction;
 
-        var content =  tabContentGroup.map(function(t, i) {
-            if (this.state.tabindex === (i+1)) {
-                return <div key={i} className={this.state.tabindex === (i+1) ? 'is-active' : 'is-invisible'}>{t}</div>;                
-            }
-
-            return null;
-        }.bind(this));
-        if(this.props.transition) {
-            return <Transition transitionName={"slide-" + this.props.direction} className="TabContentGroup" component={React.DOM.div}>
-                {content}
-            </Transition>;
+            return (
+                <Transition transitionName="opacity" className="TabContentGroup" component={React.DOM.div}>
+                    {content}
+                </Transition>
+            );
         }
+
         return content;
     }
 });
