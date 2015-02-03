@@ -13,6 +13,10 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         // console.debug('route:change', route);
         this.emit('route:change');
     },
+    navigate: function(path, options) {
+        options = options || {};
+        return BrowserHistory.navigate(path, options);
+    },
     queryStringToParams: function(queryString) {
         var params = {};
 
@@ -125,6 +129,7 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         var pattern = urlPattern.newPattern(str);
         return pattern.match(this.getHash()) || {};
     }
+
 });
 
 var _instance = new UrlStore();

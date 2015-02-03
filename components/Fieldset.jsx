@@ -31,14 +31,14 @@ var FieldSet = React.createClass({
         if(mapContext && schemaContext) {
             if(schemaContext.type === 'object') {
                 return (
-                    <div>
+                    <div key={key}>
                         <h2>{key}</h2>
                         {this.renderNodes(schemaContext.properties, mapContext)}
                     </div>
                 );
             } else {            
                 return (
-                    <div>
+                    <div key={key}>
                         <label>{sentenceCase(key)}</label>
                         {this.renderFormElement(key, schemaContext, mapContext)}
                     </div>
@@ -59,6 +59,7 @@ var FieldSet = React.createClass({
         return <Label>{label}</Label>;
     },
     renderFormElement(key, item, value) {
+
         if(!item) {
             return '-';
         }
@@ -82,7 +83,10 @@ var FieldSet = React.createClass({
         }
 
         if(item.type === 'array') {
-            return <Input disabled={true} defaultValue="unhandled"/>;
+            defaultProps.disabled = true;
+            defaultProps.defaultValue = 'unhandled';
+            
+            return Input(defaultProps);
         }
 
         if(item.type === 'string' || item.type === 'number') {
