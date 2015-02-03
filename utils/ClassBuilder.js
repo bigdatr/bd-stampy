@@ -5,14 +5,16 @@ var ClassBuilder = function (baseName) {
 };
 
 ClassBuilder.prototype.add = function (condition, passClass, failClass) {
-    if(condition) {
+    if(condition !== undefined) {
         if (passClass) {
             if (condition) {
                 this.className += ' ' + passClass;
-            } else if (failClass) {
+            }
+            else if (failClass) {
                 this.className += ' ' + failClass;
             }
-        } else {
+        }
+        else {
             this.className += ' ' + condition;
         } 
     }
