@@ -151,6 +151,7 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     }, 
     render: function() {
+        console.log('asdkjaskjdnkasd');
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
         classes.is(this.state.isDarkVideo, 'dark');        
@@ -167,30 +168,31 @@ var Video = React.createClass({
                     Sorry, your browser does not support embedded videos. <a href={this.props.src}>Download Instead</a>
                 </video>
                 {this.renderControls()}
-                
             </div>
         );
     },
     renderControls: function() {
+        if (!this.props.controls) {
+            return null;
+        }
+
         var playPauseIcon = this.state.paused ? 'play' : 'pause';
         var fullscreenIcon = this.state.fullscreen ? 'unfullscreen' : 'fullscreen';
         var mutedIcon = this.state.muted ? 'muted' : 'unmuted';
 
-        if(this.props.controls) {
-            return (
-                <div className="Video_controls">
-                    <div className="Video_toolbar">
-                        <Icon modifier="button" className="l-right" onClick={this.onFullscreen} name={fullscreenIcon}></Icon>
-                        <Icon modifier="button" className="l-right" onClick={this.onToggleSound} name={mutedIcon}></Icon>
-                        <Icon modifier="button" name={playPauseIcon} onClick={this.onPlayPause}></Icon>
-                    </div>   
-                    <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
-                        <div className="Video_bar Video_bar-buffer" style={{width:this.state.buffered + "%"}}></div>
-                        <div className="Video_bar Video_bar-progress" style={{width:this.state.currentTime + "%"}}></div>
-                    </div>
+        return (
+            <div className="Video_controls">
+                <div className="Video_toolbar">
+                    <Icon modifier="button" className="l-right" onClick={this.onFullscreen} name={fullscreenIcon}></Icon>
+                    <Icon modifier="button" className="l-right" onClick={this.onToggleSound} name={mutedIcon}></Icon>
+                    <Icon modifier="button" name={playPauseIcon} onClick={this.onPlayPause}></Icon>
+                </div>   
+                <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
+                    <div className="Video_bar Video_bar-buffer" style={{width:this.state.buffered + "%"}}></div>
+                    <div className="Video_bar Video_bar-progress" style={{width:this.state.currentTime + "%"}}></div>
                 </div>
-            );
-        }
+            </div>
+        );
     },
     renderStyle: function () {
         // console.log(this.props.maxHeight);
