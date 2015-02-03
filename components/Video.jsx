@@ -26,6 +26,11 @@ var Video = React.createClass({
         poster: React.PropTypes.string,
         controls: React.PropTypes.bool
     },
+    getDefaultProps: function() {
+        return {
+            controls: true
+        };
+    },
     getInitialState: function() {
         return {
             paused: true,
@@ -35,7 +40,6 @@ var Video = React.createClass({
             buffered: 0,
             currentTime: 0,
             dragging: false,
-            controls: true,
             autoPlay: false
         };
     },
@@ -151,7 +155,6 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     }, 
     render: function() {
-        console.log('asdkjaskjdnkasd');
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
         classes.is(this.state.isDarkVideo, 'dark');        
