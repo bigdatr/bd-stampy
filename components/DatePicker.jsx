@@ -19,6 +19,9 @@ var DatePicker = React.createClass({
         name: React.PropTypes.string.isRequired,
         modalManager: React.PropTypes.func,
         onChange: React.PropTypes.func,
+        nextButton: React.PropTypes.element,
+        previousButton: React.PropTypes.element,
+        closeButton: React.PropTypes.element,
         value: React.PropTypes.oneOfType([
             React.PropTypes.number,
             React.PropTypes.string
@@ -28,7 +31,12 @@ var DatePicker = React.createClass({
         return {
             displayDate: moment(),
             value: null,
-            isValid: true
+            isValid: true,
+            closeButton: <span>x</span>,
+            nextButton: <span>&gt;</span>,
+            previousButton: <span>&lt;</span>
+
+
         };
     },
     getInitialState: function() {
@@ -129,7 +137,7 @@ var DatePicker = React.createClass({
     renderDatePicker: function () {   
         return (
             <div className="DatePicker_selector">
-                <Icon name="cross" modifier="toolbar" className="DatePicker_close" onMouseDown={this.onClose}></Icon>
+                <div className="DatePicker_close" onMouseDown={this.onClose}>{this.props.closeButton}</div>
                 {this.renderSelectorPeriodMonth()}
                 {this.renderSelectorPeriodYear()}
                 {this.renderCalendar()}
@@ -139,18 +147,18 @@ var DatePicker = React.createClass({
     renderSelectorPeriodMonth: function() {
         return (
             <div className="DatePicker_month">
-                <Icon name="chevronback" size="small" onMouseDown={this.onDateShift.bind(this, 'month', -1)}/>
+                <span onMouseDown={this.onDateShift.bind(this, 'month', -1)}>{this.props.previousButton}</span>
                 <span className="DatePicker_text">{this.state.displayDate.format('MMMM')}</span>
-                <Icon name="chevronforward" size="small" onMouseDown={this.onDateShift.bind(this, 'month', 1)}/>
+                <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>
             </div>
         );
     },
     renderSelectorPeriodYear: function() {
         return (
             <div className="DatePicker_year">
-                <Icon name="chevronback" size="small" onMouseDown={this.onDateShift.bind(this, 'year', -1)}/>
+                <span onMouseDown={this.onDateShift.bind(this, 'year', -1)}>{this.props.previousButton}</span>
                 <span className="DatePicker_text">{this.state.displayDate.format('YYYY')}</span>
-                <Icon name="chevronforward" size="small" onMouseDown={this.onDateShift.bind(this, 'year', 1)}/>
+                <span onMouseDown={this.onDateShift.bind(this, 'year', 1)}>{this.props.nextButton}</span>
             </div>
         );
     },
