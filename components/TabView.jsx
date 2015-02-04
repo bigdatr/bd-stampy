@@ -91,8 +91,10 @@ var TabView = React.createClass({
                 tabExcludedGroup.push(c);
             }
             else if (type === 'TabContent') {
+                var key = tabContentGroup.length + 1;
                 var nextTabContent = React.addons.cloneWithProps(c, {
-                    visible: (tabContentGroup.length + 1) === tabindex
+                    visible: key === tabindex,
+                    key: key
                 });
 
                 tabContentGroup.push(nextTabContent);
@@ -127,7 +129,7 @@ var TabView = React.createClass({
     },
     renderExcluded: function(tabExcludedGroup) {
         return tabExcludedGroup.map(function(t, i) {
-            return <li className="is-excluded" key={i}>{t}</li>;
+            return <li key={i} className="is-excluded">{t}</li>;
         }.bind(this));
     },
     renderTabContent: function(content) {
