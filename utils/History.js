@@ -215,7 +215,7 @@ var _ = require('lodash');
       var url = this.root + (fragment = this.getFragment(fragment || ''));
 
       // Strip the hash and decode for matching.
-      fragment = decodeURI(fragment.replace(pathStripper, ''));
+      // fragment = decodeURI(fragment.replace(pathStripper, ''));
 
       if (this.fragment === fragment) return;
       this.fragment = fragment;
