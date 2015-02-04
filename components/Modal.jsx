@@ -17,11 +17,17 @@ var Modal = React.createClass({
             React.PropTypes.element
         ]),
         onClose: React.PropTypes.func.isRequired,
-        onClick: React.PropTypes.func
+        onClick: React.PropTypes.func,
+        nextButton: React.PropTypes.element,
+        previousButton: React.PropTypes.element,
+        closeButton: React.PropTypes.element
     },
     getDefaultProps: function () {
         return {
-            type: 'form'
+            type: 'form',
+            closeButton: <span>x</span>,
+            nextButton: <span>&gt;</span>,
+            previousButton: <span>&lt;</span>
         };
     },
     getInitialState: function () {
@@ -51,7 +57,8 @@ var Modal = React.createClass({
             .is(true,'focusable')
         ;
 
-        var closeAction = [<Icon block className="Toolbar_action" name="cross" onClick={this.props.onClose} />];
+        var closeAction = [<div className="Toolbar_action" onClick={this.props.onClose}>{this.props.closeButton}</div>];
+        // <Icon block className="Toolbar_action" name="cross" onClick={this.props.onClose} />
 
         if(this.props.action) {
             closeAction.push(this.props.action);
@@ -70,8 +77,8 @@ var Modal = React.createClass({
     },
     renderBackAndForward: function () {
         if(this.props.onNext && this.props.onPrevious) {
-            var next = <Icon className="Modal_button Modal_button-next" name="chevronforward"  modifier="large" onClick={this.props.onNext}></Icon>;
-            var prev = <Icon className="Modal_button Modal_button-prev" name="chevronback"     modifier="large" onClick={this.props.onPrevious}></Icon>;
+            var next = <div onClick={this.props.onNext} className="Modal_button Modal_button-next">{this.props.nextButton}</div>;
+            var prev = <div onClick={this.props.onPrevious} className="Modal_button Modal_button-prev">{this.props.previousButton}</div>;
             
             return <div>{prev}{next}</div>;
         }
