@@ -126,7 +126,6 @@ var Form = React.createClass({
         }
 
         if(_.isObject(shape)) {
-
             customElement = _defaultCustomElements[shape.type || 'input'];
             props = shape.props || {};
         }
