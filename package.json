@@ -34,7 +34,8 @@
   },
   "devDependencies": {
     "jest-cli": "^0.2.1",
-    "jest-reporters": "0.0.2"
+    "jest-reporters": "0.0.2",
+    "superagent": "^0.21.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setup-jasmine-env.js",

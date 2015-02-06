@@ -87,7 +87,6 @@ var Textarea = React.createClass({
                     onChange={this.onChange}
                     onKeyUp={this.onKeyUp}
                     rows={this.props.rows}
-                    defaultValue={this.props.value}
                     >
                 </textarea>
                 {error}

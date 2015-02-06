@@ -16,7 +16,7 @@ var Fieldset = React.createClass({
         if (this.props.onChange) {
             this.props.onChange(null, {
                 key: this.props.name, 
-                value: _.defaults(this.state.formData, this.props.defaultValue)
+                value: _.defaults(this.state.formData, this.props.value)
             });
         } 
     },
@@ -26,7 +26,7 @@ var Fieldset = React.createClass({
                 <Form 
                     schema={this.props.schema}
                     onChange={this.onChange}
-                    defaultValue={this.props.defaultValue}
+                    value={this.props.value}
                 />
             </fieldset>
         );

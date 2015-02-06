@@ -2,6 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 var Label = require('./Label');
+var InputRow = require('./InputRow');
 var Input = React.createFactory(require('./Input'));
 var SelectStandard = require('./SelectStandard');
 
@@ -9,11 +10,17 @@ var sentenceCase = function (text) {
     return _.capitalize(_.words(text).join(' '));
 };
 
+var _defaultCustomElements = {
+    textarea: require('./Textarea'),
+    input: require('./Input'),
+    file: require('./SuperagentFileUpload')
+}
+
 var Form = React.createClass({
     displayName: 'Form',
     propTypes: {
         schema: React.PropTypes.object.isRequired,
-        defaultValue: React.PropTypes.object.isRequired,
+        value: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired
     },
     getDefaultProps () {
@@ -22,12 +29,13 @@ var Form = React.createClass({
         }
     },
     render() {
-        return <div>{this.renderNodes(this.props.schema, this.props.defaultValue)}</div>;
+        return <div>{this.renderNodes(this.props.schema, this.props.value)}</div>;
     },
     renderNodes(nodes, mapContext) {
-        return _.map(nodes, (dd, key) => {
-            return this.renderNode(key, dd, mapContext[key])
-        });
+        return  _(nodes).keys().sort().map((key) => {
+            var value = nodes[key]
+            return this.renderNode(key, value, mapContext[key])
+        }).value();
     },
 
     // Render a form node (label, element)
@@ -45,10 +53,9 @@ var Form = React.createClass({
                 }
             } else {            
                 return (
-                    <div key={key}>
-                        <label>{sentenceCase(key)}</label>
+                    <InputRow key={key} label={sentenceCase(key)}>
                         {this.renderFormElement(key, schemaContext, mapContext)}
-                    </div>
+                    </InputRow>
                 );            
             }            
         }
@@ -63,10 +70,10 @@ var Form = React.createClass({
             label = item;
         }
 
-        return <Label>{label}</Label>;
+        return label;
     },
     renderFormElement(key, item, value) {
-
+        
         if(!item) {
             return '-';
         }
@@ -77,8 +84,13 @@ var Form = React.createClass({
         var defaultProps = {
             onChange: this.props.onChange,
             name: key.toString(),
-            defaultValue: value
+            value: value
         };
+
+        // Return Custom Elements First
+        if(this.props.formShape && this.props.formShape[key]) {
+            return this.renderCustomFormElement(key, item, value, defaultProps, this.props.formShape[key])
+        }
 
         if(item.enum) {
             // console.log(defaultProps);
@@ -86,12 +98,12 @@ var Form = React.createClass({
                 return {value: item, label: item};
             });
             
-            return <SelectStandard {...defaultProps} value={value} options={options}/>;
+            return <SelectStandard {...defaultProps} options={options}/>;
         }
 
         if(item.type === 'array') {
             defaultProps.disabled = true;
-            defaultProps.defaultValue = 'unhandled';
+            defaultProps.value = 'unhandled';
             
             return Input(defaultProps);
         }
@@ -103,6 +115,23 @@ var Form = React.createClass({
 
 
         return Input(defaultProps);
+    },
+    renderCustomFormElement(key, item, value, defaultProps, shape) {
+        var customElement = _defaultCustomElements.input;
+        var props = {};
+
+
+        if(_.isString(shape)) {
+            customElement = _defaultCustomElements[shape];
+        }
+
+        if(_.isObject(shape)) {
+
+            customElement = _defaultCustomElements[shape.type || 'input'];
+            props = shape.props || {};
+        }
+
+        return React.createElement(customElement, _.defaults(defaultProps, props));
     },
     renderSelect(props, selectItems) {
         return <DefualtSelect {...props}>{selectItems}</DefualtSelect>;
