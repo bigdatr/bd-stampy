@@ -8,9 +8,14 @@ var Fieldset = React.createClass({
     mixins: [
         require('bd-stampy/mixins/FormMixin')
     ],
+    propTypes: {
+        name: React.PropTypes.string,
+        value: React.PropTypes.string,
+        onChange: React.PropTypes.func,
+        schema: React.PropTypes.object
+    },
     onChange: function(e, details) {
-        this.FormMixin_onFormChange(e,details, this.onUpdate);
-        
+        this.FormMixin_onFormChange(e,details, this.onUpdate);        
     },
     onUpdate: function () {
         if (this.props.onChange) {
