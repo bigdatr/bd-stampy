@@ -3,6 +3,7 @@ var React = require('react');
 var request = require('superagent');
 
 var Button = require('./Button');
+var ProgressBar = require('./ProgressBar');
 
 function humanFileSize(bytes, si) {
     var thresh = si ? 1000 : 1024;
@@ -19,16 +20,23 @@ function humanFileSize(bytes, si) {
 var FileUpload = React.createClass({
     displayName: 'FileUpload',
     mixins: [
-        require('../mixins/FormMixin')
+        require('../mixins/FormMixin'),
+        require('../mixins/ClassMixin')
     ],
     propTypes: {
         onComplete: React.PropTypes.func,
         onProgress: React.PropTypes.func,
         name: React.PropTypes.string.isRequired
     },
+    getInitialState() {
+        return {
+            uploading: false,
+            percentage: 0
+        };
+    },
     postFile(file) {
         return new Promise((resolve, reject) => {
-            request
+            var req = request
                 .post(this.props.url)
                 .attach(this.props.name, file, file.name)
                 .end((response) => {
@@ -39,7 +47,8 @@ var FileUpload = React.createClass({
                     }
                 });
 
-            console.log(request);
+            req.on('progress', this.onProgress);
+
         });
     },
     onChange() {
@@ -47,46 +56,57 @@ var FileUpload = React.createClass({
         this.setState({files: input.files});
     },
     onUpload() {
+        this.setState({uploading: true});
         this.postFile(this.state.files[0]).then(
             (data) => this.onSuccess(data),
-            (error) => this.onError(error),
-            (progress) => this.onProgress(progress)
+            (error) => this.onError(error)
         );
     },
     onSuccess(data) {
+        this.setState({uploading: false});
         if(this.props.onSuccess) {
+            console.log(data);
             this.props.onSuccess(data);
         }
     },
     onError(error) {
+        this.setState({uploading: false});
         if(this.props.onError) {
             this.props.onError(error);
         }
     },
     onProgress(e) {
-        if(this.props.onProgress) {
-            var percentage = (e.loaded / e.total) * 100;
+        var decimal = (e.loaded / e.total);
 
-            var details = {
-                loaded: e.loaded,
-                total: e.total,
-                percentage: Math.round(percentage * 100) / 100
-            };
+        var details = {
+            loaded: e.loaded,
+            total: e.total,
+            decimal: decimal,
+            percentage: Math.round((decimal * 100) * 100) / 100
+        };
+        
+        this.setState(details);
 
+        if(this.props.onProgress) {            
             this.props.onProgress(e, details);
         }
     },
     render() {
+        var classes = this.ClassMixin_getClass('FileUpload')
+            .is(this.state.files, 'chosenFile')
+        ;
+
         return (
-            <div className="FileUpload">
+            <div className={classes.className}>
                 {this.renderButton()}
                 <input
-                    className="l-70" 
+                    className="FileUpload_input" 
                     ref="input"
                     type="file" 
                     name={this.props.name}
                     onChange={this.onChange}
                 />
+                {this.renderProgress()}
                 {this.renderFileInformation()}
             </div>
 
@@ -94,7 +114,12 @@ var FileUpload = React.createClass({
     },
     renderButton() {
         if(this.state.files) {
-            return <Button className="right l-30" onClick={this.onUpload}>Upload</Button>;
+            return <Button className="FileUpload_button" onClick={this.onUpload}>Upload</Button>;
+        }
+    },
+    renderProgress() {
+        if(this.state.percentage !== 0) {
+            return <ProgressBar className="FileUpload_progress" value={this.state.percentage} />;            
         }
     },
     renderFileInformation() {
@@ -102,9 +127,14 @@ var FileUpload = React.createClass({
         if(files) {
             return <div className="FileUpload_meta">
                 <div className="FileUpload_meta_name">{files[0].name}</div>
-                <div className="FileUpload_meta_size">{humanFileSize(files[0].size)}</div>
+                <div className="FileUpload_meta_size">{this.renderLoaded()}{humanFileSize(files[0].size)}</div>
                 <div className="FileUpload_meta_type">{files[0].type}</div>
             </div>
+        }
+    },
+    renderLoaded() {
+        if(this.state.loaded) {
+            return humanFileSize(this.state.files[0].size * this.state.decimal)+ ' / ';
         }
     }
 });
