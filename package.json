@@ -25,6 +25,8 @@
   ],
   "dependencies": {
     "color": "^0.7.2",
+    "json-loader": "^0.5.1",
+    "jsx-loader": "^0.12.2",
     "lodash": "^2.4.1",
     "moment": "^2.8.3",
     "node-jsx": "^0.12.4",
