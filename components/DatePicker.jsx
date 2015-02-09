@@ -6,7 +6,6 @@ var React = require('react'),
     _ = require('lodash');
 
 var Input = require('./Input.jsx');
-var Icon = require('./Icon.jsx');
 
 var ClassMixin = require('../mixins/ClassMixin.jsx'),
     ClassBuilder = require('../utils/ClassBuilder');
@@ -34,9 +33,9 @@ var DatePicker = React.createClass({
             isValid: true,
             closeButton: <span>x</span>,
             nextButton: <span>&gt;</span>,
-            previousButton: <span>&lt;</span>
-
-
+            previousButton: <span>&lt;</span>,
+            min_date: null,
+            max_date: null
         };
     },
     getInitialState: function() {
@@ -56,12 +55,6 @@ var DatePicker = React.createClass({
             });
         }
     },
-    // componentWillMount: function() {
-        
-    // },
-    // componentWillUnmount: function() {
-        
-    // },
     onMouseDown: function () {
         this.isMouseOnDatePicker = true;
     },
@@ -86,6 +79,9 @@ var DatePicker = React.createClass({
         }
     },
     onSelectDay: function(day, e) {
+        if (!this.getIsInRange(day)) {
+            return e.preventDefault();
+        }
 
         var value = day.toDate().getTime();
 
@@ -120,6 +116,21 @@ var DatePicker = React.createClass({
             });
         }
     },
+    getIsInRange: function(day) {
+        var isInRange = true;
+
+        if (this.props.min_date) {
+            var min_date = moment(this.props.min_date);
+            isInRange = min_date.isBefore(day);
+        }
+
+        if (isInRange && this.props.max_date) {
+            var max_date = moment(this.props.max_date);
+            isInRange = max_date.isAfter(day);
+        }
+
+        return isInRange;
+    },
     render: function() {
         var classes = this.ClassMixin_getClass(),
             value = this.state.value ? moment(this.state.value).format('D MMM YY') : '';
@@ -127,6 +138,7 @@ var DatePicker = React.createClass({
         classes.add(!this.props.isValid, 'is-error');
 
         var datePicker = (this.state.visible && !this.props.alternateRender) ? this.renderDatePicker() : null;
+
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
                 <Input className="DatePicker_input" readOnly={true} ref="input" name={this.props.name} onBlur={this.onBlur} placeholder={this.props.placeholder} onFocus={this.onFocus} value={value} isValid={this.props.isValid} discreteValue onChange={this.onClearDate}/>
@@ -145,20 +157,60 @@ var DatePicker = React.createClass({
         );
     },
     renderSelectorPeriodMonth: function() {
+        var prevMonthButton;
+        var prevMonth = moment(this.state.displayDate).subtract(1, 'month').endOf('month');
+        
+        if (this.getIsInRange(prevMonth)) {
+            prevMonthButton = <span onMouseDown={this.onDateShift.bind(this, 'month', -1)}>{this.props.previousButton}</span>;
+        }
+        else {
+            prevMonthButton = <span className="is-hidden">{this.props.previousButton}</span>;
+        }
+
+        var nextMonthButton;
+        var nextMonth = moment(this.state.displayDate).add(1, 'month').startOf('month');
+        
+        if (this.getIsInRange(nextMonth)) {
+            nextMonthButton = <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>;
+        }
+        else {
+            nextMonthButton = <span className="is-hidden">{this.props.nextButton}</span>;
+        }
+
         return (
             <div className="DatePicker_month">
-                <span onMouseDown={this.onDateShift.bind(this, 'month', -1)}>{this.props.previousButton}</span>
+                {prevMonthButton}
                 <span className="DatePicker_text">{this.state.displayDate.format('MMMM')}</span>
-                <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>
+                {nextMonthButton}
             </div>
         );
     },
     renderSelectorPeriodYear: function() {
+        var prevYearButton;
+        var prevYear = moment(this.state.displayDate).subtract(1, 'year').endOf('year');
+        
+        if (this.getIsInRange(prevYear)) {
+            prevYearButton = <span onMouseDown={this.onDateShift.bind(this, 'year', -1)}>{this.props.previousButton}</span>;
+        }
+        else {
+            prevYearButton = <span className="is-hidden">{this.props.previousButton}</span>;
+        }
+
+        var nextYearButton;
+        var nextYear = moment(this.state.displayDate).add(1, 'year').startOf('year');
+        
+        if (this.getIsInRange(nextYear)) {
+            nextYearButton = <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>;
+        }
+        else {
+            nextYearButton = <span className="is-hidden">{this.props.nextButton}</span>;
+        }
+
         return (
             <div className="DatePicker_year">
-                <span onMouseDown={this.onDateShift.bind(this, 'year', -1)}>{this.props.previousButton}</span>
+                {prevYearButton}
                 <span className="DatePicker_text">{this.state.displayDate.format('YYYY')}</span>
-                <span onMouseDown={this.onDateShift.bind(this, 'year', 1)}>{this.props.nextButton}</span>
+                {nextYearButton}
             </div>
         );
     },
@@ -220,7 +272,8 @@ var DatePicker = React.createClass({
             var classes = new ClassBuilder().add(day.format('ddd') === 'Sun' || day.format('ddd') === 'Sat', 'is-weekend')
                                             .add(!day.isSame(displayDate, 'month'), 'is-otherMonth')
                                             .add(day.isSame(today), 'today')
-                                            .add(selected && day.isSame(selected), 'selected');
+                                            .add(selected && day.isSame(selected), 'selected')
+                                            .add(!this.getIsInRange(day), 'is-disabled');
 
             days.push(<td key={i} className={classes.className} onMouseDown={this.onSelectDay.bind(this, day)}>{day.format('D')}</td>);
 
