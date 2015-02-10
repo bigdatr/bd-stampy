@@ -167,6 +167,7 @@ var Video = React.createClass({
                     src={this.props.src}
                     poster={this.props.poster}
                     autoPlay={this.props.autoPlay}
+                    controls={false}
                     >
                     Sorry, your browser does not support embedded videos. <a href={this.props.src}>Download Instead</a>
                 </video>
