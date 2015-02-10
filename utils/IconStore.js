@@ -9,6 +9,7 @@ var IconStore = {
 		}
 		
 		if (typeof window === 'undefined') {
+			// TODO: Add default/missing icon path
             return 'default path...';
         }
 
