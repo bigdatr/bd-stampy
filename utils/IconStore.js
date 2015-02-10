@@ -1,5 +1,7 @@
 /* global window, document */
 
+// TODO: Add default/missing icon path
+var _DEFAULT_ICON_PATH = 'Need a real path...';
 var _paths = {};
 
 var IconStore = {
@@ -9,17 +11,21 @@ var IconStore = {
 		}
 		
 		if (typeof window === 'undefined') {
-			// TODO: Add default/missing icon path
-            return 'default path...';
+            return _DEFAULT_ICON_PATH;
         }
 
-        var path = document.getElementById(iconName)
+        try {
+        	var path = document.getElementById(iconName)
         					.getElementsByTagName('path')[0]
         					.getAttribute('d');
 
-        _paths[iconName] = path;
+	        _paths[iconName] = path;
 
-        return path;
+	        return path;
+        }
+        catch(err) {
+        	console.error(new Error('Could not find icon path'));
+        }
 	}
 };
 
