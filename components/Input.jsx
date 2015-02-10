@@ -26,7 +26,8 @@ var Input = React.createClass({
         return {
             grey: false,
             isValid: true,
-            readOnly: false
+            readOnly: false,
+            closeIcon: <Icon  name="cross" size="small" ></Icon>
         };
     },
     componentDidMount: function () {
@@ -81,6 +82,16 @@ var Input = React.createClass({
     focusInput: function () {
         this.refs.input.getDOMNode().focus();
     },
+    renderClearButton() {
+        var clearButton = null;
+        if (this.props.discreteValue && this.props.value) {
+            clearButton = (
+                <div className="Input_clear" onClick={this.onClearValue}>{this.props.closeIcon}</div>
+            );
+        }
+
+        return clearButton;
+    },
     render: function() {
         var classes = this.ClassMixin_getClass()
             .add((this.props.isValid === false || this.props.error), 'is-error')
@@ -97,10 +108,8 @@ var Input = React.createClass({
             label = <Label htmlFor={this.props.name}>{this.props.label}</Label>;
         }
 
-        var clearButton = null;
         if (this.props.discreteValue) {
             classes.add(this.props.value, 'is-selected');
-            clearButton = (this.props.value) ? <Icon className="Input_clear" name="cross" size="small" onClick={this.onClearValue}></Icon> : null;
         }
 
         return (
@@ -127,12 +136,13 @@ var Input = React.createClass({
                         tabIndex={(this.props.readOnly) ? -1 : this.props.tabIndex}
                         id={this.props.name}
                     />
-                    {clearButton}
+                    {this.renderClearButton()}
                 </div>
                 {error}
             </div>           
         );
     }
+
 });
 
 module.exports = Input;

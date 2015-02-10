@@ -141,7 +141,20 @@ var DatePicker = React.createClass({
 
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
-                <Input className="DatePicker_input" readOnly={true} ref="input" name={this.props.name} onBlur={this.onBlur} placeholder={this.props.placeholder} onFocus={this.onFocus} value={value} isValid={this.props.isValid} discreteValue onChange={this.onClearDate}/>
+                <Input 
+                    className="DatePicker_input" 
+                    readOnly={true} 
+                    ref="input" 
+                    name={this.props.name} 
+                    onBlur={this.onBlur} 
+                    placeholder={this.props.placeholder} 
+                    onFocus={this.onFocus} 
+                    value={value} 
+                    isValid={this.props.isValid} 
+                    discreteValue 
+                    closeIcon={this.props.closeValueIcon}
+                    onChange={this.onClearDate}
+                />
                 {datePicker}
             </div>
         );

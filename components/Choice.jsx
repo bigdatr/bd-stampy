@@ -11,12 +11,14 @@ var Choice = React.createClass({
     propTypes: {
         disabled: React.PropTypes.bool,
         selected: React.PropTypes.bool,
+        closeIcon: React.PropTypes.element,
         onDelete: React.PropTypes.func
     },
     getDefaultProps: function () {
         return {
             disabled: false,
-            selected: false
+            selected: false,
+            closeIcon: <Icon name="cross" size="small"/>
         };
     },
     render: function() {
@@ -34,7 +36,7 @@ var Choice = React.createClass({
     },
     renderCross: function () {
         if (!this.props.disabled) {
-            return <Icon name="cross" size="small" className="Choice_delete" onClick={this.props.onDelete}/>;
+            return <div className="Choice_delete" onClick={this.props.onDelete}>{this.props.closeIcon}</div>;
         }
     }
 });

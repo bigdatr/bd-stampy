@@ -342,6 +342,7 @@ var Typeahead = React.createClass({
                     modifier={v.key}
                     selected={isSelected}
                     disabled={!this.props.clearable}
+                    closeIcon={this.props.closeIcon}
                     onDelete={this.onRemoveValue.bind(this, v)}>
                     <span>{v.value} </span>
                     {valueKey}
