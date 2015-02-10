@@ -62,16 +62,18 @@ var DatePicker = React.createClass({
         this.isMouseOnDatePicker = false;
     },
     onFocus: function() {
-        document.addEventListener("mousedown", this.onClose, false);
         this.setState({visible: true});
-        this.props.reactEvent = true;   
+        this.props.reactEvent = true;
+
+        document.addEventListener("mousedown", this.onClose, false);
     },
-    onClose: function () {
-        document.removeEventListener("mousedown", this.onClose, false);
-        if(this.isMouseOnDatePicker) {            
+    onClose: function () {        
+        if (this.isMouseOnDatePicker) {
             return;
         }
+
         this.setState({visible: false});
+        document.removeEventListener("mousedown", this.onClose, false);
     },
     onBlur: function(ee) {
         if(ee.relatedTarget) {
@@ -213,7 +215,7 @@ var DatePicker = React.createClass({
         var nextYear = moment(this.state.displayDate).add(1, 'year').startOf('year');
         
         if (this.getIsInRange(nextYear)) {
-            nextYearButton = <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>;
+            nextYearButton = <span onMouseDown={this.onDateShift.bind(this, 'year', 1)}>{this.props.nextButton}</span>;
         }
         else {
             nextYearButton = <span className="is-hidden">{this.props.nextButton}</span>;
