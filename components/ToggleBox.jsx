@@ -11,12 +11,14 @@ var ToggleBox = React.createClass({
         onClick: React.PropTypes.func,
         toggle: React.PropTypes.bool,
         checked: React.PropTypes.bool,
-        disabled: React.PropTypes.bool
+        disabled: React.PropTypes.bool,
+        name: React.PropTypes.string
     },
     getDefaultProps: function () {
         return {
             checked: false,
-            disabled: false
+            disabled: false,
+            name: null
         };
     },
     getInitialState: function() {
@@ -34,7 +36,11 @@ var ToggleBox = React.createClass({
             this.setState(state);
 
             if (this.props.onClick) {
+                console.warn('ToggleBox', 'onClick will be deprecated. Use onChange instead');
                 this.props.onClick(e, state);
+            }
+            else if (this.props.onChange) {
+                this.props.onChange(e, state);
             }
         }
     },
@@ -45,9 +51,7 @@ var ToggleBox = React.createClass({
         this.setState({focused: false});
     },
     onChange: function() {
-        // if (this.props.onChange) {
-        //     this.props.onChange(e);
-        // }
+        // Need to stub this so react warnings go. Check implementation in onClick
     },
     render: function() {
         var classes = this.ClassMixin_getClass();
