@@ -28,7 +28,7 @@ var Video = React.createClass({
     },
     getDefaultProps: function() {
         return {
-            controls: true
+            controls: false
         };
     },
     getInitialState: function() {
