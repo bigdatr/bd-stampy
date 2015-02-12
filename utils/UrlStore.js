@@ -47,7 +47,24 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
 
         var queryString = _.chain(paramList)
                             .sortBy(function(p) { return p.key; })
-                            .map(function(p) { return p.key + '=' + encodeURIComponent(p.value); })
+                            .map(function(p) {
+                                var val;
+
+                                if (typeof p.value === 'object' && p.value.length) {
+                                    // Convert arrays to pipe delimited strings
+                                    val = _.chain(p.value)
+                                                .map(function(f) {
+                                                    return encodeURIComponent(f);
+                                                })
+                                                .join('|')
+                                                .value();
+                                }
+                                else {
+                                    val = encodeURIComponent(p.value);
+                                }
+
+                                return p.key + '=' + val;
+                            })
                             .join('&')
                             .value();
 

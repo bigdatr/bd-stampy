@@ -1,8 +1,11 @@
 /** @jsx React.DOM */
+
+
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 var IconConstants = require('../constants/IconConstants.js');
+var IconStore = require('../utils/IconStore');
 
 var Icon = React.createClass({
     displayName: 'Icon',
@@ -21,28 +24,37 @@ var Icon = React.createClass({
             type: 'fontface',
         };
     },
-    render() {        
-        this.classes = this.ClassMixin_getClass();
-        this.classes.modifier(this.props.size);
-        this.classes.modifier(this.props.name.toLowerCase());
-
-        if(this.props.type === 'svg') {
+    getClasses() {
+        var classes = this.ClassMixin_getClass();
+        classes.modifier(this.props.size);
+        classes.modifier(this.props.name.toLowerCase());
+        return classes;
+    },
+    render() {
+        if (this.props.type === 'svg') {
             return this.renderSvg();
         }
+
         return this.renderFontFace();
     },
-    renderSvg() {        
-        this.classes.modifier('svg');
-        return <svg {...this.props} pointerEvents="all" className={this.classes.className} dangerouslySetInnerHTML={{__html: '<use xlink:href="#' + this.props.name + '"></use>'}}></svg>;
+    renderSvg() {    
+        var classes = this.getClasses();
+        classes.modifier('svg');
+        
+        var path = IconStore.getPath(this.props.name);
+
+        return (
+            <svg    {...this.props}
+                    className={classes.className}
+                    width="0"
+                    height="0"
+                    viewBox="256 256 512 512">
+                <path d={path}></path>
+            </svg>
+        );
     },
     renderFontFace() {
-        var componentType = this.props.componentType;
-
-        if(this.props.onClick) {
-            componentType = React.DOM.a;        
-        }
-
-        
+        var componentType = this.props.componentType;        
 
         // Switch Out Icon Types        
         var iconType = (this.props.size === 'small') ? 1 : 0;
@@ -53,9 +65,11 @@ var Icon = React.createClass({
         if(IconConstants[name] && IconConstants[name][iconType]) {
             iconCode = IconConstants[name][iconType];
         }
+
+        var classes = this.getClasses();
         
         return componentType({
-            className: this.classes.className, 
+            className: classes.className, 
             onClick: this.props.onClick,
             onMouseDown: this.props.onMouseDown,
             'data-icon': iconCode,
