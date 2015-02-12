@@ -84,7 +84,7 @@ var Form = React.createClass({
         var defaultProps = {
             onChange: this.props.onChange,
             name: key.toString(),
-            value: value
+            value: value || ''
         };
 
         // Return Custom Elements First
@@ -100,6 +100,8 @@ var Form = React.createClass({
             
             return <SelectStandard {...defaultProps} options={options}/>;
         }
+
+        console.log(defaultProps.value);
 
         if(item.type === 'array') {
             defaultProps.disabled = true;

@@ -33,7 +33,7 @@ var Icon = React.createClass({
     },
     renderSvg() {        
         this.classes.modifier('svg');
-        return <svg {...this.props} className={this.classes.className} dangerouslySetInnerHTML={{__html: '<use xlink:href="#' + this.props.name + '"></use>'}}></svg>;
+        return <svg {...this.props} pointerEvents="all" className={this.classes.className} dangerouslySetInnerHTML={{__html: '<use xlink:href="#' + this.props.name + '"></use>'}}></svg>;
     },
     renderFontFace() {
         var componentType = this.props.componentType;
