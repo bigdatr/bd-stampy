@@ -28,7 +28,13 @@ var Video = React.createClass({
     },
     getDefaultProps: function() {
         return {
-            controls: true
+            controls: true,
+            playIcon:           <Icon modifier="button" name="play"></Icon>,
+            pauseIcon:          <Icon modifier="button" name="pause"></Icon>,
+            unfullscreenIcon:   <Icon modifier="button" name="unfullscreen"></Icon>,
+            fullscreenIcon:     <Icon modifier="button" name="fullscreen"></Icon>,
+            mutedIcon:          <Icon modifier="button" name="muted"></Icon>,
+            unmutedIcon:        <Icon modifier="button" name="unmuted"></Icon>
         };
     },
     getInitialState: function() {
@@ -180,16 +186,16 @@ var Video = React.createClass({
             return null;
         }
 
-        var playPauseIcon = this.state.paused ? 'play' : 'pause';
-        var fullscreenIcon = this.state.fullscreen ? 'unfullscreen' : 'fullscreen';
-        var mutedIcon = this.state.muted ? 'muted' : 'unmuted';
+        var playPauseIcon = this.state.paused ? this.props.playIcon : this.props.pauseIcon;
+        var fullscreenIcon = this.state.fullscreen ? this.props.unfullscreenIcon : this.props.fullscreenIcon;
+        var mutedIcon = this.state.muted ? this.props.mutedIcon : this.props.unmutedIcon;
 
         return (
             <div className="Video_controls">
                 <div className="Video_toolbar">
-                    <Icon modifier="button" className="l-right" onClick={this.onFullscreen} name={fullscreenIcon}></Icon>
-                    <Icon modifier="button" className="l-right" onClick={this.onToggleSound} name={mutedIcon}></Icon>
-                    <Icon modifier="button" name={playPauseIcon} onClick={this.onPlayPause}></Icon>
+                    <div className="l-right" onClick={this.onFullscreen}>{fullscreenIcon}</div>
+                    <div className="l-right" onClick={this.onToggleSound}>{mutedIcon}</div>
+                    <div onClick={this.onPlayPause}>{playPauseIcon}</div>
                 </div>   
                 <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
                     <div className="Video_bar Video_bar-buffer" style={{width:this.state.buffered + "%"}}></div>
