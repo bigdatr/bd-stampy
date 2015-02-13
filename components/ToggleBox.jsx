@@ -12,13 +12,15 @@ var ToggleBox = React.createClass({
         toggle: React.PropTypes.bool,
         checked: React.PropTypes.bool,
         disabled: React.PropTypes.bool,
-        name: React.PropTypes.string
+        name: React.PropTypes.string,
+        canToggleOff: React.PropTypes.bool
     },
     getDefaultProps: function () {
         return {
             checked: false,
             disabled: false,
-            name: null
+            name: null,
+            canToggleOff: true //TODO: Needs to be removed once we stop using state and only use props
         };
     },
     getInitialState: function() {
@@ -33,7 +35,10 @@ var ToggleBox = React.createClass({
     onClick: function(e) {
         if (!this.props.disabled) {
             var state = { checked: !this.state.checked };
-            this.setState(state);
+
+            if (state.checked || this.props.canToggleOff) {
+                this.setState(state);
+            }
 
             if (this.props.onClick) {
                 console.warn('ToggleBox', 'onClick will be deprecated. Use onChange instead');
