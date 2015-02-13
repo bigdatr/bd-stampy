@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Label = require('./Label');
 var InputRow = require('./InputRow');
 var Input = React.createFactory(require('./Input'));
+var Checkbox = React.createFactory(require('./Checkbox'));
 var SelectStandard = require('./SelectStandard');
 
 var sentenceCase = function (text) {
@@ -13,6 +14,7 @@ var sentenceCase = function (text) {
 var _defaultCustomElements = {
     textarea: require('./Textarea'),
     input: require('./Input'),
+    checkbox: require('./Checkbox'),
     file: require('./SuperagentFileUpload')
 }
 
@@ -73,7 +75,6 @@ var Form = React.createClass({
         return label;
     },
     renderFormElement(key, item, value) {
-        
         if(!item) {
             return '-';
         }
@@ -84,6 +85,7 @@ var Form = React.createClass({
         var defaultProps = {
             onChange: this.props.onChange,
             name: key.toString(),
+            error: this.props.errors[key],
             value: value || ''
         };
 
@@ -101,13 +103,15 @@ var Form = React.createClass({
             return <SelectStandard {...defaultProps} options={options}/>;
         }
 
-        console.log(defaultProps.value);
-
         if(item.type === 'array') {
             defaultProps.disabled = true;
             defaultProps.value = 'unhandled';
             
             return Input(defaultProps);
+        }
+
+        if(item.type === 'boolean') {
+            return Checkbox(defaultProps);
         }
 
         if(item.type === 'string' || item.type === 'number') {
