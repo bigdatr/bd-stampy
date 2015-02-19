@@ -23,6 +23,10 @@ var SelectStandard = React.createClass({
             value: this.props.value || option.value
         };
     },
+    componentWillReceiveProps: function (nextProps) {
+        var option = nextProps.options[0];
+        this.setState({value: nextProps.value || option.value});  
+    },
     getDetails: function () {
         return {
             key: this.props.name,

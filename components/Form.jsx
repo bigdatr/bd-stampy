@@ -7,6 +7,7 @@ var Input = React.createFactory(require('./Input'));
 var Checkbox = React.createFactory(require('./Checkbox'));
 var SelectStandard = require('./SelectStandard');
 
+
 var sentenceCase = function (text) {
     return _.capitalize(_.words(text).join(' '));
 };
@@ -15,6 +16,7 @@ var _defaultCustomElements = {
     textarea: require('./Textarea'),
     input: require('./Input'),
     checkbox: require('./Checkbox'),
+    typeahead: require('./Typeahead'),
     file: require('./SuperagentFileUpload')
 }
 
@@ -23,21 +25,43 @@ var Form = React.createClass({
     propTypes: {
         schema: React.PropTypes.object.isRequired,
         value: React.PropTypes.object.isRequired,
+        onlyOrder: React.PropTypes.bool,
         onChange: React.PropTypes.func.isRequired
     },
     getDefaultProps () {
         return {
-            nested: false
+            nested: false,
+            onlyOrder: false
         }
     },
     render() {
-        return <div>{this.renderNodes(this.props.schema, this.props.value)}</div>;
+        var form;
+
+        var order = this.props.order;
+
+        if(!this.props.onlyOrder) {
+            order = _.chain(this.props.order)
+                .union(_.keys(this.props.schema))
+                .value();
+        }
+ 
+        if(this.props.nested) {
+            form = this.renderNodes(this.props.schema, this.props.value);            
+        } else {
+            form = this.renderOrderedNodes(order);
+        }
+
+        return <div>{form}</div>
+    },
+    renderOrderedNodes(order) {
+        return  _.map(order, (value) => {
+            return this.renderNode(value, this.props.schema[value], this.props.value[value]);
+        });
     },
     renderNodes(nodes, mapContext) {
-        return  _(nodes).keys().sort().map((key) => {
-            var value = nodes[key]
+        return  _.map(nodes, (value, key) => {
             return this.renderNode(key, value, mapContext[key])
-        }).value();
+        });
     },
 
     // Render a form node (label, element)
@@ -54,49 +78,53 @@ var Form = React.createClass({
                     );                    
                 }
             } else {            
-                return (
-                    <InputRow key={key} label={sentenceCase(key)}>
-                        {this.renderFormElement(key, schemaContext, mapContext)}
-                    </InputRow>
-                );            
+                if(this.props.formShape[key] !== false) {
+                    return (
+                        <InputRow key={key} label={this.renderLabel(schemaContext, key)}>
+                            {this.renderFormElement(key, schemaContext, mapContext)}
+                        </InputRow>
+                    );
+                }
             }            
         }
     },
     renderLabel(item, key) {
         var label = key;
-        if(item) {
-            label = item.label || key;
+        var shape = this.props.formShape;
+        if(shape[key] && shape[key].label) {
+            label = shape[key].label;
         }
 
-        if(typeof item === 'string') {
-            label = item;
-        }
-
-        return label;
+        return sentenceCase(label);
     },
     renderFormElement(key, item, value) {
         if(!item) {
             return '-';
         }
-        // console.log(item);
-        // var element = item.type || Input;
-        
-        // Defaults 
-        var defaultProps = {
+        var shape = this.props.formShape;
+        var enums = item.enum;
+        var shapeProps = (shape[key]) ? shape[key].props : null;
+        var defaultProps = _.defaults({
             onChange: this.props.onChange,
             name: key.toString(),
             error: this.props.errors[key],
             value: value || ''
-        };
+        }, shapeProps);
 
-        // Return Custom Elements First
-        if(this.props.formShape && this.props.formShape[key]) {
-            return this.renderCustomFormElement(key, item, value, defaultProps, this.props.formShape[key])
+        
+        if(item.items) {
+            enums = item.items.enum;
         }
 
-        if(item.enum) {
+        // Return Custom Elements First
+        
+        if(shape && shape[key] && shape[key].type) {
+            return this.renderCustomFormElement(key, item, value, defaultProps, shape[key], enums)
+        }        
+
+        if(enums) {
             // console.log(defaultProps);
-            var options = item.enum.map((item) => {
+            var options = enums.map((item) => {
                 return {value: item, label: item};
             });
             
@@ -115,16 +143,26 @@ var Form = React.createClass({
         }
 
         if(item.type === 'string' || item.type === 'number') {
+            defaultProps.type = item.type;
             return Input(defaultProps);
         }
 
-
-
         return Input(defaultProps);
     },
-    renderCustomFormElement(key, item, value, defaultProps, shape) {
+    renderCustomFormElement(key, item, value, defaultProps, shape, enums) {
         var customElement = _defaultCustomElements.input;
         var props = {};
+
+        if(enums) {
+            defaultProps.multiple = true;
+
+            if(!value) {
+                defaultProps.value = [];   
+            }
+            defaultProps.children = _.map(enums, (value, key)=> {
+                return <option value={value} key={key}>{_.capitalize(value)}</option>;
+            });   
+        }
 
 
         if(_.isString(shape)) {
@@ -132,14 +170,14 @@ var Form = React.createClass({
         }
 
         if(_.isObject(shape)) {
-            customElement = _defaultCustomElements[shape.type || 'input'];
+            if(!_.isString(shape.type)) {
+                customElement = shape.type;
+            } else {
+                customElement = _defaultCustomElements[shape.type || 'input'];                
+            }
             props = shape.props || {};
         }
-
         return React.createElement(customElement, _.defaults(defaultProps, props));
-    },
-    renderSelect(props, selectItems) {
-        return <DefualtSelect {...props}>{selectItems}</DefualtSelect>;
     }
 });
 
