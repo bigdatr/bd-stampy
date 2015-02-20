@@ -51,12 +51,24 @@ var FileUpload = React.createClass({
 
         });
     },
-    onChange() {
+    onChange(e) {
         var input = this.refs.input.getDOMNode();
-        this.setState({files: input.files});
+        this.setState({
+            files: input.files,
+            uploading: false,
+            percentage: 0,
+            error: null
+        });
+        if(this.props.onChange) {
+            this.props.onChange(e);
+        }
     },
     onUpload() {
-        this.setState({uploading: true});
+        this.setState({
+            uploading: true,
+            percentage: 0,
+            error: null
+        });
         this.postFile(this.state.files[0]).then(
             (data) => this.onSuccess(data),
             (error) => this.onError(error)
@@ -65,7 +77,6 @@ var FileUpload = React.createClass({
     onSuccess(data) {
         this.setState({uploading: false});
         if(this.props.onSuccess) {
-            console.log(data);
             this.props.onSuccess(data);
         }
     },

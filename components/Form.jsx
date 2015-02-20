@@ -80,7 +80,7 @@ var Form = React.createClass({
             } else {            
                 if(this.props.formShape[key] !== false) {
                     return (
-                        <InputRow key={key} label={this.renderLabel(schemaContext, key)}>
+                        <InputRow key={key} label={this.renderLabel(key)}>
                             {this.renderFormElement(key, schemaContext, mapContext)}
                         </InputRow>
                     );
@@ -88,14 +88,14 @@ var Form = React.createClass({
             }            
         }
     },
-    renderLabel(item, key) {
+    renderLabel(key) {
         var label = key;
         var shape = this.props.formShape;
         if(shape[key] && shape[key].label) {
             label = shape[key].label;
         }
-
-        return sentenceCase(label);
+        
+        return _.isString(label) ? sentenceCase(label) : label;
     },
     renderFormElement(key, item, value) {
         if(!item) {
