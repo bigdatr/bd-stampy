@@ -11,12 +11,13 @@ var Icon = React.createClass({
     displayName: 'Icon',
     mixins:[ClassMixin],
     propTypes: {
+        name: React.PropTypes.string,
         block: React.PropTypes.bool,
         component: React.PropTypes.func,
         inline: React.PropTypes.bool,
         onClick: React.PropTypes.func,
         size: React.PropTypes.string,
-        name: React.PropTypes.string.isRequired
+        hexCode: React.PropTypes.string
     },
     getDefaultProps: function() {
         return {
@@ -27,7 +28,11 @@ var Icon = React.createClass({
     getClasses() {
         var classes = this.ClassMixin_getClass();
         classes.modifier(this.props.size);
-        classes.modifier(this.props.name.toLowerCase());
+
+        if(this.props.name) {
+            classes.modifier(this.props.name.toLowerCase());            
+        }
+
         return classes;
     },
     render() {
@@ -55,18 +60,27 @@ var Icon = React.createClass({
     },
     renderFontFace() {
         var componentType = this.props.componentType;        
-
-        // Switch Out Icon Types        
-        var iconType = (this.props.size === 'small') ? 1 : 0;
-
         var iconCode = '\uE001';
-        var name = this.props.name.toLowerCase();
-
-        if(IconConstants[name] && IconConstants[name][iconType]) {
-            iconCode = IconConstants[name][iconType];
-        }
-
         var classes = this.getClasses();
+
+        //name vs code point 
+        if(this.props.hexCode || this.props.decimalCode) {
+            // Hex
+            if(this.props.hexCode) {
+                iconCode = String.fromCharCode(parseInt(this.props.hexCode, 16));
+            }
+            // Decimal
+            if(this.props.decimalCode) {
+                iconCode = String.fromCharCode(this.props.decimalCode);            
+            }
+        } else {
+            // Named Icons       
+            var iconType = (this.props.size === 'small') ? 1 : 0;            
+            var name = this.props.name.toLowerCase();
+            if(IconConstants[name] && IconConstants[name][iconType]) {
+                iconCode = IconConstants[name][iconType];
+            }
+        }
         
         return componentType({
             className: classes.className, 
