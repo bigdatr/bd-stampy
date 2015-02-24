@@ -110,7 +110,6 @@ var ToggleGroup = React.createClass({
         }
     },
     render: function() {        
-        console.log(this.props.children.map(data => data.props));
         var classes = this.ClassMixin_getClass();
         
         if (this.props.grouped) {
