@@ -108,6 +108,7 @@ var Form = React.createClass({
             onChange: this.props.onChange,
             name: key.toString(),
             error: this.props.errors[key],
+            type: 'text',
             value: value || ''
         }, shapeProps);
 
@@ -143,7 +144,7 @@ var Form = React.createClass({
         }
 
         if(item.type === 'string' || item.type === 'number') {
-            defaultProps.type = item.type;
+            defaultProps.type = 'text';
             return Input(defaultProps);
         }
 

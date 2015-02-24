@@ -96,6 +96,7 @@ var Input = React.createClass({
     render: function() {
         var classes = this.ClassMixin_getClass()
             .add((this.props.isValid === false || this.props.error), 'is-error')
+            .modifier(this.props.type)
         ;
         var disabled = this.props.disabled || false;
 

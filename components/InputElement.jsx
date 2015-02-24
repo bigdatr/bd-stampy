@@ -19,7 +19,6 @@ var Input = React.createClass({
         };
     },
     getDetails() {
-        console.log('getDetails');
         return {
             key: this.props.name,
             value: this.refs.input.getDOMNode().value
