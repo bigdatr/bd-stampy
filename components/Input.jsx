@@ -27,6 +27,7 @@ var Input = React.createClass({
             grey: false,
             isValid: true,
             readOnly: false,
+            type: 'text',
             closeIcon: <Icon  name="cross" size="small" ></Icon>
         };
     },
