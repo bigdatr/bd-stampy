@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
 var _ = require('lodash');
-var paginate = require('../utils/Paginate');
 
 var Pagination = React.createClass({
     displayName: 'Pagination',
@@ -17,7 +16,9 @@ var Pagination = React.createClass({
         return {
             length: 0,
             page: 0,
-            ammount: 25  
+            ammount: 25,
+            nextButton: 'next &raquo;',
+            previousButton: '&laquo; prev'
         };
     },
     onClick(page, e) {
@@ -28,23 +29,28 @@ var Pagination = React.createClass({
     render: function () {       
         var numberOfPages = Math.ceil(this.props.length / this.props.ammount);
         this.classes = this.ClassMixin_getClass('Pagination');
+
+        if(numberOfPages === 0) {
+            return null;
+        }
+
         return <div className={this.classes.className}>
             {this.renderButtons(numberOfPages)}
             <ul className={this.classes.child('list')}>
                 {_(numberOfPages).range().map(this.renderItem).value()}
             </ul>
-        </div>
+        </div>;
     },
     renderButtons(numberOfPages) {
         var next, prev;
         var buttonClass = this.classes.child('button');
 
         if(this.props.page > 0) {
-            prev = <button className={`${buttonClass} ${buttonClass}-previous`} onClick={this.onClick.bind(this, this.props.page - 1)}>prev</button>;
+            prev = <button className={`${buttonClass} ${buttonClass}-previous`} onClick={this.onClick.bind(this, this.props.page - 1)}>{this.props.previousButton}</button>;
         }
         
         if(this.props.page <= numberOfPages) {
-            next = <button className={`${buttonClass} ${buttonClass}-next`} onClick={this.onClick.bind(this, this.props.page + 1)}>next</button>;
+            next = <button className={`${buttonClass} ${buttonClass}-next`} onClick={this.onClick.bind(this, this.props.page + 1)}>{this.props.nextButton}</button>;
         }
         
         return (
