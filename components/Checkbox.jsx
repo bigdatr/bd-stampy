@@ -5,6 +5,11 @@ var ClassMixin = require('../mixins/ClassMixin.jsx');
 var Checkbox = React.createClass({
     displayName: 'Checkbox',
     mixins: [ClassMixin],
+    propTypes: {
+        name: React.PropTypes.string,
+        checked: React.PropTypes.bool,
+        onChange: React.PropTypes.func
+    },
     getInitialState: function() {
         return {
             checked: this.props.checked
@@ -29,7 +34,8 @@ var Checkbox = React.createClass({
     render: function() {
     	var classes = this.ClassMixin_getClass()
     	    .add(this.state.checked, 'is-active');
-        return (  
+
+        return (
             <span className={classes.className} onClick={this.handleClick}>
                 <input 
                     className={classes.child('input')} 
@@ -40,7 +46,7 @@ var Checkbox = React.createClass({
                     defaultChecked={this.props.checked}
                 />
                 <span className={classes.child('box')}></span>
-                <span className={classes.child('text')}>{this.props.children}</span>
+                <div className={classes.child('text')}>{this.props.children}</div>
             </span>
         );
     }
