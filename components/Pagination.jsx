@@ -17,8 +17,9 @@ var Pagination = React.createClass({
             length: 0,
             page: 0,
             ammount: 25,
-            nextButton: 'next &raquo;',
-            previousButton: '&laquo; prev'
+            maxLinks: 10,
+            nextButton: 'next \u00bb',
+            previousButton: '\u00ab prev'
         };
     },
     onClick(page, e) {
@@ -30,16 +31,30 @@ var Pagination = React.createClass({
         var numberOfPages = Math.ceil(this.props.length / this.props.ammount);
         this.classes = this.ClassMixin_getClass('Pagination');
 
-        if(numberOfPages === 0) {
+        if(numberOfPages === 1) {
             return null;
         }
 
         return <div className={this.classes.className}>
             {this.renderButtons(numberOfPages)}
             <ul className={this.classes.child('list')}>
-                {_(numberOfPages).range().map(this.renderItem).value()}
+                {this.renderLinks(numberOfPages)}
             </ul>
         </div>;
+    },
+    renderLinks(numberOfPages) {
+        var half = Math.floor(this.props.maxLinks / 2);
+
+        var arrayObject;
+
+        if(numberOfPages > this.props.maxLinks) {
+            arrayObject = _(0).range(half).concat(['...'], _(numberOfPages - half).range(numberOfPages).value());
+        } else {
+            arrayObject = _(numberOfPages).range();
+        }
+
+
+        return arrayObject.map(this.renderItem).value();
     },
     renderButtons(numberOfPages) {
         var next, prev;
@@ -60,6 +75,9 @@ var Pagination = React.createClass({
     renderItem(item) {
         var className = this.classes.child('listItem');
         var isActive = (item === this.props.page) ? 'is-active' : '';
+        if (item === '...') {
+            return <li className={className}>...</li>;
+        }
         return <li className={`${className} ${isActive}`} onClick={this.onClick.bind(this, item)}><a>{item}</a></li>;
     }
 });
