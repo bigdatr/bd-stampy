@@ -58,7 +58,7 @@ module.exports = {
     tag:            ['\uE067',          '\uE042'        ],
     task:           ['\uE359'                           ],     
     thumbsdown:     ['\uE345',          '\uE126'        ],
-    tick:           ['\uE207'                           ],     
+    tick:           ['\uE207',           '\uE013'        ],     
     trash:          ['\uE017',          '\uE020'        ],
     undo:           ['\uE222'                           ],     
     unfullscreen:   ['\uE215'                           ],     
