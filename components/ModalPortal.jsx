@@ -2,6 +2,7 @@
 /* global document, HTMLElement */
 
 var React = require('react');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
@@ -18,7 +19,7 @@ if (typeof window !== 'undefined') {
 
 var Modal = React.createClass({
     displayName: 'Modal',
-    mixins: [ClassMixin],
+    mixins: [ClassMixin, PureRenderMixin],
     propTypes: {
         isOpen: React.PropTypes.bool.isRequired,
         transitionName: React.PropTypes.oneOf(['fade']),
@@ -32,29 +33,16 @@ var Modal = React.createClass({
     },
     getInitialState: function () {
         return {
-            modalIsMounted: true  
+            loaded: false
         };
     },
     componentDidUpdate: function (prevProps) {
-        var _this = this;
-
-        if (this.props.isOpen && this.state.modalIsMounted) {
-            // Show modal
-            this.setState({modalIsMounted: false});
-        }
-        else if (prevProps.isOpen && !this.props.isOpen) {
-            // Hide modal
-            setTimeout(function() {
-                if (_this.isMounted()) {
-                    _this.setState({modalIsMounted: true});
-                }
-            }, this.props.transitionDuration + 16.6);
+        if (!this.state.loaded && !prevProps.isOpen && this.props.isOpen) {
+            this.setState({loaded: true});
         }
     },
     render: function() {
-        if (this.state.modalIsMounted) {
-            // Need this to ensure that the modal is removed from the DOM
-            // and CSS transitions will work correctly
+        if (!this.state.loaded && !this.props.isOpen) {
             return null;
         }
 
