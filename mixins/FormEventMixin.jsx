@@ -1,4 +1,12 @@
+var React = require('react');
+
 var FormEventMixin = {
+    propTypes: {
+        onChange: React.PropTypes.func,
+        onFocus: React.PropTypes.func,
+        onBlur: React.PropTypes.func,
+        onKeyUp: React.PropTypes.func
+    },
     onChange: function(e) {
         if (this.props.onChange) {
             this.props.onChange(e, this.getDetails());
