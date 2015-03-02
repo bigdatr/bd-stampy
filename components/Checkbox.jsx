@@ -1,40 +1,45 @@
-/** @jsx React.DOM */
 var React = require('react');
-var ClassMixin = require('../mixins/ClassMixin.jsx');
+var Input = require('./InputElement');
+
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+var ClassMixin = require('../mixins/ClassMixin');
 
 var Checkbox = React.createClass({
     displayName: 'Checkbox',
-    mixins: [ClassMixin],
-    getDetails: function() {
+    propTypes: {
+        checked: React.PropTypes.bool,
+        onChange: React.PropTypes.func,
+        boxColor: React.PropTypes.string,
+        tickColor: React.PropTypes.string
+    },
+    mixins: [ClassMixin, PureRenderMixin],
+    getDefaultProps: function () {
         return {
-            key: this.props.name,
-            value: !this.props.value
+            boxColor: 'smoke',
+            tickColor: 'hotpink'
         };
     },
-    onChange: function(e) {
-        if (this.props.onChange) {
-            this.props.onChange(e, this.getDetails());
-        }
-    },
-    render: function() {
-    	var classes = this.ClassMixin_getClass()
-    	    .add(this.props.value, 'is-active');
-
-        return (  
-            <span className={classes.className} onClick={this.handleClick}>
-                <input 
-                    className={classes.child('input')} 
-                    type="checkbox" 
-                    name={this.props.name} 
-                    onChange={this.onChange} 
-                    checked={this.props.value}
-                    defaultChecked={this.props.value}
+    render: function () {
+        return (
+            <div className="Checkbox">
+                <Input 
+                    type="checkbox"
+                    id={this.props.name}
+                    name={this.props.name}
+                    checked={this.props.checked}
+                    defaultChecked={this.props.checked || false}
+                    onChange={this.props.onChange}
                 />
-                <span className={classes.child('box')}></span>
-                <span className={classes.child('text')}>{this.props.children}</span>
-            </span>
+                  
+                <label htmlFor={this.props.name}>
+                    <span className="check" style={{borderColor: this.props.tickColor}} />
+                    <span className="box" style={{borderColor: this.props.boxColor}} />
+                    <span className="text">{this.props.children}</span>
+                </label> 
+            </div>
         );
-    }
+    },
+    
 });
 
 module.exports = Checkbox;

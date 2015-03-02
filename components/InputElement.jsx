@@ -1,12 +1,12 @@
 var React = require('react');
-var Label = require('../components/Label.jsx');
-var Icon = require('../components/Icon.jsx');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var Input = React.createClass({
     displayName: 'Input',
     mixins: [
         require('../mixins/ClassMixin'),
-        require('../mixins/FormEventMixin')
+        require('../mixins/FormEventMixin'),
+        PureRenderMixin
     ],
     propTypes: {
         value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
@@ -19,9 +19,19 @@ var Input = React.createClass({
         };
     },
     getDetails() {
+        var el = this.refs.input.getDOMNode();
+        var value;
+
+        if (this.props.type === 'checkbox') {
+            value = el.checked;
+        }
+        else {
+            value = el.value;
+        }
+
         return {
             key: this.props.name,
-            value: this.refs.input.getDOMNode().value
+            value: value
         };
     },
     render() {
