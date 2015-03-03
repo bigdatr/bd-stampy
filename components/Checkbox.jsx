@@ -1,42 +1,30 @@
 var React = require('react');
-var Input = require('./InputElement');
-
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+
+var Input = require('./InputElement');
 var ClassMixin = require('../mixins/ClassMixin');
 
 var Checkbox = React.createClass({
     displayName: 'Checkbox',
     propTypes: {
         checked: React.PropTypes.bool,
-        onChange: React.PropTypes.func,
-        boxColor: React.PropTypes.string,
-        tickColor: React.PropTypes.string
+        onChange: React.PropTypes.func
     },
     mixins: [ClassMixin, PureRenderMixin],
-    getDefaultProps: function () {
-        return {
-            boxColor: 'smoke',
-            tickColor: 'hotpink'
-        };
-    },
     render: function () {
+        var classes = this.ClassMixin_getClass('Checkbox');
         return (
-            <div className="Checkbox">
+            <label className={classes.className}>
                 <Input 
                     type="checkbox"
-                    id={this.props.name}
+                    className={classes.child('input')}
                     name={this.props.name}
                     checked={this.props.checked}
                     defaultChecked={this.props.checked || false}
                     onChange={this.props.onChange}
-                />
-                  
-                <label htmlFor={this.props.name}>
-                    <span className="check" style={{borderColor: this.props.tickColor}} />
-                    <span className="box" style={{borderColor: this.props.boxColor}} />
-                    <span className="text">{this.props.children}</span>
-                </label> 
-            </div>
+                />                  
+                <span className={classes.child("text")}>{this.props.children}</span>
+            </label>
         );
     },
     
