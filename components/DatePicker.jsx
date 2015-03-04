@@ -10,6 +10,7 @@ var Input = require('./Input.jsx');
 var ClassMixin = require('../mixins/ClassMixin.jsx'),
     ClassBuilder = require('../utils/ClassBuilder');
 
+
 var DatePicker = React.createClass({
     displayName: 'DatePicker',
     mixins: [ClassMixin],
@@ -20,6 +21,7 @@ var DatePicker = React.createClass({
         nextButton: React.PropTypes.element,
         previousButton: React.PropTypes.element,
         closeButton: React.PropTypes.element,
+        required: React.PropTypes.bool,
         value: React.PropTypes.oneOfType([
             React.PropTypes.number,
             React.PropTypes.string
@@ -34,7 +36,8 @@ var DatePicker = React.createClass({
             nextButton: <span>&gt;</span>,
             previousButton: <span>&lt;</span>,
             min_date: null,
-            max_date: null
+            max_date: null,
+            required: true
         };
     },
     getInitialState: function() {
@@ -139,6 +142,7 @@ var DatePicker = React.createClass({
         classes.add(!this.props.isValid, 'is-error');
 
         var datePicker = (this.state.visible && !this.props.alternateRender) ? this.renderDatePicker() : null;
+        var closeIcon = this.props.required ?  null : this.props.closeValueIcon;
 
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
@@ -153,7 +157,7 @@ var DatePicker = React.createClass({
                     value={value} 
                     isValid={this.props.isValid} 
                     discreteValue 
-                    closeIcon={this.props.closeValueIcon}
+                    closeIcon={closeIcon}
                     onChange={this.onClearDate}
                 />
                 {datePicker}
@@ -264,13 +268,8 @@ var DatePicker = React.createClass({
             return false;
         });
         
-        var startOfWeek = moment(startOfMonth).subtract(calendarOffset-1, 'days'),
+        var startOfWeek = startOfMonth.subtract(calendarOffset-1, 'days'),
             weeks = [];
-    
-        // Ensure we always display the 1st, even if its not on a Sunday
-        if (startOfMonth.isBefore(startOfWeek)) {
-            startOfWeek.subtract(7, 'days');
-        }
 
         while (startOfWeek.isBefore(endOfMonth)) {
             weeks.push({start: moment(startOfWeek)});
