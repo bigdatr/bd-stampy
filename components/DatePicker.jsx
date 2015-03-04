@@ -10,7 +10,6 @@ var Input = require('./Input.jsx');
 var ClassMixin = require('../mixins/ClassMixin.jsx'),
     ClassBuilder = require('../utils/ClassBuilder');
 
-
 var DatePicker = React.createClass({
     displayName: 'DatePicker',
     mixins: [ClassMixin],
@@ -268,8 +267,13 @@ var DatePicker = React.createClass({
             return false;
         });
         
-        var startOfWeek = startOfMonth.subtract(calendarOffset-1, 'days'),
+        var startOfWeek = moment(startOfMonth).subtract(calendarOffset-1, 'days'),
             weeks = [];
+    
+        // Ensure we always display the 1st, even if its not on a Sunday
+        if (startOfMonth.isBefore(startOfWeek)) {
+            startOfWeek.subtract(7, 'days');
+        }
 
         while (startOfWeek.isBefore(endOfMonth)) {
             weeks.push({start: moment(startOfWeek)});
