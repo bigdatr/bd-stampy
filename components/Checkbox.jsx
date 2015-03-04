@@ -23,7 +23,7 @@ var Checkbox = React.createClass({
                     defaultChecked={this.props.checked || false}
                     onChange={this.props.onChange}
                 />                  
-                <span className={classes.child("text")}>{this.props.children}</span>
+                <span className={classes.child("label")}>{this.props.children}</span>
             </label>
         );
     },

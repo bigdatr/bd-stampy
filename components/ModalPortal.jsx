@@ -1,16 +1,13 @@
-/** @jsx React.DOM */
 /* global document, HTMLElement */
+HTMLElement = typeof HTMLElement === 'undefined' ? function(){} : HTMLElement;
 
 var React = require('react');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
-
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 // TODO: This is due to a limitation of react-modal. Hopefully they fix it soon!
-HTMLElement = typeof HTMLElement === 'undefined' ? function(){} : HTMLElement;
 
 var ReactModal = require('react-modal');
-
 
 if (typeof window !== 'undefined') {
     ReactModal.setAppElement(document.body);
@@ -27,8 +24,8 @@ var Modal = React.createClass({
     },
     getDefaultProps: function () {
         return {
-              transitionName: 'fade',
-              transitionDuration: 350
+            transitionName: 'fade',
+            transitionDuration: 480
         };
     },
     getInitialState: function () {
@@ -47,14 +44,16 @@ var Modal = React.createClass({
         }
 
         var modalClasses = this.ClassMixin_getClass()
-                                .modifier(this.props.transitionName);
+            .modifier(this.props.transitionName);
 
         return (
-            <ReactModal     className={modalClasses.className}
-                            isOpen={this.props.isOpen}
-                            onRequestClose={this.props.onRequestClose}
-                            closeTimeoutMS={this.props.transitionDuration}
-                                >{this.props.children}</ReactModal>
+            <ReactModal 
+                className={modalClasses.className}
+                isOpen={this.props.isOpen}
+                onRequestClose={this.props.onRequestClose}
+                closeTimeoutMS={this.props.transitionDuration}>
+                {this.props.children}
+            </ReactModal>
         );
     }
 });
