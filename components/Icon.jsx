@@ -89,7 +89,11 @@ var Icon = React.createClass({
         if(this.props.hexCode || this.props.decimalCode) {
             // Hex
             if(this.props.hexCode) {
-                iconCode = getUnicodeCharacter(parseInt(this.props.hexCode, 16));
+                if(parseInt(this.props.hexCode, 16) > 57344) {
+                    iconCode = getUnicodeCharacter(parseInt(this.props.hexCode, 16));
+                } else {
+                    iconCode = this.props.hexCode;
+                }
             }
             // Decimal
             if(this.props.decimalCode) {

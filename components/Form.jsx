@@ -46,6 +46,7 @@ var Form = React.createClass({
         }
  
         if(this.props.nested) {
+            console.log(this.props.schema);
             form = this.renderNodes(this.props.schema, this.props.value);            
         } else {
             form = this.renderOrderedNodes(order);
@@ -60,7 +61,8 @@ var Form = React.createClass({
     },
     renderNodes(nodes, mapContext) {
         return  _.map(nodes, (value, key) => {
-            return this.renderNode(key, value, mapContext[key])
+            console.log(mapContext, key)
+            return this.renderNode(key, value, mapContext[key] || '');                           
         });
     },
 
@@ -78,7 +80,7 @@ var Form = React.createClass({
                     );                    
                 }
             } else {            
-                if(this.props.formShape[key] !== false) {
+                if(this.props.nested || this.props.formShape[key] !== false) {
                     return (
                         <InputRow key={key} label={this.renderLabel(key)}>
                             {this.renderFormElement(key, schemaContext, mapContext)}
@@ -89,6 +91,10 @@ var Form = React.createClass({
         }
     },
     renderLabel(key) {
+        if(this.props.nested) {
+            return key;
+        }
+
         var label = key;
         var shape = this.props.formShape;
         if(shape[key] && shape[key].label) {
@@ -103,7 +109,10 @@ var Form = React.createClass({
         }
         var shape = this.props.formShape;
         var enums = item.enum;
-        var shapeProps = (shape[key]) ? shape[key].props : null;
+        var shapeProps = {}
+        if(shape) {
+            shapeProps = (shape[key]) ? shape[key].props : null;
+        }
         var defaultProps = _.defaults({
             onChange: this.props.onChange,
             name: key.toString(),
@@ -140,6 +149,7 @@ var Form = React.createClass({
         }
 
         if(item.type === 'boolean') {
+            defaultProps.checked = value;
             return Checkbox(defaultProps);
         }
 
