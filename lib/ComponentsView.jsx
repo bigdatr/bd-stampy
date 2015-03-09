@@ -13,10 +13,11 @@ var ComponentsView = React.createClass({
         );
     },
     renderPosts() {
-        return this.props.components.map((post,key) => {
+        return this.props.components.map((cc,key) => {
+
             return <li key={key}>
-                <h2>{post.data.displayName}</h2>
-                <ul>{post.data.props.map((pp)=> <li>{pp.name}: {pp.type}</li>)}</ul>
+                <h2>{cc.data.displayName}</h2>
+                <ul>{cc.data.props.map((pp, key)=> <li key={key}><strong>{pp.name}</strong>: {pp.type}</li>)}</ul>
             </li>;
         });
     }
