@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var ClassBuilder = require('bd-stampy/utils/ClassBuilder');
+var ClassBuilder = require('../utils/ClassBuilder');
 
 var SelectStandard = React.createClass({
     displayName: 'SelectStandard',
@@ -25,7 +25,7 @@ var SelectStandard = React.createClass({
     },
     componentWillReceiveProps: function (nextProps) {
         var option = nextProps.options[0];
-        this.setState({value: nextProps.value || option.value});  
+        this.setState({value: nextProps.value || option.value});
     },
     getDetails: function () {
         return {
@@ -81,11 +81,11 @@ var SelectStandard = React.createClass({
             }.bind(this));
 
             return <ul className="Select_options">{options}</ul>;
-        }        
+        }
     },
     renderValue: function () {
         var option =  _.find(this.props.options, {'value': this.state.value}) || this.props.options[0];
-        return option.label;            
+        return option.label;
     }
 });
 
