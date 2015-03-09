@@ -4,7 +4,7 @@ var React = require('react');
 var Carousel = React.createClass({
     displayName: 'Carousel',
     mixins: [
-        require('bd-stampy/mixins/ClassMixin')
+        require('../mixins/ClassMixin')
     ],
     propTypes: {
         images: React.PropTypes.array.isRequired,

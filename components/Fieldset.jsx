@@ -6,7 +6,7 @@ var Form = require('./Form');
 var Fieldset = React.createClass({
     displayName: 'Fieldset',
     mixins: [
-        require('bd-stampy/mixins/FormMixin')
+        require('../mixins/FormMixin')
     ],
     propTypes: {
         name: React.PropTypes.string,
@@ -15,20 +15,20 @@ var Fieldset = React.createClass({
         schema: React.PropTypes.object
     },
     onChange: function(e, details) {
-        this.FormMixin_onFormChange(e,details, this.onUpdate);        
+        this.FormMixin_onFormChange(e,details, this.onUpdate);
     },
     onUpdate: function () {
         if (this.props.onChange) {
             this.props.onChange(null, {
-                key: this.props.name, 
+                key: this.props.name,
                 value: _.defaults(this.state.formData, this.props.value)
             });
-        } 
+        }
     },
     render: function () {
         return (
             <fieldset>
-                <Form 
+                <Form
                     schema={this.props.schema}
                     onChange={this.onChange}
                     value={this.props.value}

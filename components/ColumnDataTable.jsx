@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var Tag = require('bd-stampy/components/Tag');
+var Tag = require('../components/Tag');
 
 var ColumnDataTable = React.createClass({
     displayName: 'ColumnDataTable',
@@ -20,11 +20,11 @@ var ColumnDataTable = React.createClass({
     //                 if(series !== this.props.data[key].series[subkey]) {
     //                     return true;
     //                 }
-    //             }, this);    
-    //         }, this);            
+    //             }, this);
+    //         }, this);
     //     }
-        
-    //     return false;  
+
+    //     return false;
     // },
     render: function () {
         return (
