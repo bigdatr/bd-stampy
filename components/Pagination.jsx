@@ -9,7 +9,7 @@ var Pagination = React.createClass({
     ],
     propTypes: {
         ammount: React.PropTypes.number,
-        length: React.PropTypes.array,
+        length: React.PropTypes.number,
         page: React.PropTypes.number
     },
     getDefaultProps: function () {
@@ -72,13 +72,13 @@ var Pagination = React.createClass({
             <div>{prev}{next}</div>
         );
     },
-    renderItem(item) {
+    renderItem(item, key) {
         var className = this.classes.child('listItem');
         var isActive = (item === this.props.page) ? 'is-active' : '';
         if (item === '...') {
-            return <li className={className}>...</li>;
+            return <li key={key} className={className}>...</li>;
         }
-        return <li className={`${className} ${isActive}`} onClick={this.onClick.bind(this, item)}><a>{item}</a></li>;
+        return <li key={key} className={`${className} ${isActive}`} onClick={this.onClick.bind(this, item)}><a>{item}</a></li>;
     }
 });
 
