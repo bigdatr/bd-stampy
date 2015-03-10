@@ -50,12 +50,13 @@ var Video = React.createClass({
         };
     },
     componentDidMount: function() {
-        // Add Listeners      
+        // Add Listeners
         this.timeouts = [];
         this._video = this.refs.video.getDOMNode();
         this._video.addEventListener('loadedmetadata', this.onVideoLoaded);
         this._video.addEventListener('seeking', this.onVideoSeek);
         this._video.addEventListener('seeked', this.onVideoSought);
+        this.refs.wrapper.getDOMNode().focus();
     },
 
     componentWillUnmount: function() {
@@ -84,9 +85,9 @@ var Video = React.createClass({
                         buffered: perc,
                         duration: v.duration,
                         currentTime: timePercentage
-                    });                
+                    });
                 }
-            } 
+            }
         }
     },
     onScrub: function(e) {
@@ -107,14 +108,14 @@ var Video = React.createClass({
         // Stay within video bounds
         if(x >= 0 && x <= width) {
            this.updatePosition(x);
-        } 
+        }
         // Over
         else if (x >= width) {
             this.updatePosition(width);
-        } 
+        }
         // Under
         else {
-            this.updatePosition(0);            
+            this.updatePosition(0);
         }
     },
     onScrubEnd: function () {
@@ -134,8 +135,16 @@ var Video = React.createClass({
         this.setState({currentTime: perc});
         this._video.currentTime = unPercentage(perc, this.state.duration);
     },
-    onKeyUp: function() {
-        // NEED Key Handlers
+    onKeyUp: function(e) {
+         if (e.keyCode == 27) { // esc button.
+            if (this.state.fullscreen) {
+                e.stopPropagation();
+                Fullscreen.exit();
+                this.setState({fullscreen: false});
+            } else {
+                this.setState({fullscreen: true});
+            }
+         }
     },
     onPlay: function () {
         this._video.play();
@@ -163,14 +172,14 @@ var Video = React.createClass({
     onToggleSound: function () {
         this._video.muted = !this._video.muted;
         this.setState({muted: this._video.muted});
-    }, 
+    },
     render: function() {
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
-        classes.is(this.state.isDarkVideo, 'dark');        
+        classes.is(this.state.isDarkVideo, 'dark');
 
         return (
-            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()}>
+            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()} tabIndex='0' >
                 <video ref="video"
                     {...this.props}
                     onClick={this.onPlayPause}
@@ -200,7 +209,7 @@ var Video = React.createClass({
                     <div className="l-right" onClick={this.onFullscreen}>{fullscreenIcon}</div>
                     <div className="l-right" onClick={this.onToggleSound}>{mutedIcon}</div>
                     <div onClick={this.onPlayPause}>{playPauseIcon}</div>
-                </div>   
+                </div>
                 <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
                     <div className="Video_bar Video_bar-buffer" style={{width:this.state.buffered + "%"}}></div>
                     <div className="Video_bar Video_bar-progress" style={{width:this.state.currentTime + "%"}}></div>
