@@ -20,6 +20,7 @@ var DatePicker = React.createClass({
         nextButton: React.PropTypes.element,
         previousButton: React.PropTypes.element,
         closeButton: React.PropTypes.element,
+        required: React.PropTypes.bool,
         value: React.PropTypes.oneOfType([
             React.PropTypes.number,
             React.PropTypes.string
@@ -34,7 +35,8 @@ var DatePicker = React.createClass({
             nextButton: <span>&gt;</span>,
             previousButton: <span>&lt;</span>,
             min_date: null,
-            max_date: null
+            max_date: null,
+            required: false
         };
     },
     getInitialState: function() {
@@ -149,6 +151,7 @@ var DatePicker = React.createClass({
         classes.add(!this.props.isValid, 'is-error');
 
         var datePicker = (this.state.visible && !this.props.alternateRender) ? this.renderDatePicker() : null;
+        var closeIcon = this.props.required ?  null : this.props.closeValueIcon;
 
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
@@ -163,7 +166,7 @@ var DatePicker = React.createClass({
                     value={value} 
                     isValid={this.props.isValid} 
                     discreteValue 
-                    closeIcon={this.props.closeValueIcon}
+                    closeIcon={closeIcon}
                     onChange={this.onClearDate}
                 />
                 {datePicker}
