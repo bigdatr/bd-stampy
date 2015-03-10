@@ -38,10 +38,20 @@ var DatePicker = React.createClass({
         };
     },
     getInitialState: function() {
+        var value = null;
+
+        if (this.props.value) {
+            var type = typeof this.props.value;
+
+            if (type === 'number') {
+                value = parseInt(this.props.value, 10);
+            }
+        }
+
         return {
             displayDate: moment(this.props.displayDate || new Date()),
             visible: false,
-            value: this.props.value ? parseInt(this.props.value, 10) : null
+            value: value
         };
     },
     componentWillReceiveProps: function (nextProps) {

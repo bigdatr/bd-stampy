@@ -132,13 +132,13 @@ var ToggleGroup = React.createClass({
         var selected = this.state.selected;
 
         var toggles = this.props.toggles.map(function(t) {
-            return <ToggleBox key={t.value} checked={selected[t.value]} disabled={this.props.disabled} onClick={this.onToggle.bind(this, t)}>{t.label || t.value}</ToggleBox>;
+            return <ToggleBox key={t.value} checked={selected[t.value]} disabled={this.props.disabled} onChange={this.onToggle.bind(this, t)}>{t.label || t.value}</ToggleBox>;
         }.bind(this));
         
         var allSelected = !_.contains(selected, true);
 
         if(this.props.defaultToggle) {
-            toggles.unshift(<ToggleBox key={this.props.defaultToggle} checked={allSelected} onClick={this.onToggle.bind(this, this.props.defaultToggle)}>{this.props.defaultToggle}</ToggleBox>); 
+            toggles.unshift(<ToggleBox key={this.props.defaultToggle} checked={allSelected} onChange={this.onToggle.bind(this, this.props.defaultToggle)}>{this.props.defaultToggle}</ToggleBox>); 
         }
 
         return toggles;
