@@ -36,7 +36,7 @@ var DatePicker = React.createClass({
             previousButton: <span>&lt;</span>,
             min_date: null,
             max_date: null,
-            required: true
+            required: false
         };
     },
     getInitialState: function() {
