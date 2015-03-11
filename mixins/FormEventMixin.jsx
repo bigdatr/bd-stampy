@@ -8,6 +8,7 @@ var FormEventMixin = {
         onKeyUp: React.PropTypes.func
     },
     onChange: function(e) {
+        console.log(this.getDetails());
         if (this.props.onChange) {
             this.props.onChange(e, this.getDetails());
         }
