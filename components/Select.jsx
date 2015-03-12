@@ -1,8 +1,8 @@
 var React = require('react');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
-var Input = React.createClass({
-    displayName: 'Input',
+var Select = React.createClass({
+    displayName: 'Select',
     mixins: [
         require('../mixins/ClassMixin'),
         require('../mixins/FormEventMixin'),
@@ -26,10 +26,10 @@ var Input = React.createClass({
     },
     render() {
         var classes = this.ClassMixin_getClass('Select_element');
-        return <select onChange={this.onChange} ref="select" className={classes.className}>
+        return <select onChange={this.onChange} ref="select" className={classes.className} value={this.props.value}>
             {this.props.children}
         </select>;
     }
 });
 
-module.exports = Input;
+module.exports = Select;

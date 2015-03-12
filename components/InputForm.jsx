@@ -13,7 +13,7 @@ var InputForm = React.createClass({
 
         return (
             <div>
-                <Input {...this.props} className={(error) ? 'is-error' : ''} />
+                <Input {...this.props} value={this.props.formData[this.props.name]}className={(error) ? 'is-error' : ''} />
                 {error}
             </div>
         );
