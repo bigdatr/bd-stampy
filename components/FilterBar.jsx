@@ -31,13 +31,16 @@ var FilterBar = React.createClass({
     },
     renderFilters: function(filters) {
         var active = this.props.active || filters[0];
+        var cursorStyle = {
+           cursor: 'pointer'
+        };
         return filters.map(function(filter, key){
             var activeClassName = (active === filter) ? this.props.activeClass: '';
             return <Icon
                 key={key}
                 className={activeClassName}
                 modifier="inline"
-                sytle="cursor:pointer"
+                style={cursorStyle}
                 name={filter}
                 onClick={this.onClick.bind(this, filter)}
             />;
