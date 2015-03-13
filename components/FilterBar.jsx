@@ -6,6 +6,7 @@ var React = require('react');
 var Icon = require('./Icon');
 
 var FilterBar = React.createClass({
+    displayName: 'FilterBar',
     propTypes: {
         filters: React.PropTypes.array.isRequired,
         active: React.PropTypes.string,
@@ -25,18 +26,19 @@ var FilterBar = React.createClass({
     },
     onClick: function (filter, e) {
         if(this.props.onClick) {
-            this.props.onClick(e, {key: this.props.name, value:filter});            
+            this.props.onClick(e, {key: this.props.name, value:filter});
         }
     },
     renderFilters: function(filters) {
         var active = this.props.active || filters[0];
         return filters.map(function(filter, key){
             var activeClassName = (active === filter) ? this.props.activeClass: '';
-            return <Icon 
-                key={key} 
-                className={activeClassName} 
-                modifier="inline" 
-                name={filter} 
+            return <Icon
+                key={key}
+                className={activeClassName}
+                modifier="inline"
+                sytle="cursor:pointer"
+                name={filter}
                 onClick={this.onClick.bind(this, filter)}
             />;
         }.bind(this));
