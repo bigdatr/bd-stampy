@@ -28,7 +28,7 @@ var IconStore = {
 	        return path;
         }
         catch(err) {
-        	console.error(new Error('Could not find icon path'));
+        	console.warn('bd-stampy/Icon.jsx', 'Could not find icon path for `' + iconName + '`');
             return _DEFAULT_ICON_PATH;
         }
 	}
