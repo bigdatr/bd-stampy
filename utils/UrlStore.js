@@ -32,7 +32,7 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
                 else {
                     params[pair[0]] = decodeURIComponent(pair[1]);
                 }
-                
+
             });
 
         return params;
@@ -100,6 +100,8 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
                 nextParams[k] = v;
             }
         });
+
+
 
         var currentQueryString = BrowserHistory.getQueryString();
         var nextQueryString = this.paramsToQueryString(nextParams);

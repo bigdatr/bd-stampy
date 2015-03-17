@@ -34,7 +34,7 @@ var Input = React.createClass({
     componentDidMount: function () {
         if(this.props.focus) {
             this.focusInput();
-        }  
+        }
     },
     componentWillUpdate: function (nextProps) {
         if(nextProps.focus && this.props.focus !== nextProps.focus) {
@@ -119,7 +119,7 @@ var Input = React.createClass({
                 {label}
 
                 <div className="Input_wrapper">
-                    <input 
+                    <input
                         {...this.props}
                         disabled={disabled}
                         ref="input"
@@ -141,7 +141,7 @@ var Input = React.createClass({
                     {this.renderClearButton()}
                 </div>
                 {error}
-            </div>           
+            </div>
         );
     }
 

@@ -10,7 +10,7 @@ var IconStore = require('../utils/IconStore');
 function getUnicodeCharacter(cp) {
     if (cp >= 0 && cp <= 0xD7FF || cp >= 0xE000 && cp <= 0xFFFF) {
         return String.fromCharCode(cp);
-    } 
+    }
     else if (cp >= 0x10000 && cp <= 0x10FFFF) {
 
         // we substract 0x10000 from cp to get a 20-bits number
@@ -52,7 +52,7 @@ var Icon = React.createClass({
         classes.modifier(this.props.size);
 
         if(this.props.name) {
-            classes.modifier(this.props.name.toLowerCase());            
+            classes.modifier(this.props.name.toLowerCase());
         }
 
         return classes;
@@ -64,28 +64,27 @@ var Icon = React.createClass({
 
         return this.renderFontFace();
     },
-    renderSvg() {    
+    renderSvg() {
         var classes = this.getClasses();
         classes.modifier('svg');
-        
-        var path = IconStore.getPath(this.props.name);
 
+        var paths = IconStore.getPaths(this.props.name);
         return (
             <svg {...this.props}
-                    className={classes.className}
-                    width="0"
-                    height="0"
-                    viewBox="256 256 512 512">
-                <path d={path}></path>
+                className={classes.className}
+                viewBox="12 12 24 24"
+                width="0"
+                height="0">
+                {paths.map((path, key) => <path key={key} d={path}></path>)}
             </svg>
         );
     },
     renderFontFace() {
-        var componentType = this.props.componentType;        
+        var componentType = this.props.componentType;
         var iconCode = '\uE001';
         var classes = this.getClasses();
 
-        //name vs code point 
+        //name vs code point
         if(this.props.hexCode || this.props.decimalCode) {
             // Hex
             if(this.props.hexCode) {
@@ -97,11 +96,11 @@ var Icon = React.createClass({
             }
             // Decimal
             if(this.props.decimalCode) {
-                iconCode = String.fromCharCode(this.props.decimalCode);            
+                iconCode = String.fromCharCode(this.props.decimalCode);
             }
         } else {
-            // Named Icons       
-            var iconType = (this.props.size === 'small') ? 1 : 0;            
+            // Named Icons
+            var iconType = (this.props.size === 'small') ? 1 : 0;
             var name = this.props.name;
             if(name) {
                 name = name.toLowerCase();
@@ -111,9 +110,9 @@ var Icon = React.createClass({
                 iconCode = IconConstants[name][iconType];
             }
         }
-        
+
         return componentType({
-            className: classes.className, 
+            className: classes.className,
             onClick: this.props.onClick,
             onMouseDown: this.props.onMouseDown,
             'data-icon': iconCode,
