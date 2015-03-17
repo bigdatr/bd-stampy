@@ -133,13 +133,13 @@ var DatePicker = React.createClass({
         var isInRange = true;
 
         if (this.props.min_date) {
-            var min_date = moment(this.props.min_date);
-            isInRange = min_date.isBefore(day);
+            var min_date = moment(this.props.min_date).subtract(1, 'day');
+            isInRange = day.isAfter(min_date);
         }
 
         if (isInRange && this.props.max_date) {
-            var max_date = moment(this.props.max_date);
-            isInRange = max_date.isAfter(day);
+            var max_date = moment(this.props.max_date).add(1, 'day');
+            isInRange = day.isBefore(max_date);
         }
 
         return isInRange;
