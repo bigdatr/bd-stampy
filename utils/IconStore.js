@@ -28,7 +28,7 @@ var IconStore = {
 	        return path;
         }
         catch(err) {
-        	console.warn('bd-stampy/Icon.jsx', 'Could not find icon path for `' + iconName + '`');
+        	console.warn('bd-stampy/Icon.jsx', 'Could not find svg path for `' + iconName + '`');
             return _DEFAULT_ICON_PATH;
         }
 	}
