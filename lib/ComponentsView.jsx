@@ -40,10 +40,10 @@ var ComponentsView = React.createClass({
 
                     {_.map(props, (pp, key)=> {
                     return <tr key={key}>
-                        <td><strong>{key}</strong></td>
-                        <td><pre>{pp.type}</pre></td>
-                        <td><pre>{pp.defaultValue}</pre></td>
-                        <td>{pp.description}</td>
+                        <td className="l-20"><strong>{key}</strong></td>
+                        <td className="l-20"><pre>{pp.type}</pre></td>
+                        <td className="l-20"><pre>{pp.defaultValue}</pre></td>
+                        <td >{pp.description}</td>
                     </tr>;
                 })}
                 </table>
