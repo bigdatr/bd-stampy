@@ -7,7 +7,7 @@ var AppHandler = React.createClass({
     displayName: 'AppHandler',
     render: function () {
         return (
-            <div>
+            <div className="Navigation_content padding2">
                 <h1>Stampy</h1>
                 <RouteHandler {...this.props.data} />
             </div>

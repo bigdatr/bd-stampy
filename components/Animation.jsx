@@ -1,5 +1,8 @@
 var React = require('react/addons');
 
+/**
+ * General component description.
+ */
 var Animation = React.createClass({
     displayName: 'Animation',
     componentDidMount: function () {
@@ -16,7 +19,7 @@ var Animation = React.createClass({
         // You can do this for other computed styles as well, if needed.
         // Just be sure to stick to compositor-only props like transform
         // and opacity where possible.
-        // 
+        //
         var invertY = first.top - last.top;
         var invertX = first.left - last.left;
 
@@ -36,10 +39,10 @@ var Animation = React.createClass({
         });
 
         // Capture the end with transitionend
-        // el.addEventListener('transitionend', tidyUpAnimations);  
+        // el.addEventListener('transitionend', tidyUpAnimations);
     },
     render: function () {
-        var clonedComponent = React.addons.cloneWithProps(this.props.children, { 
+        var clonedComponent = React.addons.cloneWithProps(this.props.children, {
             ref: 'animation',
             className: this.props.name
         });

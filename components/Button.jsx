@@ -8,10 +8,15 @@ var Button = React.createClass({
     displayName: 'Button',
     mixins: [ClassMixin],
     propTypes: {
+
+        /**
+         * Color name string
+         */
         color: React.PropTypes.string,
         component: React.PropTypes.string, //Has some validation issues
         onClick: React.PropTypes.func,
         toggle: React.PropTypes.bool,
+        type: React.PropTypes.string,
         checked: React.PropTypes.bool,
         disabled: React.PropTypes.bool
     },
@@ -33,7 +38,7 @@ var Button = React.createClass({
         if (this.props.href){
             return React.DOM.a;
         }
-        
+
         return React.DOM[this.props.component];
     },
     onClick: function(e) {
