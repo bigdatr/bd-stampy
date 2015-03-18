@@ -3,6 +3,7 @@
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var _ = require('lodash');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 function validateLengthOf2(props, propName, componentName) {
     if(props[propName].length !== 2) {
@@ -13,7 +14,7 @@ function validateLengthOf2(props, propName, componentName) {
 
 var Config = React.createClass({
     displayName: 'Config',
-    mixins: [ClassMixin],
+    mixins: [ClassMixin, PureRenderMixin],
     propTypes: {
         toggleButton: React.PropTypes.object,
         width: validateLengthOf2,

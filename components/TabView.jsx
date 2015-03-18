@@ -33,11 +33,12 @@
 var React = require('react/addons');
 var Transition = React.addons.CSSTransitionGroup;
 var ClassMixin = require('../mixins/ClassMixin.jsx');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 
 var TabView = React.createClass({
     displayName: 'TabView',
-    mixins: [ClassMixin],
+    mixins: [ClassMixin, PureRenderMixin],
     propTypes: {
         defaultTab: React.PropTypes.number,
         text: React.PropTypes.string,

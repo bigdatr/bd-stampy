@@ -12,10 +12,11 @@
  */
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var Badge = React.createClass({
     displayName: 'Badge',
-    mixins: [ClassMixin],
+    mixins: [ClassMixin, PureRenderMixin],
     propTypes: {         
         color: React.PropTypes.string
     },

@@ -1,12 +1,13 @@
 /** @jsx React.DOM */
 
 var React = require('react/addons');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 var ViewManager = React.createClass({
     displayName: 'ViewManager',
-    mixins: [ClassMixin],
+    mixins: [ClassMixin, PureRenderMixin],
     propTypes: {
         position: React.PropTypes.number
     },
