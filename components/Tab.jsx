@@ -6,10 +6,12 @@
  */
 var React = require('react');
 var Icon = require('./Icon.jsx');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var Tab = React.createClass({
     displayName: 'Tab',
     type: 'Tab',
+    mixins: [PureRenderMixin],
     propTypes: {
         icon: React.PropTypes.string,
         text: React.PropTypes.string

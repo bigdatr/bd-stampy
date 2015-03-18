@@ -1,9 +1,11 @@
 /** @jsx React.DOM */
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder.js');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var Page = React.createClass({
     displayName: 'Page',
+    mixins: [PureRenderMixin],
     propTypes: {
         content: React.PropTypes.string,
         visible: React.PropTypes.bool
@@ -32,7 +34,7 @@ var Page = React.createClass({
                 return child;
             }
 
-            return React.addons.cloneWithProps(child, {visible: visible});
+            return React.addons.cloneWithProps(child, {key: child.key || undefined, visible: visible});
         });
 
         var content = children;

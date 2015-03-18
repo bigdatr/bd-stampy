@@ -6,10 +6,12 @@
  */
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var TabContent = React.createClass({
     displayName: 'TabContent',
     type: 'TabContent',
+    mixins: [PureRenderMixin],
     propTypes: {
 		padded: React.PropTypes.bool,
         visible: React.PropTypes.bool
