@@ -43,11 +43,11 @@ var Modal = React.createClass({
             return null;
         }
 
-        var modalClasses = this.ClassMixin_getClass()
+        var modalClasses = this.ClassMixin_getClass('Modal')
             .modifier(this.props.transitionName);
 
         return (
-            <ReactModal 
+            <ReactModal
                 className={modalClasses.className}
                 isOpen={this.props.isOpen}
                 onRequestClose={this.props.onRequestClose}

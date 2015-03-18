@@ -31,7 +31,9 @@ function getUnicodeCharacter(cp) {
 
 var Icon = React.createClass({
     displayName: 'Icon',
-    mixins:[ClassMixin],
+    mixins:[
+        ClassMixin
+    ],
     propTypes: {
         name: React.PropTypes.string,
         block: React.PropTypes.bool,
@@ -67,13 +69,14 @@ var Icon = React.createClass({
     renderSvg() {
         var classes = this.getClasses();
         classes.modifier('svg');
-
         var paths = IconStore.getPaths(this.props.name);
+
+        var viewBox = (this.props.size === 'small') ? '6 6 12 12' : '12 12 24 24';
         return (
             <svg {...this.props}
                 className={classes.className}
-                viewBox="12 12 24 24"
                 width="0"
+                viewBox={viewBox}
                 height="0">
                 {paths.map((path, key) => <path key={key} d={path}></path>)}
             </svg>

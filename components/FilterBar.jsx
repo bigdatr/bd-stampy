@@ -5,6 +5,9 @@
 var React = require('react');
 var Icon = require('./Icon');
 
+
+console.warn('bd-stampy/components/FilterBar.jsx', 'Will be deprecated soon');
+
 var FilterBar = React.createClass({
     displayName: 'FilterBar',
     propTypes: {
@@ -20,7 +23,7 @@ var FilterBar = React.createClass({
     render: function() {
         return (
             <div className={this.props.className}>
-                {this.renderFilters(this.props.filters)}
+                {this.renderFilters()}
             </div>
         );
     },
@@ -29,12 +32,12 @@ var FilterBar = React.createClass({
             this.props.onClick(e, {key: this.props.name, value:filter});
         }
     },
-    renderFilters: function(filters) {
-        var active = this.props.active || filters[0];
+    renderFilters: function() {
+        var active = this.props.active || this.props.filters[0];
         var cursorStyle = {
            cursor: 'pointer'
         };
-        return filters.map(function(filter, key){
+        return this.props.filters.map(function(filter, key){
             var activeClassName = (active === filter) ? this.props.activeClass: '';
             return <Icon
                 key={key}
