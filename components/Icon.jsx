@@ -75,8 +75,8 @@ var Icon = React.createClass({
         return (
             <svg {...this.props}
                 className={classes.className}
-                width="0"
                 viewBox={viewBox}
+                width="0"
                 height="0">
                 {paths.map((path, key) => <path key={key} d={path}></path>)}
             </svg>

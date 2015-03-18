@@ -1,7 +1,7 @@
 /* global window, document */
 
-// TODO: Add default/missing icon path
 var _DEFAULT_ICON_PATH = ['M12 12 h 24 v 24 h -24 Z'];
+
 var _paths = {};
 
 var IconStore = {
@@ -15,10 +15,12 @@ var IconStore = {
         }
 
         try {
+            var _nodes = document.getElementById(iconName).childNodes;
 
-        	var path = Array.prototype.slice.call(document.getElementById(iconName).childNodes).map(function(pp){
-                return pp.getAttribute('d');
-            });
+        	var path = Array.prototype.slice.call(_nodes)
+                .map(function(pp){
+                    return pp.getAttribute('d');
+                });
 
 	        _paths[iconName] = path;
 
