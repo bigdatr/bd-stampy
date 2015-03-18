@@ -44,10 +44,9 @@ var Form = React.createClass({
                 .union(_.keys(this.props.schema))
                 .value();
         }
- 
+
         if(this.props.nested) {
-            console.log(this.props.schema);
-            form = this.renderNodes(this.props.schema, this.props.value);            
+            form = this.renderNodes(this.props.schema, this.props.value);
         } else {
             form = this.renderOrderedNodes(order);
         }
@@ -62,7 +61,7 @@ var Form = React.createClass({
     renderNodes(nodes, mapContext) {
         return  _.map(nodes, (value, key) => {
             console.log(mapContext, key)
-            return this.renderNode(key, value, mapContext[key] || '');                           
+            return this.renderNode(key, value, mapContext[key] || '');
         });
     },
 
@@ -77,9 +76,9 @@ var Form = React.createClass({
                             <h2>{key}</h2>
                             {this.renderNodes(schemaContext.properties, mapContext)}
                         </div>
-                    );                    
+                    );
                 }
-            } else {            
+            } else {
                 if(this.props.nested || this.props.formShape[key] !== false) {
                     return (
                         <InputRow key={key} label={this.renderLabel(key)}>
@@ -87,7 +86,7 @@ var Form = React.createClass({
                         </InputRow>
                     );
                 }
-            }            
+            }
         }
     },
     renderLabel(key) {
@@ -100,7 +99,7 @@ var Form = React.createClass({
         if(shape[key] && shape[key].label) {
             label = shape[key].label;
         }
-        
+
         return _.isString(label) ? sentenceCase(label) : label;
     },
     renderFormElement(key, item, value) {
@@ -121,30 +120,30 @@ var Form = React.createClass({
             value: value || ''
         }, shapeProps);
 
-        
+
         if(item.items) {
             enums = item.items.enum;
         }
 
         // Return Custom Elements First
-        
+
         if(shape && shape[key] && shape[key].type) {
             return this.renderCustomFormElement(key, item, value, defaultProps, shape[key], enums)
-        }        
+        }
 
         if(enums) {
             // console.log(defaultProps);
             var options = enums.map((item) => {
                 return {value: item, label: item};
             });
-            
+
             return <SelectStandard {...defaultProps} options={options}/>;
         }
 
         if(item.type === 'array') {
             defaultProps.disabled = true;
             defaultProps.value = 'unhandled';
-            
+
             return Input(defaultProps);
         }
 
@@ -168,11 +167,11 @@ var Form = React.createClass({
             defaultProps.multiple = true;
 
             if(!value) {
-                defaultProps.value = [];   
+                defaultProps.value = [];
             }
             defaultProps.children = _.map(enums, (value, key)=> {
                 return <option value={value} key={key}>{_.capitalize(value)}</option>;
-            });   
+            });
         }
 
 
@@ -184,7 +183,7 @@ var Form = React.createClass({
             if(!_.isString(shape.type)) {
                 customElement = shape.type;
             } else {
-                customElement = _defaultCustomElements[shape.type || 'input'];                
+                customElement = _defaultCustomElements[shape.type || 'input'];
             }
             props = shape.props || {};
         }

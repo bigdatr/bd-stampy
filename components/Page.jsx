@@ -25,7 +25,10 @@ var Page = React.createClass({
         var visible = this.props.visible;
 
         var children = React.Children.map(this.props.children, function(child) {
-            if (typeof child.props !== 'object') {
+            if (!child) {
+                return null;
+            }
+            else if (typeof child.props !== 'object') {
                 return child;
             }
 

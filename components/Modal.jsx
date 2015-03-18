@@ -64,9 +64,8 @@ var Modal = React.createClass({
             closeAction.push(this.props.action);
         }
 
-
         return (
-        	<div className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} tabIndex="0">
+        	<div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} tabIndex="0">
                 <Toolbar title={this.props.title} action={closeAction}/>
                 {this.renderBackAndForward()}                    
                 <div className="Modal_info">{this.props.info}</div>

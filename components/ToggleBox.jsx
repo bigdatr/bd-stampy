@@ -8,7 +8,6 @@ var ToggleBox = React.createClass({
     displayName: 'ToggleBox',
     mixins: [ClassMixin],
     propTypes: {
-        onClick: React.PropTypes.func,
         toggle: React.PropTypes.bool,
         checked: React.PropTypes.bool,
         disabled: React.PropTypes.bool,
@@ -40,12 +39,12 @@ var ToggleBox = React.createClass({
                 this.setState(state);
             }
 
-            if (this.props.onClick) {
+            if (this.props.onChange) {
+                this.props.onChange(e, state);
+            }
+            else if (this.props.onClick) {
                 console.warn('ToggleBox', 'onClick will be deprecated. Use onChange instead');
                 this.props.onClick(e, state);
-            }
-            else if (this.props.onChange) {
-                this.props.onChange(e, state);
             }
         }
     },

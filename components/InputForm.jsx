@@ -1,37 +1,23 @@
-/** @jsx React.DOM */
 var React = require('react');
 
-var SelectStandard = require('./SelectStandard.jsx');
-var UrlStore = require('../utils/UrlStore.js');
+var Input = require('./InputElement');
 
-var SelectStandardForm = React.createClass({
-    displayName: 'SelectStandardForm',
-    mixins: [
-        require('../mixins/FormMixin')
-    ],
-    propTypes: {
-        options: React.PropTypes.array.isRequired,
-        name: React.PropTypes.string.isRequired
-    },
-    onChange: function (e, details) {
-        var query = {};
-        query[details.key] = details.value;
-        UrlStore.setQueryParams(query);
-        if(this.props.onChange) {
-            this.props.onChange(e, details);
+var InputForm = React.createClass({
+    displayName: 'InputForm',
+    render: function () {
+        var error;
+
+        if(this.props.errors && this.props.errors[this.props.name]) {
+            error = <span className="Input_error">{this.props.errors[this.props.name]}</span>;
         }
-    },
 
-    render: function() {
         return (
-            <SelectStandard 
-                name={this.props.name}
-                options={this.props.options}
-                value={this.props.value}
-                onChange={this.onChange}
-            ></SelectStandard>
+            <div>
+                <Input {...this.props} value={this.props.formData[this.props.name]}className={(error) ? 'is-error' : ''} />
+                {error}
+            </div>
         );
     }
 });
 
-module.exports = SelectStandardForm;
+module.exports = InputForm;
