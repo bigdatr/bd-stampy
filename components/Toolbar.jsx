@@ -13,10 +13,11 @@ var Toolbar = React.createClass({
     },
     render: function() {
         var classes = this.ClassMixin_getClass('Toolbar');
-        return (  
+        return (
         	<div className={classes.className}>
-                {this.renderAction()}
                 {this.renderTitle()}
+                {this.props.children}
+                {this.props.action}
             </div>
         );
     },
@@ -24,7 +25,7 @@ var Toolbar = React.createClass({
         if (this.props.title) {
 
             var text = <span>{this.renderIcon()}{this.props.title}</span>;
-            
+
             if(this.props.href) {
                 text = <a href={this.props.href}>{text}</a>;
             }
@@ -35,7 +36,7 @@ var Toolbar = React.createClass({
     renderAction: function () {
         if (this.props.action) {
             return this.props.action.map(function (action, key){
-                return <span key={key}>{action}</span>;
+                return action;
             });
         }
     },
