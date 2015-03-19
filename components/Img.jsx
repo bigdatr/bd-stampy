@@ -128,7 +128,7 @@ var Img = React.createClass({
             .add(errorClass);
 
         if(_.isString(src)) {
-            return <img className={classes.className} src={src} height={height} width={width} />;
+            return <img className={classes.className} src={src} height={height} width={width} alt={this.props.alt} title={this.props.title} />;
         }
 
         return React.addons.cloneWithProps(src, {className: errorClass + ' ' + this.props.className});        
