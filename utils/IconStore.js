@@ -1,6 +1,6 @@
 /* global window, document */
 
-var _DEFAULT_ICON_PATH = ['M12 12 h 24 v 24 h -24 Z'];
+var _DEFAULT_ICON_PATH = ['M0 0 h 16 v 16 h -16 Z'];
 
 var _paths = {};
 

@@ -41,6 +41,7 @@ var Icon = React.createClass({
         inline: React.PropTypes.bool,
         onClick: React.PropTypes.func,
         size: React.PropTypes.string,
+        paths: React.PropTypes.array,
         hexCode: React.PropTypes.string
     },
     getDefaultProps: function() {
@@ -69,16 +70,15 @@ var Icon = React.createClass({
     renderSvg() {
         var classes = this.getClasses();
         classes.modifier('svg');
-        var paths = IconStore.getPaths(this.props.name);
+        // var paths = IconStore.getPaths(this.props.name);
 
-        var viewBox = (this.props.size === 'small') ? '6 6 12 12' : '12 12 24 24';
+        // var viewBox = (this.props.size === 'small') ? '0 0 16 16' : '0 0 16 16';
         return (
             <svg {...this.props}
                 className={classes.className}
-                viewBox={viewBox}
                 width="0"
                 height="0">
-                {paths.map((path, key) => <path key={key} d={path}></path>)}
+                {this.props.paths.map((path, key) => <path key={key} d={path}></path>)}
             </svg>
         );
     },
