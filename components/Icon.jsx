@@ -70,9 +70,6 @@ var Icon = React.createClass({
     renderSvg() {
         var classes = this.getClasses();
         classes.modifier('svg');
-        // var paths = IconStore.getPaths(this.props.name);
-
-        // var viewBox = (this.props.size === 'small') ? '0 0 16 16' : '0 0 16 16';
         return (
             <svg {...this.props}
                 className={classes.className}
