@@ -6,16 +6,27 @@ var ComponentsView = React.createClass({
     displayName: 'ComponentsView',
     render: function () {
         return (
-            <div>
-                <ul>
-                    {this.renderPosts()}
+            <div className="Row">
+                <div className="Nav">
+                    <h1>Stampy</h1>
+                    <ul> {this.renderNav()} </ul>
+                </div>
+                <ul className="Content">
+                    {this.renderComponents()}
                 </ul>
             </div>
         );
     },
-    renderPosts() {
+    renderNav() {
         return this.props.components.map((cc,key) => {
             return <li key={key}>
+                <a href={`#${cc.data.displayName}`}>{cc.data.displayName}</a>
+            </li>;
+        });
+    },
+    renderComponents() {
+        return this.props.components.map((cc,key) => {
+            return <li key={key} id={""+cc.data.displayName}>
                 <h2>{cc.data.displayName}</h2>
 
                 <p>{cc.data.description}</p>
@@ -27,10 +38,9 @@ var ComponentsView = React.createClass({
     },
     renderProps(props){
         if(!_.isEmpty(props)){
-            console.log(props);
             return <div>
                 <h3>Props</h3>
-                <table className="Table Table-data">
+                <table className="PropsTable">
                     <thead>
                         <th>Name</th>
                         <th>Type</th>
@@ -39,12 +49,15 @@ var ComponentsView = React.createClass({
                     </thead>
 
                     {_.map(props, (pp, key)=> {
-                    return <tr key={key}>
-                        <td className="l-20"><strong>{key}</strong></td>
-                        <td className="l-20"><pre>{pp.type}</pre></td>
-                        <td className="l-20"><pre>{pp.defaultValue}</pre></td>
-                        <td >{pp.description}</td>
-                    </tr>;
+                        var defaultValue = (pp.defaultValue) ? <code>{pp.defaultValue}</code> : '';
+                        var type = (pp.type) ? <code>{pp.type}</code> : '';
+
+                        return <tr key={key}>
+                            <td className="l-20"><strong>{key}</strong></td>
+                            <td className="l-20">{type}</td>
+                            <td className="l-20">{defaultValue}</td>
+                            <td >{pp.description}</td>
+                        </tr>;
                 })}
                 </table>
             </div>

@@ -1,0 +1,176 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+  font-size: 1em;
+  line-height: 1.8125em;
+  font-family: 'Roboto', sans-serif;
+  color: #444;
+}
+h1 {
+  font-size: 2.75em;
+  line-height: 1.318181818em;
+  margin-top: 1.31818182em;
+  margin-bottom: 0.65909091em;
+}
+h2 {
+  font-size: 1.9375em;
+  line-height: 1.870967742em;
+  margin-top: 1.87096774em;
+  margin-bottom: 0.93548387em;
+}
+h3 {
+  font-size: 1.375em;
+  line-height: 1.318181818em;
+  margin-top: 1.31818182em;
+  margin-bottom: 1.31818182em;
+}
+h4 {
+  font-size: 1em;
+  line-height: 1.8125em;
+  margin-top: 1.8125em;
+  margin-bottom: 1.8125em;
+}
+p, ul, ol, table, blockquote {
+  margin-top: 1.8125em;
+  margin-bottom: 1.8125em;
+}
+
+/* Sanitation */
+hr {
+  border: 1px solid #e6e6e6;
+  margin: -1px 0;
+}
+ul ul, ol ol, ul ol, ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+b, strong, em, small, code {
+  line-height: 1;
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+sub {
+  top: 0.4em;
+}
+
+a {
+    color: inherit;
+}
+
+.Row {
+    display: flex;
+}
+
+.Nav {
+    width: 15%;
+    position: fixed;
+    background-color: #444;
+    color: white;
+    top: 0;
+    bottom: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: auto;
+
+}
+
+.l-20 {
+    width: 20%;
+}
+
+.Content {
+    margin-left: 15%;
+    padding: 2rem;
+    width:80%;
+}
+
+.PropsTable {
+    margin-bottom: 32px;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    clear: both;
+    line-height: 1.5em;
+
+    font-size: .9em;
+}
+
+.PropsTable th,
+.PropsTable td {
+    padding: 4px;
+    vertical-align: top;
+    vertical-align: middle;
+}
+
+.PropsTable th {
+    color: #aaa;
+}
+
+.PropsTable td {
+    border: 1px solid #e6e6e6;
+    border-left: 0;
+    border-right: 0;
+}
+
+code, pre {
+    font-family: 'Menlo', monospace;
+}
+
+code {
+    background-color: #e6e6e6;
+    font-size: 12px;
+    /*padding: .5rem;*/
+    padding: .25rem;
+}
+
