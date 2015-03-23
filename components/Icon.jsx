@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 
 
 var React = require('react');
@@ -29,6 +29,9 @@ function getUnicodeCharacter(cp) {
     }
 }
 
+/**
+ * Icons. SVG and Fontface
+ */
 var Icon = React.createClass({
     displayName: 'Icon',
     mixins:[
