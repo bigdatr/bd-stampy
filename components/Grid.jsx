@@ -2,7 +2,7 @@
 var React = require('react');
 
 /**
- * Simple wrapper for tunics grid classes
+ * Simple wrapper for grid classes
  */
 var Grid = React.createClass({
     displayName: 'Grid',
