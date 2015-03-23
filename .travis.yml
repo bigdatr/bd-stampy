@@ -7,4 +7,4 @@ script:
 - npm run docs
 env:
   global:
-  - secure: YzXZzeXUHP7iWLzPy4DG5J1E2kH8rMH/gequvTDnIJPtpeUw5rLx+mo69kD9Ntn11wTUtO2oUucxOr6gwRu8nRjrzohcRppnW/89HXPDM2zViDjvG7mry6Kg4BPHqNzQ6NoceUuZ42E5tyk2+q6lwqClJBjAiM5Ic1q1SKvNQ9E=
+  - secure: cyYlSFRglBLceEpaoig6U077EwzrA0VruYymjH0dwL3KgZtubxbrYYvEACqbWA83AUN3hhybOvaXvuiQuoSiy7Iu3kHVSAbD0Y8JTeaI7Z6OR5sMtEjQjY603Or1EwH03Ly1bvIGuSYzJDwMVOFlpslCjvtctWLvHKjhtNz3jGA=

@@ -4,8 +4,8 @@ mkdir docs;
 stalactite build
 cd docs
 git init
-git config user.name "allanhortle"
-git config user.email "allanhortle@gmail.com"
+git config user.name "bigdatrbots"
+git config user.email "stampy@bigdatr.com"
 git add .
 git commit -m "Deployed to Github Pages"
 git push --force --quiet "https://${GH_TOKEN}@github.com/bigdatr/bd-stampy.git" master:gh-pages > /dev/null 2>&1
