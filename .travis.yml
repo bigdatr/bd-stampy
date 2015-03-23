@@ -7,4 +7,4 @@ script:
     stalactite build
 after_script:
 - |
-    git push origin `git subtree split --prefix docs master`:gh-pages --force
+    git subtree push --prefix docs origin gh-pages
