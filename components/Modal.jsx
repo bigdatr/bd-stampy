@@ -66,8 +66,8 @@ var Modal = React.createClass({
 
         return (
         	<div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} tabIndex="0">
-                <Toolbar title={this.props.title} action={closeAction}/>
-                {this.renderBackAndForward()}                    
+                <Toolbar title={this.props.title}>{closeAction}</Toolbar>
+                {this.renderBackAndForward()}
                 <div className="Modal_info">{this.props.info}</div>
                 <div className="Modal_wrapper" ref="ModalWrapper" onClick={this.onClick} >{this.props.children}</div>
                 <div className="Modal_footer">{this.renderActions()}</div>
@@ -78,7 +78,7 @@ var Modal = React.createClass({
         if(this.props.onNext && this.props.onPrevious) {
             var next = <div onClick={this.props.onNext} className="Modal_button Modal_button-next">{this.props.nextButton}</div>;
             var prev = <div onClick={this.props.onPrevious} className="Modal_button Modal_button-prev">{this.props.previousButton}</div>;
-            
+
             return <div>{prev}{next}</div>;
         }
 
