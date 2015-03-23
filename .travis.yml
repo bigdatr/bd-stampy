@@ -3,14 +3,10 @@ node_js:
 - '0.10'
 before_install: npm install -g stalactite
 script:
-- |
-  stalactite build
-after_script:
-- |
-  git subtree push --prefix docs origin gh-pages
+  - stalactite build
+  - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./scripts/deploy_docs_from_travis.sh'
 env:
   global:
-    secure: QSCW4uCgmmKdRBu2hr0ri5/r1GZTINynXva84H0btZnCgWRY3LsEw/+HaHIff6C23FIXI70ukFHGo/GHFUqRpBgHj241/zR/r4BK/Hoz/z5vNynetwaXG8I95U+VyXV+c4Bn/7/Ygzx8mOi2eGLJbADD45px7rB3tAM5mOfx8Aw=
-after_success:
-  - git remote add travis https://github.com/bigdatr/bd-stampy.git
-  - git subtree push --prefix docs travis gh-pages
+    - GH_REF: 'github.com/bigdatr/bd-stampy.git'
+    - secure: WECgq7mMxH8uGpuM6kEfZF38vXxNkAwqmBc8BZho15YRA4smBdWStd86BkG0PnwWiICyaWsLENTCh7XPRmwSs9iYB6P+xD6q489qv3RRiXGUStQZLeZgP61yFNZvaQuM344GnYm5loZxzKPNCideGecLVSeNZYW19A2eUsYcyLo=
+
