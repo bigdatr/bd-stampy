@@ -30,7 +30,7 @@ function getUnicodeCharacter(cp) {
 }
 
 /**
- * Icons. SVG and Fontface
+ * Icons Either pass in a hexcode or an array of svg paths.
  */
 var Icon = React.createClass({
     displayName: 'Icon',
