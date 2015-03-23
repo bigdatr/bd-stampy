@@ -5,7 +5,7 @@ var Input = require('./InputElement');
 var ClassMixin = require('../mixins/ClassMixin');
 
 /**
- * input[type='checkbox'] that is wrapped in a label for easy clicking
+ * input[type=checkbox] that is wrapped in a label for easy clicking
  */
 var Checkbox = React.createClass({
     displayName: 'Checkbox',

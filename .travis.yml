@@ -2,12 +2,9 @@ language: node_js
 node_js:
 - '0.10'
 before_install: npm install -g stalactite
-
 script:
-  - stalactite build
-  - npm run docs
+- stalactite build
+- npm run docs
 env:
   global:
-    - GH_REF: 'github.com/bigdatr/bd-stampy.git'
-    - secure: WECgq7mMxH8uGpuM6kEfZF38vXxNkAwqmBc8BZho15YRA4smBdWStd86BkG0PnwWiICyaWsLENTCh7XPRmwSs9iYB6P+xD6q489qv3RRiXGUStQZLeZgP61yFNZvaQuM344GnYm5loZxzKPNCideGecLVSeNZYW19A2eUsYcyLo=
-
+  - secure: YzXZzeXUHP7iWLzPy4DG5J1E2kH8rMH/gequvTDnIJPtpeUw5rLx+mo69kD9Ntn11wTUtO2oUucxOr6gwRu8nRjrzohcRppnW/89HXPDM2zViDjvG7mry6Kg4BPHqNzQ6NoceUuZ42E5tyk2+q6lwqClJBjAiM5Ic1q1SKvNQ9E=

@@ -8,7 +8,7 @@
 
 git config user.name "allanhortle"
 git config user.email "allanhortle@gmail.com"
-git subtree push --prefix docs "https://${GH_TOKEN}@github.com/bigdatr/bd-stampy.git" gh-pages
+git subtree push --prefix docs "https://${GH_TOKEN}@github.com/bigdatr/bd-stampy.git" gh-pages > /dev/null 2>&1
 echo "Pushed new documentation successfully."
 exit 0
 
