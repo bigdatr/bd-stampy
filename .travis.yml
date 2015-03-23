@@ -4,7 +4,10 @@ node_js:
 before_install: npm install -g stalactite
 script:
 - |
-    stalactite build
+  stalactite build
 after_script:
 - |
-    git subtree push --prefix docs origin gh-pages
+  git subtree push --prefix docs origin gh-pages
+env:
+  global:
+    secure: QSCW4uCgmmKdRBu2hr0ri5/r1GZTINynXva84H0btZnCgWRY3LsEw/+HaHIff6C23FIXI70ukFHGo/GHFUqRpBgHj241/zR/r4BK/Hoz/z5vNynetwaXG8I95U+VyXV+c4Bn/7/Ygzx8mOi2eGLJbADD45px7rB3tAM5mOfx8Aw=
