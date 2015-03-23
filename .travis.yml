@@ -1,3 +1,10 @@
 language: node_js
 node_js:
 - '0.10'
+before_install: npm install -g stalactite
+script:
+- |
+    stalactite build
+after_script:
+- |
+    git push origin `git subtree split --prefix docs master`:gh-pages --force
