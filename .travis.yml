@@ -2,9 +2,10 @@ language: node_js
 node_js:
 - '0.10'
 before_install: npm install -g stalactite
+
 script:
   - stalactite build
-  - '[ "${TRAVIS_PULL_REQUEST}" != "false" ] || ./scripts/deploy_docs_from_travis.sh'
+  - npm run docs
 env:
   global:
     - GH_REF: 'github.com/bigdatr/bd-stampy.git'
