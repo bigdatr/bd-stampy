@@ -1,23 +1,33 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Icon = require('../components/Icon.jsx');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+
+var ClassMixin = require('../mixins/ClassMixin');
 
 var Toolbar = React.createClass({
     displayName: 'Toolbar',
     mixins: [
-        require('../mixins/ClassMixin')
+        ClassMixin,
+        PureRenderMixin
     ],
     propTypes: {
         icon: React.PropTypes.string,
         subtitle: React.PropTypes.string
     },
+    getDefaultProps: function () {
+        return {
+            action: []
+        };
+    },
     render: function() {
         var classes = this.ClassMixin_getClass('Toolbar');
+
         return (
         	<div className={classes.className}>
                 {this.renderTitle()}
                 {this.props.children}
-                {this.props.action}
+                {this.renderActions}
             </div>
         );
     },
@@ -33,12 +43,10 @@ var Toolbar = React.createClass({
             return <div className='Toolbar_title'>{text}</div>;
         }
     },
-    renderAction: function () {
-        if (this.props.action) {
-            return this.props.action.map(function (action, key){
-                return action;
-            });
-        }
+    renderActions: function () {
+        return this.props.action.map(function (action) {
+            return action;
+        });
     },
     renderIcon: function () {
         if (this.props.icon) {
