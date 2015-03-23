@@ -48,6 +48,7 @@ var Icon = React.createClass({
         return {
             componentType: React.DOM.span,
             type: 'fontface',
+            paths: []
         };
     },
     getClasses() {
