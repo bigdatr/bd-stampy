@@ -24,7 +24,8 @@ var DatePicker = React.createClass({
         value: React.PropTypes.oneOfType([
             React.PropTypes.number,
             React.PropTypes.string
-        ])
+        ]),
+        disabled: React.PropTypes.bool
     },
     getDefaultProps: function() {
         return {
@@ -36,7 +37,8 @@ var DatePicker = React.createClass({
             previousButton: <span>&lt;</span>,
             min_date: null,
             max_date: null,
-            required: false
+            required: false,
+            disabled: false
         };
     },
     getInitialState: function() {
@@ -73,10 +75,12 @@ var DatePicker = React.createClass({
         this.isMouseOnDatePicker = false;
     },
     onFocus: function() {
-        this.setState({visible: true});
-        this.props.reactEvent = true;
+        if (!this.props.disabled) {
+            this.setState({visible: true});
+            this.props.reactEvent = true;
 
-        document.addEventListener("mousedown", this.onClose, false);
+            document.addEventListener("mousedown", this.onClose, false);
+        }
     },
     onClose: function () {        
         if (this.isMouseOnDatePicker) {
@@ -151,7 +155,7 @@ var DatePicker = React.createClass({
         classes.add(!this.props.isValid, 'is-error');
 
         var datePicker = (this.state.visible && !this.props.alternateRender) ? this.renderDatePicker() : null;
-        var closeIcon = this.props.required ?  null : this.props.closeValueIcon;
+        var closeIcon = this.props.required || this.props.disabled ?  null : this.props.closeValueIcon;
 
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
