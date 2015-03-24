@@ -62,7 +62,8 @@ var Toast = React.createClass({
     hide: function() {
         this.setState(this.getInitialState());
     },
-    render: function() {         
+    render: function() {
+        // TODO: This is just a prototype component, needs lots of refactoring
         var classes = this.ClassMixin_getClass();
 
         var toastStyle = {
