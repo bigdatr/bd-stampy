@@ -42,7 +42,8 @@ var TabView = React.createClass({
     propTypes: {
         defaultTab: React.PropTypes.number,
         text: React.PropTypes.string,
-        transition: React.PropTypes.bool
+        transition: React.PropTypes.bool,
+        onChange: React.PropTypes.func
     },
     getInitialState: function() {
         return {
