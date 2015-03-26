@@ -40,7 +40,7 @@ var Modal = React.createClass({
     },
     onKeyDown: function (e) {
         if (this.props.onKeyDown) {
-            this.props.onKeyDown(e, this.props);
+            this.props.onKeyDown(e);
         }
     },
     componentDidMount: function() {
