@@ -38,6 +38,11 @@ var Modal = React.createClass({
             this.props.onKeyUp(e, this.props);
         }
     },
+    onKeyDown: function (e) {
+        if (this.props.onKeyDown) {
+            this.props.onKeyDown(e);
+        }
+    },
     componentDidMount: function() {
         this.setState(this.getInitialState());
 
@@ -65,13 +70,13 @@ var Modal = React.createClass({
         }
 
         return (
-        	<div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} tabIndex="0">
+            <div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} onKeyDown={this.onKeyDown} tabIndex="0">
                 <Toolbar title={this.props.title}>{closeAction}</Toolbar>
                 {this.renderBackAndForward()}
                 <div className="Modal_info">{this.props.info}</div>
                 <div className="Modal_wrapper" ref="ModalWrapper" onClick={this.onClick} >{this.props.children}</div>
                 <div className="Modal_footer">{this.renderActions()}</div>
-        	</div>
+            </div>
         );
     },
     renderBackAndForward: function () {
