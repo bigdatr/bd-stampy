@@ -36,7 +36,7 @@ var Choice = React.createClass({
     },
     renderCross: function () {
         if (!this.props.disabled) {
-            return <div className="Choice_delete" onClick={this.props.onDelete}>{this.props.closeIcon}</div>;
+            return <button className="Choice_delete" onClick={this.props.onDelete} aria-label="clear">{this.props.closeIcon}</button>;
         }
     }
 });

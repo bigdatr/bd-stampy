@@ -68,7 +68,7 @@ var SelectStandard = React.createClass({
         var classes = new ClassBuilder('Select').is(this.state.results.length, 'active');
 
         return (
-            <div className={classes.className} onClick={this.onClick}>
+            <div className={classes.className}>
                 <input className="Select_value" onFocus={this.onFocus} onBlur={this.onBlur} name={this.props.name} value={this.renderValue()} readOnly/>
                 {this.renderOptions()}
             </div>

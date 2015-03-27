@@ -6,7 +6,10 @@ var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 var ToggleBox = React.createClass({
     displayName: 'ToggleBox',
-    mixins: [ClassMixin],
+    mixins: [
+        ClassMixin,
+        require('../mixins/ARIAMixin')
+    ],
     propTypes: {
         toggle: React.PropTypes.bool,
         checked: React.PropTypes.bool,
@@ -70,7 +73,7 @@ var ToggleBox = React.createClass({
             classes.modifier('disabled');
         }
 
-        return <div className={classes.className} role="checkbox" tabIndex="1" onClick={this.onClick}>
+        return <div className={classes.className} role="checkbox" tabIndex="1" onClick={this.onClick} onKeyDown={this.ARIAMixin_onKeyDown} onKeyUp={this.ARIAMixin_onKeyUp}>
             <label>{this.props.children}</label>
             <input
                 className="ToggleBox_input"

@@ -8,6 +8,7 @@ var React = require('react');
 var Icon = require('./Icon.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
+
 var Tab = React.createClass({
     displayName: 'Tab',
     type: 'Tab',
@@ -18,7 +19,7 @@ var Tab = React.createClass({
     },
     render: function() {
         return (
-            <span className={this.props.className} role="button" tabIndex="1" ononClick={this.props.onClick}>
+            <span className={this.props.className}>
                 <span>{this.renderIcon()}</span>
                 <span className="Tab_text">{this.props.text}</span>
                 {this.props.children}

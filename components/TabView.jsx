@@ -34,11 +34,11 @@ var React = require('react/addons');
 var Key = require('../utils/Key');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
-
+var ARIAMixin = require('../mixins/ARIAMixin');
 
 var TabView = React.createClass({
     displayName: 'TabView',
-    mixins: [ClassMixin, PureRenderMixin],
+    mixins: [ClassMixin, PureRenderMixin, ARIAMixin],
     propTypes: {
         defaultTab: React.PropTypes.number,
         text: React.PropTypes.string,
@@ -137,6 +137,7 @@ var TabView = React.createClass({
                 key={i}
                 className={this.state.tabindex === (i+1) ? 'is-active' : ''}
                 tabIndex="1"
+                onKeyDown={this.ARIAMixin_onKeyDown}
                 onKeyUp={this.onKeyUp.bind(this, i+1)}
                 onClick={this.onTabChange.bind(this, i+1)}>{t}</li>;
         });

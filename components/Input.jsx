@@ -87,7 +87,7 @@ var Input = React.createClass({
         var clearButton = null;
         if (this.props.discreteValue && this.props.value) {
             clearButton = (
-                <div className="Input_clear" onClick={this.onClearValue}>{this.props.closeIcon}</div>
+                <button className="Input_clear" aria-label="clear" onClick={this.onClearValue}>{this.props.closeIcon}</button>
             );
         }
 
@@ -136,7 +136,7 @@ var Input = React.createClass({
                         onKeyDown={this.props.onKeyDown}
                         value={this.props.value}
                         tabIndex={(this.props.readOnly) ? -1 : this.props.tabIndex}
-                        id={this.props.name}
+                        id={""+this.props.name}
                     />
                     {this.renderClearButton()}
                 </div>

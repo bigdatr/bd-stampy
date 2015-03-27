@@ -62,7 +62,7 @@ var Modal = React.createClass({
             .is(true,'focusable')
         ;
 
-        var closeAction = [<div className="Toolbar_action" onClick={this.props.onClose}>{this.props.closeButton}</div>];
+        var closeAction = [<button className="Toolbar_action" onClick={this.props.onClose} aria-label="close">{this.props.closeButton}</button>];
         // <Icon block className="Toolbar_action" name="cross" onClick={this.props.onClose} />
 
         if(this.props.action) {
@@ -70,19 +70,19 @@ var Modal = React.createClass({
         }
 
         return (
-            <div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} onKeyUp={this.onKeyUp} onKeyDown={this.onKeyDown} tabIndex="0">
+            <div {...this.props} className={modalClasses.className} ref="modal" onClick={this.props.onClick} role="dialogue" onKeyUp={this.onKeyUp} onKeyDown={this.onKeyDown} tabIndex="0">
                 <Toolbar title={this.props.title}>{closeAction}</Toolbar>
                 {this.renderBackAndForward()}
                 <div className="Modal_info">{this.props.info}</div>
-                <div className="Modal_wrapper" ref="ModalWrapper" onClick={this.onClick} >{this.props.children}</div>
+                <div className="Modal_wrapper" ref="ModalWrapper">{this.props.children}</div>
                 <div className="Modal_footer">{this.renderActions()}</div>
             </div>
         );
     },
     renderBackAndForward: function () {
         if(this.props.onNext && this.props.onPrevious) {
-            var next = <div onClick={this.props.onNext} className="Modal_button Modal_button-next">{this.props.nextButton}</div>;
-            var prev = <div onClick={this.props.onPrevious} className="Modal_button Modal_button-prev">{this.props.previousButton}</div>;
+            var next = <button onClick={this.props.onNext} aria-label="next" className="Modal_button Modal_button-next">{this.props.nextButton}</button>;
+            var prev = <button onClick={this.props.onPrevious} aria-label="previous" className="Modal_button Modal_button-prev">{this.props.previousButton}</button>;
 
             return <div>{prev}{next}</div>;
         }
