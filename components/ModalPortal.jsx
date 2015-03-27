@@ -19,6 +19,7 @@ var Modal = React.createClass({
     mixins: [ClassMixin, PureRenderMixin],
     propTypes: {
         isOpen: React.PropTypes.bool.isRequired,
+        onRequestClose: React.PropTypes.func,
         transitionName: React.PropTypes.oneOf(['fade']),
         transitionDuration: React.PropTypes.number
     },

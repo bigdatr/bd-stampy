@@ -5,7 +5,10 @@ var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var Page = React.createClass({
     displayName: 'Page',
-    mixins: [PureRenderMixin],
+    mixins: [
+        PureRenderMixin,
+        require('../mixins/ClassMixin')
+    ],
     propTypes: {
         content: React.PropTypes.string,
         visible: React.PropTypes.bool
@@ -17,9 +20,9 @@ var Page = React.createClass({
             wrapper: true
         };
     },
-    
+
     render: function () {
-        var classes = new ClassBuilder('Page')
+        var classes = this.ClassMixin_getClass('Page')
             .modifier(this.props.content)
             .add(!this.props.visible, 'is-hidden')
         ;

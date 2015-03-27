@@ -25,6 +25,7 @@ var Button = React.createClass({
             component: 'button',
             toggle: false,
             type: 'button',
+            modifier: 'default',
             checked: false,
             disabled: false
         };
@@ -58,8 +59,7 @@ var Button = React.createClass({
         }
     },
     render: function() {
-        var classes = this.ClassMixin_getClass()
-                            .modifier(this.props.color);
+        var classes = this.ClassMixin_getClass('Button').modifier(this.props.color);
 
 
         if ((this.props.toggle && !this.state.checked) || this.props.disabled) {
@@ -71,7 +71,7 @@ var Button = React.createClass({
         var props = _.defaults({
                 className: classes.className,
                 onClick: this.onClick,
-                type: this.props.type
+                type: this.props.type,
             }, this.props);
 
         return ButtonComponent(props, this.props.children);

@@ -18,8 +18,8 @@ var Tab = React.createClass({
     },
     render: function() {
         return (
-            <span className={this.props.className} onClick={this.props.onClick}>
-                {this.renderIcon()}
+            <span className={this.props.className} role="button" tabIndex="1" ononClick={this.props.onClick}>
+                <span>{this.renderIcon()}</span>
                 <span className="Tab_text">{this.props.text}</span>
                 {this.props.children}
             </span>

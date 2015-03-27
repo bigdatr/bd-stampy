@@ -9,11 +9,12 @@ var Img = React.createClass({
     mixins: [
         require('../mixins/ClassMixin.jsx')
     ],
-    propTypes: {         
+    propTypes: {
         src: React.PropTypes.string.isRequired,
         block: React.PropTypes.bool,
         onLoad: React.PropTypes.func,
         onError: React.PropTypes.func,
+        alt: React.PropTypes.string.isRequired,
         loader: React.PropTypes.element
     },
     getDefaultProps: function() {
@@ -52,11 +53,11 @@ var Img = React.createClass({
         this.fetchImage();
     },
     componentDidUpdate: function () {
-        this.fetchImage();  
+        this.fetchImage();
     },
     fetchImage: function() {
-        var img = new Image(); 
-        var _this = this;  
+        var img = new Image();
+        var _this = this;
 
         img.onload = function() {
             if (_this.isMounted()) {
@@ -72,7 +73,7 @@ var Img = React.createClass({
                 _this.props.onLoad(img);
             }
         };
-        
+
         img.onerror = function() {
             this.setState({error: true, fallback: true, cached: false});
 
@@ -80,7 +81,7 @@ var Img = React.createClass({
                 _this.props.onError(img);
             }
         }.bind(this);
-        
+
         img.src = this.props.src;
     },
     render: function() {
@@ -93,7 +94,7 @@ var Img = React.createClass({
         var aspectRatio = this.props.maxHeight / this.props.maxWidth;
         var imageRatio = this.state.height / this.state.width;
 
-        // if the image is more portrait than the screen 
+        // if the image is more portrait than the screen
         // and is also taller
         // restrict the height to maxHeight
         if (imageRatio > aspectRatio) {
@@ -118,7 +119,7 @@ var Img = React.createClass({
             return this.props.loader;
         }
 
-        return this.renderImage(src, height, width);    
+        return this.renderImage(src, height, width);
     },
     renderImage: function (src, height, width) {
         var errorClass = (this.state.error) ? 'is-error' : '';
@@ -131,7 +132,7 @@ var Img = React.createClass({
             return <img className={classes.className} src={src} height={height} width={width} alt={this.props.alt} title={this.props.title} />;
         }
 
-        return React.addons.cloneWithProps(src, {className: errorClass + ' ' + this.props.className});        
+        return React.addons.cloneWithProps(src, {className: errorClass + ' ' + this.props.className});
     }
 });
 

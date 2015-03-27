@@ -2,7 +2,7 @@
 /**
  * TabView
  *
- * @param {String} example  
+ * @param {String} example
     <TabView defaultTab={1}>
 
         <Tab>Tab 1</Tab>
@@ -26,12 +26,12 @@
             <p>Inert HTML Content here</p>
             <p>Inert HTML Content here</p>
         </TabContent>
-        
+
     </TabView>
 
  */
 var React = require('react/addons');
-var Transition = React.addons.CSSTransitionGroup;
+var Key = require('../utils/Key');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
@@ -58,6 +58,12 @@ var TabView = React.createClass({
     componentWillReceiveProps: function(nextProps) {
         if (nextProps.defaultTab) {
             this.setState({tabindex: nextProps.defaultTab});
+        }
+    },
+    onKeyUp(i, e) {
+        e.preventDefault();
+        if(Key.isPressed(e, 'space')) {
+            this.onTabChange(i);
         }
     },
     onTabChange: function(tabindex) {
@@ -124,9 +130,15 @@ var TabView = React.createClass({
         );
     },
     renderTab: function(tabGroup) {
-        return tabGroup.map(function(t, i) {
-            return <li key={i} className={this.state.tabindex === (i+1) ? 'is-active' : ''} onClick={this.onTabChange.bind(this, (i+1))}>{t}</li>;
-        }.bind(this));
+        return tabGroup.map((t, i) => {
+            return <li
+                role="button"
+                key={i}
+                className={this.state.tabindex === (i+1) ? 'is-active' : ''}
+                tabIndex="1"
+                onKeyUp={this.onKeyUp.bind(this, i+1)}
+                onClick={this.onTabChange.bind(this, i+1)}>{t}</li>;
+        });
     },
     renderExcluded: function(tabExcludedGroup) {
         return tabExcludedGroup.map(function(t, i) {
