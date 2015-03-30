@@ -28,20 +28,20 @@
     "color": "^0.7.2",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.12.2",
-    "lodash": "^2.4.1",
-    "moment": "^2.8.3",
+    "lodash": "^3.6.0",
+    "moment": "^2.9.0",
     "node-jsx": "^0.12.4",
     "react": "^0.12.2",
     "react-modal": "^0.1.0",
     "react-tools": "^0.12.2",
-    "url-pattern": "^0.6.0"
+    "url-pattern": "^0.7.0"
   },
   "devDependencies": {
-    "jest-cli": "^0.2.1",
+    "jest-cli": "^0.4.0",
     "jest-reporters": "0.0.2",
     "react-router": "^0.12.4",
     "stalactite": "0.0.5",
-    "superagent": "^0.21.0"
+    "superagent": "^1.1.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setup-jasmine-env.js",

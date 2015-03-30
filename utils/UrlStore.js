@@ -145,7 +145,7 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         return fragments[0];
     },
     patternMatch: function(str) {
-        var pattern = urlPattern.newPattern(str);
+        var pattern = new urlPattern(str);
         return pattern.match(this.getHash());
     }
 
