@@ -12,13 +12,15 @@ var Choice = React.createClass({
         disabled: React.PropTypes.bool,
         selected: React.PropTypes.bool,
         closeIcon: React.PropTypes.element,
-        onDelete: React.PropTypes.func
+        onDelete: React.PropTypes.func,
+        component: React.PropTypes.string
     },
     getDefaultProps: function () {
         return {
             disabled: false,
             selected: false,
-            closeIcon: <Icon name="cross" size="small"/>
+            closeIcon: <Icon name="cross" size="small"/>,
+            component: 'li'
         };
     },
     render: function() {
@@ -27,11 +29,10 @@ var Choice = React.createClass({
             .is(this.props.selected, 'selected')
         ;
 
-        return (
-            <li className={classes.className}>
-                {this.props.children}
-                {this.renderCross()}
-            </li>
+        return React.createElement(
+            this.props.component,
+            {className: classes.className},
+            [this.props.children, this.renderCross()]
         );
     },
     renderCross: function () {
