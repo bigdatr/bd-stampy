@@ -201,18 +201,22 @@ var Video = React.createClass({
         var sec = seconds - (min * 60);
         var hr = Math.floor(seconds / 3600);
 
+        var _timer = [];
+
         if (sec < 10) { // display 0:09 rather than 0:9
-            sec = '0' + sec;
+            sec = '0'.concat(sec);
         }
 
         if (hr === 0) {
-            return min + ':' + sec;
+            _timer = [min, sec];
         } else {
             if (min < 10) { // display 1:02:10 rather than 1:2:10
-                min = '0' + min;
+                min = '0'.concat(min);
             }
-            return hr + ':' + min + ':' + sec;
+            _timer = [hr, min, sec];
         }
+
+        return _timer.join(':');
     },
     renderControls: function() {
         if (!this.props.controls) {
