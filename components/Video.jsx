@@ -8,7 +8,6 @@ var Maths = require('../utils/Maths.js');
 var Icon = require('./Icon.jsx');
 var Fullscreen = require('../utils/Fullscreen.js');
 
-
 function percentage (a, b) {
     return 100 * a / b;
 }
@@ -46,7 +45,8 @@ var Video = React.createClass({
             buffered: 0,
             currentTime: 0,
             dragging: false,
-            autoPlay: false
+            autoPlay: false,
+            currentSec: 0
         };
     },
     componentDidMount: function() {
@@ -84,7 +84,8 @@ var Video = React.createClass({
                     this.setState({
                         buffered: perc,
                         duration: v.duration,
-                        currentTime: timePercentage
+                        currentTime: timePercentage,
+                        currentSec: v.currentTime
                     });
                 }
             }
@@ -174,6 +175,8 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     },
     render: function() {
+console.log('this.state.duration', this.state.duration, this.state.buffered, this.state.currentTime);
+
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
         classes.is(this.state.isDarkVideo, 'dark');
@@ -194,6 +197,25 @@ var Video = React.createClass({
             </div>
         );
     },
+    convertSecondsToHourMinuteSecond: function(seconds) {
+        seconds = parseInt(seconds) || 0;
+        var min = Math.floor(seconds / 60);
+        var sec = seconds - min * 60;
+        var hr = Math.floor(seconds / 3600);
+
+        if (sec < 10) { // display 0:09 rather than 0:9
+            sec = '0' + sec;
+        }
+
+        if (hr === 0) {
+            return min + ':' + sec;
+        } else {
+            if (min < 10) { // display 1:02:10 rather than 1:2:10
+                min = '0' + min;
+            }
+            return hr + ':' + min + ':' + sec;
+        }
+    },
     renderControls: function() {
         if (!this.props.controls) {
             return null;
@@ -202,12 +224,14 @@ var Video = React.createClass({
         var playPauseIcon = this.state.paused ? this.props.playIcon : this.props.pauseIcon;
         var fullscreenIcon = this.state.fullscreen ? this.props.unfullscreenIcon : this.props.fullscreenIcon;
         var mutedIcon = this.state.muted ? this.props.mutedIcon : this.props.unmutedIcon;
+        var videoDuration = this.convertSecondsToHourMinuteSecond(this.state.currentSec) + '/' + this.convertSecondsToHourMinuteSecond(this.state.duration);
 
         return (
             <div className="Video_controls">
                 <div className="Video_toolbar">
                     <div className="l-right" onClick={this.onFullscreen}>{fullscreenIcon}</div>
                     <div className="l-right" onClick={this.onToggleSound}>{mutedIcon}</div>
+                    <div className="l-right">{videoDuration}</div>
                     <div onClick={this.onPlayPause}>{playPauseIcon}</div>
                 </div>
                 <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
