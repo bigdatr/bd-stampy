@@ -175,8 +175,6 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     },
     render: function() {
-console.log('this.state.duration', this.state.duration, this.state.buffered, this.state.currentTime);
-
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
         classes.is(this.state.isDarkVideo, 'dark');
@@ -200,7 +198,7 @@ console.log('this.state.duration', this.state.duration, this.state.buffered, thi
     convertSecondsToHourMinuteSecond: function(seconds) {
         seconds = parseInt(seconds) || 0;
         var min = Math.floor(seconds / 60);
-        var sec = seconds - min * 60;
+        var sec = seconds - (min * 60);
         var hr = Math.floor(seconds / 3600);
 
         if (sec < 10) { // display 0:09 rather than 0:9
