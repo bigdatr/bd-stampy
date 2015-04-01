@@ -70,6 +70,7 @@ var DatePicker = React.createClass({
     },
     onKeyUp: function(e){
         if (e.keyCode === 27 ) { // esc
+            e.stopPropagation();
             this.onClose();
         }
     },
