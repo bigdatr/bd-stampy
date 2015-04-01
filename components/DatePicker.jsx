@@ -68,6 +68,11 @@ var DatePicker = React.createClass({
             });
         }
     },
+    onKeyUp: function(e){
+        if (e.keyCode === 27 ) { // esc
+            this.onClose();
+        }
+    },
     onMouseDown: function () {
         this.isMouseOnDatePicker = true;
     },
@@ -172,6 +177,7 @@ var DatePicker = React.createClass({
                     discreteValue
                     closeIcon={closeIcon}
                     onChange={this.onClearDate}
+                    onKeyUp={this.onKeyUp}
                 />
                 {datePicker}
             </div>
