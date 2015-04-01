@@ -82,7 +82,7 @@ var DatePicker = React.createClass({
             document.addEventListener("mousedown", this.onClose, false);
         }
     },
-    onClose: function () {        
+    onClose: function () {
         if (this.isMouseOnDatePicker) {
             return;
         }
@@ -159,17 +159,17 @@ var DatePicker = React.createClass({
 
         return (
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
-                <Input 
-                    className="DatePicker_input" 
-                    readOnly={true} 
-                    ref="input" 
-                    name={this.props.name} 
-                    onBlur={this.onBlur} 
-                    placeholder={this.props.placeholder} 
-                    onFocus={this.onFocus} 
-                    value={value} 
-                    isValid={this.props.isValid} 
-                    discreteValue 
+                <Input
+                    className="DatePicker_input"
+                    readOnly={true}
+                    ref="input"
+                    name={this.props.name}
+                    onBlur={this.onBlur}
+                    placeholder={this.props.placeholder}
+                    onFocus={this.onFocus}
+                    value={value}
+                    isValid={this.props.isValid}
+                    discreteValue
                     closeIcon={closeIcon}
                     onChange={this.onClearDate}
                 />
@@ -177,7 +177,7 @@ var DatePicker = React.createClass({
             </div>
         );
     },
-    renderDatePicker: function () {   
+    renderDatePicker: function () {
         return (
             <div className="DatePicker_selector">
                 <div className="DatePicker_close" onMouseDown={this.onClose}>{this.props.closeButton}</div>
@@ -190,7 +190,7 @@ var DatePicker = React.createClass({
     renderSelectorPeriodMonth: function() {
         var prevMonthButton;
         var prevMonth = moment(this.state.displayDate).subtract(1, 'month').endOf('month');
-        
+
         if (this.getIsInRange(prevMonth)) {
             prevMonthButton = <span onMouseDown={this.onDateShift.bind(this, 'month', -1)}>{this.props.previousButton}</span>;
         }
@@ -200,7 +200,7 @@ var DatePicker = React.createClass({
 
         var nextMonthButton;
         var nextMonth = moment(this.state.displayDate).add(1, 'month').startOf('month');
-        
+
         if (this.getIsInRange(nextMonth)) {
             nextMonthButton = <span onMouseDown={this.onDateShift.bind(this, 'month', 1)}>{this.props.nextButton}</span>;
         }
@@ -219,7 +219,7 @@ var DatePicker = React.createClass({
     renderSelectorPeriodYear: function() {
         var prevYearButton;
         var prevYear = moment(this.state.displayDate).subtract(1, 'year').endOf('year');
-        
+
         if (this.getIsInRange(prevYear)) {
             prevYearButton = <span onMouseDown={this.onDateShift.bind(this, 'year', -1)}>{this.props.previousButton}</span>;
         }
@@ -229,7 +229,7 @@ var DatePicker = React.createClass({
 
         var nextYearButton;
         var nextYear = moment(this.state.displayDate).add(1, 'year').startOf('year');
-        
+
         if (this.getIsInRange(nextYear)) {
             nextYearButton = <span onMouseDown={this.onDateShift.bind(this, 'year', 1)}>{this.props.nextButton}</span>;
         }
@@ -270,7 +270,7 @@ var DatePicker = React.createClass({
             endOfMonth = moment(displayDate).endOf('month'),
             firstDay = startOfMonth.format('ddd'),
             calendarOffset = 0;
-    
+
         // Calculate offset at start of calendar
         _.find(moment.weekdaysShort(), function(w, i) {
             if (w === firstDay) {
@@ -280,10 +280,10 @@ var DatePicker = React.createClass({
 
             return false;
         });
-        
+
         var startOfWeek = moment(startOfMonth).subtract(calendarOffset-1, 'days'),
             weeks = [];
-    
+
         // Ensure we always display the 1st, even if its not on a Sunday
         if (startOfMonth.isBefore(startOfWeek)) {
             startOfWeek.subtract(7, 'days');
