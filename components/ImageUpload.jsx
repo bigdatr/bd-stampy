@@ -53,7 +53,7 @@ var ImageUpload = React.createClass({
         var preview;
 
         if (this.state.image_preview) {
-            preview = <Img src={this.state.image_preview} className="l-100" />;
+            preview = <Img src={this.state.image_preview} alt="Preview of image to upload" className="l-100" />;
         }
 
         return (

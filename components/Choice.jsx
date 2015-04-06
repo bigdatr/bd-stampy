@@ -29,11 +29,14 @@ var Choice = React.createClass({
             .is(this.props.selected, 'selected')
         ;
 
-        return React.createElement(
-            this.props.component,
-            {className: classes.className},
-            [this.props.children, this.renderCross()]
+        var el = (
+            <div className="Choice">
+                {this.props.children}
+                {this.renderCross()}
+            </div>
         );
+
+        return React.createElement(this.props.component, {className: classes.className}, el);
     },
     renderCross: function () {
         if (!this.props.disabled) {
