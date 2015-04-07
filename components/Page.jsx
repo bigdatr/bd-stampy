@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+/* global document */
+
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder.js');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
@@ -11,26 +13,33 @@ var Page = React.createClass({
     ],
     propTypes: {
         content: React.PropTypes.string,
-        visible: React.PropTypes.bool,
-        onLeaveCurrentPage: React.PropTypes.func,
-        onBackPreviousPage: React.PropTypes.func
+        visible: React.PropTypes.bool
     },
+    _lastScrollPosition: 0,
     getDefaultProps: function () {
         return {
             content: 'static',
             visible: true,
-            wrapper: true
+            wrapper: true,
+            scrollTop: null
         };
     },
     componentWillReceiveProps: function (nextProps) {
-        if (this.props.onLeaveCurrentPage) {
-            this.props.onLeaveCurrentPage(nextProps, this.props);
+        if (this.props.visible === true && nextProps.visible === false) {
+            // Hiding the page
+            if (this.props.scrollTop) {
+                this._lastScrollPosition = this.props.scrollTop;
+            }
         }
     },
-    componentDidUpdate: function (prevProps, prevState) {
-        if (this.props.onBackPreviousPage) {
-            this.props.onBackPreviousPage(prevProps, prevState, this.props, this.state);
+    componentDidUpdate: function (prevProps) {
+        if (prevProps.visible === false && this.props.visible === true) {
+            // Showing the page
+            document.body.scrollTop = this._lastScrollPosition;
         }
+    },
+    onPageScroll: function() {
+        this._lastScrollPosition = document.body.scrollTop;
     },
     render: function () {
         var classes = this.ClassMixin_getClass('Page')
@@ -55,7 +64,7 @@ var Page = React.createClass({
 
         if (this.props.wrapper) {
             content = (
-                <div className="wrapper">
+                <div className="wrapper" onWheel={this.onPageScroll} onScroll={this.onPageScroll}>
                     {children}
                 </div>
             );
