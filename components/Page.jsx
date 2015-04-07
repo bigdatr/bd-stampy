@@ -11,7 +11,9 @@ var Page = React.createClass({
     ],
     propTypes: {
         content: React.PropTypes.string,
-        visible: React.PropTypes.bool
+        visible: React.PropTypes.bool,
+        onLeaveCurrentPage: React.PropTypes.func,
+        onBackPreviousPage: React.PropTypes.func
     },
     getDefaultProps: function () {
         return {
@@ -20,7 +22,16 @@ var Page = React.createClass({
             wrapper: true
         };
     },
-
+    componentWillReceiveProps: function (nextProps) {
+        if (this.props.onLeaveCurrentPage) {
+            this.props.onLeaveCurrentPage(nextProps, this.props);
+        }
+    },
+    componentDidUpdate: function (prevProps, prevState) {
+        if (this.props.onBackPreviousPage) {
+            this.props.onBackPreviousPage(prevProps, prevState, this.props, this.state);
+        }
+    },
     render: function () {
         var classes = this.ClassMixin_getClass('Page')
             .modifier(this.props.content)
