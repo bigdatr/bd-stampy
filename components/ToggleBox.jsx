@@ -73,12 +73,11 @@ var ToggleBox = React.createClass({
             classes.modifier('disabled');
         }
 
-        return <div className={classes.className}>
+        return <div className={classes.className} onClick={this.onClick}>
             <label>{this.props.children}</label>
             <input
                 className="ToggleBox_input"
                 type="checkbox"
-                onClick={this.onClick}
                 checked={this.state.checked}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}

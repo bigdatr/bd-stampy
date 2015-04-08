@@ -6,7 +6,7 @@ var Label = React.createClass({
     displayName: 'Label',
     mixins: [ClassMixin],
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('Label ');
         return <label className={classes.className} htmlFor={this.props.htmlFor}>{this.props.children}</label>;
     }
 });

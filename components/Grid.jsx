@@ -9,12 +9,8 @@ var Grid = React.createClass({
     mixins: [
         require('../mixins/ClassMixin')
     ],
-    propTypes:{
-        modifier: React.PropTypes.string
-    },
     render: function() {
     	var classes = this.ClassMixin_getClass('grid');
-
         return <div className={classes.className}>{this.props.children}</div>;
     }
 });

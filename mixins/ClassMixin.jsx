@@ -34,19 +34,11 @@ var ClassMixin = {
     ClassMixin_applyModifiers: function (classBuilder) {
         if (this.props.modifier) {
 
-            // If comma string turn into an array.
-            if (typeof this.props.modifier === 'string') {
-                var modifiers = splits(this.props.modifier);
-                this.props.modifier = modifiers.filter(function(m) {
-                    return !!m; // Remove all falsey values. The values false, null, 0, "", undefined, and NaN are all falsey.
-                });
-            }
-            
             // Apply the modifiers
-            this.props.modifier.forEach(function(e) {
+            this.props.modifier.split(' ').forEach(function(e) {
                 classBuilder.modifier(e);
             });
-        } 
+        }
         return classBuilder;
     },
     ClassMixin_applyIs: function (classBuilder) {
