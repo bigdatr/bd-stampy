@@ -13,7 +13,8 @@ var Page = React.createClass({
     ],
     propTypes: {
         content: React.PropTypes.string,
-        visible: React.PropTypes.bool
+        visible: React.PropTypes.bool,
+        scrollTop: React.React.PropTypes.number
     },
     _lastScrollPosition: 0,
     getDefaultProps: function () {
