@@ -28,7 +28,7 @@ var Page = React.createClass({
     componentWillReceiveProps: function (nextProps) {
         if (this.props.visible === true && nextProps.visible === false) {
             // Hiding the page
-            if (this.props.scrollTop) {
+            if (this.props.scrollTop !== null) {
                 this._lastScrollPosition = this.props.scrollTop;
             }
         }
