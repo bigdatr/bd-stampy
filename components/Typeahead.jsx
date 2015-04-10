@@ -404,6 +404,11 @@ var Typeahead = React.createClass({
             groupCount++;
         }, this);
 
+        // No results
+        if (results.length === 0) {
+            results.push(<li key="noresults" className="List-dropdown_item">No results</li>);
+        }
+
         return <ul className="List-dropdown">{results}</ul>;
     },
     renderResultsList: function(data, header, selectedIndex) {
