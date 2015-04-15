@@ -186,7 +186,6 @@ var Typeahead = React.createClass({
         }
     },
     onRemoveValue: function(value, e) {
-        console.error('::onRemoveValue', value);
         var values = this.props.values;
 
         values = values.filter(function(v) {
