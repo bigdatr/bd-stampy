@@ -18,8 +18,6 @@ var Checkbox = React.createClass({
     onClick: function (ee) {
         // Manual toggle hack. Somtimes the lable clickevent will auto scroll to nowhere...
         var checkbox = this.refs.checkbox.getDOMNode();
-
-        console.log('onClick');
         checkbox.checked = !checkbox.checked;
         ee.preventDefault();
 
