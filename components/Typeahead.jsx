@@ -109,6 +109,7 @@ var Typeahead = React.createClass({
             values: values
         });
     },
+    onKeyUp: function() {},
     onKeyDown: function(e) {
         var hasResults = false,
             totalResults = 0,
@@ -159,6 +160,9 @@ var Typeahead = React.createClass({
 
         if (this.props.results) {
             if (Key.isPressed(e,'enter')) {
+                // Stop the click event on Choice.jsx (cause that trigger Choice.onDelete())
+                e.preventDefault();
+
                 if (this.props.results.length) {
                     this.onClick(this.props.results[this.state.keySelectionIndex], this.props.name, e);
                 }
@@ -170,10 +174,11 @@ var Typeahead = React.createClass({
                         if (groupCount === item.groupIndex) {
                             this.onClick(v[item.resultIndex], k, e);
                         }
+
                         groupCount++;
                     }, this);
                 }
-                this.setState({forceHideResults: true});
+                // this.setState({forceHideResults: true});
             }
             else if (Key.isPressed(e, 'esc')) {
                 this.setState({forceHideResults: true});
@@ -181,6 +186,7 @@ var Typeahead = React.createClass({
         }
     },
     onRemoveValue: function(value, e) {
+        console.error('::onRemoveValue', value);
         var values = this.props.values;
 
         values = values.filter(function(v) {
