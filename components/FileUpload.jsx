@@ -6,7 +6,7 @@ var Button = require('./Button.jsx');
 var FileUpload = React.createClass({
     displayName: 'FileUpload',
     propTypes: {
-        name: React.PropTypes.string.isRequired, 
+        name: React.PropTypes.string.isRequired,
         url: React.PropTypes.string.isRequired,
         onClick: React.PropTypes.func,
         onProgress: React.PropTypes.func,
@@ -90,7 +90,7 @@ var FileUpload = React.createClass({
         this.uploadFile();
     },
     render: function() {
-        var classes = 'FileUpload InfoBox';
+        var classes = 'FileUpload';
 
         var uploadButton;
 

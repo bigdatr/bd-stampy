@@ -226,15 +226,15 @@ var Video = React.createClass({
         var playPauseIcon = this.state.paused ? this.props.playIcon : this.props.pauseIcon;
         var fullscreenIcon = this.state.fullscreen ? this.props.unfullscreenIcon : this.props.fullscreenIcon;
         var mutedIcon = this.state.muted ? this.props.mutedIcon : this.props.unmutedIcon;
-        var videoDuration = this.convertSecondsToHourMinuteSecond(this.state.currentSec) + '/' + this.convertSecondsToHourMinuteSecond(this.state.duration);
+        var videoDuration = this.convertSecondsToHourMinuteSecond(this.state.currentSec) + ' / ' + this.convertSecondsToHourMinuteSecond(this.state.duration);
 
         return (
             <div className="Video_controls">
                 <div className="Video_toolbar">
-                    <div className="l-right" onClick={this.onFullscreen}>{fullscreenIcon}</div>
-                    <div className="l-right" onClick={this.onToggleSound}>{mutedIcon}</div>
-                    <div className="l-right">{videoDuration}</div>
-                    <div onClick={this.onPlayPause}>{playPauseIcon}</div>
+                    <div className="Video_toolbarItem right" onClick={this.onFullscreen}>{fullscreenIcon}</div>
+                    <div className="Video_toolbarItem right" onClick={this.onToggleSound}>{mutedIcon}</div>
+                    <span  className="Video_toolbarItem "onClick={this.onPlayPause}>{playPauseIcon}</span>
+                    <span className="Video_toolbarItem ">{videoDuration}</span>
                 </div>
                 <div className="Video_progress" onMouseDown={this.onScrub} ref="progress">
                     <div className="Video_bar Video_bar-buffer" style={{width:this.state.buffered + "%"}}></div>

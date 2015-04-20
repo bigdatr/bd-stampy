@@ -17,10 +17,10 @@ var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var Badge = React.createClass({
     displayName: 'Badge',
     mixins: [ClassMixin, PureRenderMixin],
-    propTypes: {         
+    propTypes: {
         color: React.PropTypes.string
     },
-    render: function() {         
+    render: function() {
         var classes = this.ClassMixin_getClass();
         classes.modifier(this.props.color);
         classes.is(this.props.disabled, 'disabled');
@@ -29,7 +29,7 @@ var Badge = React.createClass({
             return <div className={classes.className} onClick={this.props.onClick}>{this.props.children}</div>;
         }else{
             return <span></span>;
-        }   
+        }
 
     }
 });
