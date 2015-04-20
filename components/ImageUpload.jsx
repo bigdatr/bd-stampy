@@ -11,7 +11,8 @@ var ImageUpload = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         url: React.PropTypes.string.isRequired,
-        preview: React.PropTypes.bool
+        preview: React.PropTypes.bool,
+        onComplete: React.PropTypes.func
     },
     getDefaultProps: function() {
         return {
@@ -37,7 +38,9 @@ var ImageUpload = React.createClass({
     onComplete: function() {
         this.setState({image_preview: null});
 
-        console.log('image upload complete');
+        if (this.props.onComplete) {
+            this.props.onComplete();
+        }
     },
     fetchPreview: function(file) {
         var _this = this;

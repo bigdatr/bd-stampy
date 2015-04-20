@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+/* global document */
+
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder.js');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
@@ -11,16 +13,35 @@ var Page = React.createClass({
     ],
     propTypes: {
         content: React.PropTypes.string,
-        visible: React.PropTypes.bool
+        visible: React.PropTypes.bool,
+        scrollTop: React.PropTypes.number
     },
+    _lastScrollPosition: 0,
     getDefaultProps: function () {
         return {
             content: 'static',
             visible: true,
-            wrapper: true
+            wrapper: true,
+            scrollTop: null
         };
     },
-
+    componentWillReceiveProps: function (nextProps) {
+        if (this.props.visible === true && nextProps.visible === false) {
+            // Hiding the page
+            if (this.props.scrollTop !== null) {
+                this._lastScrollPosition = this.props.scrollTop;
+            }
+        }
+    },
+    componentDidUpdate: function (prevProps) {
+        if (prevProps.visible === false && this.props.visible === true) {
+            // Showing the page
+            document.body.scrollTop = this._lastScrollPosition;
+        }
+    },
+    onPageScroll: function() {
+        this._lastScrollPosition = document.body.scrollTop;
+    },
     render: function () {
         var classes = this.ClassMixin_getClass('Page')
             .modifier(this.props.content)
@@ -44,7 +65,7 @@ var Page = React.createClass({
 
         if (this.props.wrapper) {
             content = (
-                <div className="wrapper">
+                <div className="wrapper" onWheel={this.onPageScroll} onScroll={this.onPageScroll}>
                     {children}
                 </div>
             );

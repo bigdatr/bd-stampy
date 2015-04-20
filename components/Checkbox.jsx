@@ -14,12 +14,13 @@ var Checkbox = React.createClass({
         checked: React.PropTypes.bool,
         onChange: React.PropTypes.func
     },
-    mixins: [ClassMixin, PureRenderMixin],
+    mixins: [
+        ClassMixin,
+        PureRenderMixin
+    ],
     onClick: function (ee) {
         // Manual toggle hack. Somtimes the lable clickevent will auto scroll to nowhere...
         var checkbox = this.refs.checkbox.getDOMNode();
-
-        console.log('onClick');
         checkbox.checked = !checkbox.checked;
         ee.preventDefault();
 
