@@ -1,6 +1,6 @@
 {
   "name": "bd-stampy",
-  "version": "0.1.55",
+  "version": "0.1.56",
   "description": "React UI Component Library",
   "main": "stampy.js",
   "scripts": {
