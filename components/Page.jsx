@@ -65,7 +65,7 @@ var Page = React.createClass({
 
         if (this.props.wrapper) {
             content = (
-                <div className="wrapper" onWheel={this.onPageScroll} onScroll={this.onPageScroll}>
+                <div className="wrapper" onWheel={this.onPageScroll}>
                     {children}
                 </div>
             );
