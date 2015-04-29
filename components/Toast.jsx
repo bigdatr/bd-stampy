@@ -8,7 +8,7 @@ var Toast = React.createClass({
         ClassMixin,
         PureRenderMixin
     ],
-    propTypes: {         
+    propTypes: {
         durationMS: React.PropTypes.number,
         message: React.PropTypes.string,
         autohide: React.PropTypes.bool
@@ -27,7 +27,7 @@ var Toast = React.createClass({
         };
     },
     componentDidMount: function () {
-        this.componentDidUpdate();  
+        this.componentDidUpdate();
     },
     componentDidUpdate: function () {
         if (!this.state.hasAnimated && this.props.message) {

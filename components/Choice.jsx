@@ -31,7 +31,7 @@ var Choice = React.createClass({
 
         var el = (
             <div>
-                {this.props.children}
+                <div className={classes.child('text')}>{this.props.children}</div>
                 {this.renderCross()}
             </div>
         );
