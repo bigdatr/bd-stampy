@@ -33,7 +33,7 @@ var FileUpload = React.createClass({
         xhr.onreadystatechange = function(){
             if(xhr.readyState === 4){
                 var resp = JSON.parse(xhr.response);
-                this.onComplete(resp);
+                this.onComplete(resp, xhr);
             }
         }.bind(this);
 
@@ -66,9 +66,9 @@ var FileUpload = React.createClass({
             this.props.onProgress(e, details);
         }
     },
-    onComplete: function(resp) {
+    onComplete: function(resp, xhr) {
         if (this.props.onComplete) {
-            this.props.onComplete(resp);
+            this.props.onComplete(resp, xhr);
         }
     },
     onChange: function(e) {
