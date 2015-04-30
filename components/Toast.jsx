@@ -11,7 +11,8 @@ var Toast = React.createClass({
     propTypes: {         
         durationMS: React.PropTypes.number,
         message: React.PropTypes.string,
-        autohide: React.PropTypes.bool
+        autohide: React.PropTypes.bool,
+        onHidden: React.PropTypes.func
     },
     getDefaultProps: function () {
         return {
@@ -45,7 +46,7 @@ var Toast = React.createClass({
     },
     show: function() {
         this.setState({
-            opacity: 0.8,
+            opacity: 0.95,
             bottom: 0,
             hasAnimated: true
         });
@@ -61,6 +62,12 @@ var Toast = React.createClass({
     },
     hide: function() {
         this.setState(this.getInitialState());
+
+        if (this.props.onHidden) {
+            setTimeout(function() {
+                this.props.onHidden();
+            }.bind(this), this.props.durationMS + 300);
+        }
     },
     render: function() {
         // TODO: This is just a prototype component, needs lots of refactoring
