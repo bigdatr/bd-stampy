@@ -36,7 +36,10 @@ var Choice = React.createClass({
             </div>
         );
 
-        return React.createElement(this.props.component, {className: classes.className}, el);
+        return React.createElement(this.props.component, {
+            className: classes.className,
+            title: this.props.children
+        }, el);
     },
     renderCross: function () {
         if (!this.props.disabled) {

@@ -21,11 +21,11 @@ var Input = React.createClass({
     },
 
     render: function() {
-        var classes = this.ClassMixin_getClass();        
+        var classes = this.ClassMixin_getClass('Code')
+            .modifier(this.props.language)
+            .modifier(this.props.colorScheme);
         return (
-            <pre>
-                <code className={this.props.language + ' ' + this.props.colorScheme}>{this.syntaxHighlight(this.props.children, this.props.language)}</code>
-            </pre>
+            <samp className={classes.className}>{this.syntaxHighlight(this.props.children, this.props.language)}</samp>
         );
     },
     syntaxHighlight: function (str, language) {
@@ -36,12 +36,11 @@ var Input = React.createClass({
         return table[language](str);
     },
     highlightJSON: function (json) {
-        
         if (typeof json != 'string') {
-            json = JSON.stringify(json, undefined, 2);
+            json = JSON.stringify(json, undefined, 4);
         }
 
-        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');        
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         return _.map(json.match(/(\s+)|("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)|([:,\{\}])/g), function(match) {
             var cls = 'char';
             if (/^"/.test(match)) {
@@ -57,7 +56,7 @@ var Input = React.createClass({
             } else if (/[0-9]/.test(match)){
                 cls = 'number';
             }
-                
+
             return <span className={cls}>{match}</span>
         });
 

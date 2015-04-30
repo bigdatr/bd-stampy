@@ -1,6 +1,8 @@
 /*global window*/
 var React = require('react');
 
+
+
 var Dropdown = React.createClass({
     displayName: 'Dropdown',
     mixins: [
@@ -12,7 +14,9 @@ var Dropdown = React.createClass({
         };
     },
     componentWillMount: function () {
-        window.addEventListener("click", this.closeDropdown, false);
+        if (typeof window !== 'undefined') {
+            window.addEventListener("click", this.closeDropdown, false);
+        }
     },
     componentWillUnmount: function () {
         window.removeEventListener("click", this.closeDropdown, false);

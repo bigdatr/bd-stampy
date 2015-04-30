@@ -17,7 +17,8 @@ var Pagination = React.createClass({
             length: 0,
             page: 0,
             ammount: 25,
-            maxLinks: 10,
+            offset: 0,
+            maxLinks: 8,
             nextButton: 'next \u00bb',
             previousButton: '\u00ab prev'
         };
@@ -27,7 +28,7 @@ var Pagination = React.createClass({
             this.props.onClick(e, page);
         }
     },
-    render: function () {       
+    render: function () {
         var numberOfPages = Math.ceil(this.props.length / this.props.ammount);
         this.classes = this.ClassMixin_getClass('Pagination');
 
@@ -43,17 +44,38 @@ var Pagination = React.createClass({
         </div>;
     },
     renderLinks(numberOfPages) {
-        var half = Math.floor(this.props.maxLinks / 2);
 
         var arrayObject;
 
-        if(numberOfPages > this.props.maxLinks) {
-            arrayObject = _(0).range(half).concat(['...'], _(numberOfPages - half).range(numberOfPages).value());
-        } else {
-            arrayObject = _(numberOfPages).range();
+        var leftSide  = this.props.maxLinks / 2;
+        var rightSide = this.props.maxLinks - leftSide;
+
+
+        // Straight up 0 to maxLinks
+        if(numberOfPages <= this.props.maxLinks) {
+            arrayObject = _(this.props.maxLinks).range();
         }
+        // fancy stuff
+        else {
+            if (this.props.page > numberOfPages - this.props.maxLinks / 2) {
+                rightSide = numberOfPages - this.props.page;
+                leftSide  = this.props.maxLinks - rightSide;
+            }
+            else if (this.props.page < this.props.maxLinks / 2) {
+                leftSide  = this.props.page;
+                rightSide = this.props.maxLinks - leftSide;
+            }
 
+            arrayObject = _(this.props.page - leftSide).range(this.props.page + rightSide);
 
+            if(this.props.page > this.props.maxLinks / 2) {
+                arrayObject = _([0, '...'].concat(arrayObject.value()));
+            }
+
+            if(this.props.page < numberOfPages - this.props.maxLinks / 2) {
+                arrayObject = _(arrayObject.value().concat(['...', numberOfPages -1]));
+            }
+        }
         return arrayObject.map(this.renderItem).value();
     },
     renderButtons(numberOfPages) {
@@ -63,11 +85,11 @@ var Pagination = React.createClass({
         if(this.props.page > 0) {
             prev = <button className={`${buttonClass} ${buttonClass}-previous`} onClick={this.onClick.bind(this, this.props.page - 1)}>{this.props.previousButton}</button>;
         }
-        
+
         if(this.props.page <= numberOfPages) {
             next = <button className={`${buttonClass} ${buttonClass}-next`} onClick={this.onClick.bind(this, this.props.page + 1)}>{this.props.nextButton}</button>;
         }
-        
+
         return (
             <div>{prev}{next}</div>
         );
