@@ -39,7 +39,7 @@ var FileUpload = React.createClass({
             var req = request
                 .post(this.props.url)
                 .attach(this.props.name, file, file.name)
-                .end((response) => {
+                .end((err, response) => {
                     if (response.ok) {
                         resolve(response.body);
                     } else {
@@ -95,10 +95,10 @@ var FileUpload = React.createClass({
             decimal: decimal,
             percentage: Math.round((decimal * 100) * 100) / 100
         };
-        
+
         this.setState(details);
 
-        if(this.props.onProgress) {            
+        if(this.props.onProgress) {
             this.props.onProgress(e, details);
         }
     },
@@ -111,9 +111,9 @@ var FileUpload = React.createClass({
             <div className={classes.className}>
                 {this.renderButton()}
                 <input
-                    className="FileUpload_input" 
+                    className="FileUpload_input"
                     ref="input"
-                    type="file" 
+                    type="file"
                     name={this.props.name}
                     onChange={this.onChange}
                 />
@@ -130,7 +130,7 @@ var FileUpload = React.createClass({
     },
     renderProgress() {
         if(this.state.percentage !== 0) {
-            return <ProgressBar className="FileUpload_progress" value={this.state.percentage} />;            
+            return <ProgressBar className="FileUpload_progress" value={this.state.percentage} />;
         }
     },
     renderFileInformation() {
