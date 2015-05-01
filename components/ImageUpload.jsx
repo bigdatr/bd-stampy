@@ -35,11 +35,11 @@ var ImageUpload = React.createClass({
             this.props.onAddFile(e, file);
         }
     },
-    onComplete: function() {
-        this.setState({image_preview: null});
+    onComplete: function(res, xhr) {
+        // this.setState({image_preview: null});
 
         if (this.props.onComplete) {
-            this.props.onComplete();
+            this.props.onComplete(res, xhr);
         }
     },
     fetchPreview: function(file) {
