@@ -2,7 +2,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var Tag = require('../components/Tag');
+var PureRenderComponent = require('../components/PureRenderComponent');
 
 var ColumnDataTable = React.createClass({
     displayName: 'ColumnDataTable',
@@ -44,7 +44,7 @@ var ColumnDataTable = React.createClass({
     },
     renderListItems: function (items) {
         return _.map(items, function (item, key) {
-            return <Tag key={key} data={item} component="li"/>;
+            return <PureRenderComponent key={key} component="li">{item}</PureRenderComponent>;
         });
     },
     renderRows: function (data) {

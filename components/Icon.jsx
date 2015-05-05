@@ -85,7 +85,7 @@ var Icon = React.createClass({
     },
     renderFontFace() {
         var componentType = this.props.componentType;
-        var iconCode = '\uE001';
+        var iconCode = '\uE139';
         var classes = this.getClasses();
 
         //name vs code point

@@ -8,15 +8,16 @@ var RadioButton = React.createClass({
     ],
     render: function () {
         var classes = this.ClassMixin_getClass('Radio');
-
         var defaultChecked = this.props.defaultChecked;
         if(this.props.defaultCheckedFromValue === this.props.value) {
             defaultChecked = true;
+        } else {
+            classes.modifier('inactive');
         }
-        
+
         return (
             <label className={classes.className}>
-                <Input 
+                <Input
                     type="radio"
                     name={this.props.name}
                     value={this.props.value}
@@ -28,7 +29,7 @@ var RadioButton = React.createClass({
             </label>
         );
     },
-    
+
 });
 
 module.exports = RadioButton;
