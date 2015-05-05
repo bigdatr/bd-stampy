@@ -13,7 +13,7 @@ var Col = React.createClass({
     render: function() {
         var columnWidth = this.props.width ? 'col--'+this.props.width : 'col--';
         var className = columnWidth + ' ' + this.props.className;
-        return <div className={className}>{this.props.children}</div>;
+        return <div {...this.props} className={className}>{this.props.children}</div>;
     }
 });
 
