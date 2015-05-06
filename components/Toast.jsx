@@ -12,19 +12,21 @@ var Toast = React.createClass({
         durationMS: React.PropTypes.number,
         message: React.PropTypes.string,
         autohide: React.PropTypes.bool,
-        onHidden: React.PropTypes.func
+        onHidden: React.PropTypes.func,
+        height: React.PropTypes.number
     },
     getDefaultProps: function () {
         return {
-            durationMS: 3500,
+            durationMS: 3000,
             message: null,
-            autohide: true
+            autohide: true,
+            height: 100
         };
     },
     getInitialState: function () {
         return {
             opacity: 0.2,
-            bottom: -34
+            bottom: this.props.height * -1
         };
     },
     componentDidMount: function () {
@@ -46,7 +48,7 @@ var Toast = React.createClass({
     },
     show: function() {
         this.setState({
-            opacity: 0.95,
+            opacity: 0.98,
             bottom: 0,
             hasAnimated: true
         });
@@ -73,39 +75,50 @@ var Toast = React.createClass({
         // TODO: This is just a prototype component, needs lots of refactoring
         var classes = this.ClassMixin_getClass();
 
-        var toastStyle = {
-            position: 'absolute',
-            bottom: this.state.bottom,
-            left: 0,
-            width: '100%',
-            padding: 5,
-            backgroundColor: '#333',
-            color: '#fff',
-            opacity: this.state.opacity,
-            transition: 'all 0.3s ease-out',
-            transform: 'translatez(0)'
-        };
-
-        var closeStyle = {
-            position: 'absolute',
-            right: 20,
-            bottom: 0,
-            padding: 5,
-            fontSize: 12,
-            cursor: 'pointer',
-            color: 'hotpink'
+        var styles = {
+            wrapper: {
+                position: 'absolute',
+                bottom: this.state.bottom,
+                left: 0,
+                width: '100%',
+                height: this.props.height,
+                opacity: this.state.opacity,
+                transition: 'all 0.3s ease-out',
+                transform: 'translatez(0)'
+            },
+            toastStyle: {
+                position: 'relative',
+                height: '100%',
+                width: '100%',
+                backgroundColor: 'hotpink',
+                color: '#333',
+                fontSize: 30,
+                fontWeight: 600
+            },
+            closeStyle: {
+                position: 'absolute',
+                right: 20,
+                bottom: 0,
+                padding: 5,
+                fontSize: 14,
+                cursor: 'pointer',
+                color: '#fff',
+                fontWeight: 100
+            }
         };
 
         var closeButton;
 
         if (this.props.message) {
-            closeButton = <div style={closeStyle} onClick={this.hide}>CLOSE</div>;
+            closeButton = <div style={styles.closeStyle} onClick={this.hide}>CLOSE</div>;
         }
 
         return (
-            <div className={classes.className} style={toastStyle}>
-                {this.props.message}
-                {closeButton}
+            <div className={classes.className} style={styles.wrapper}>
+                <div className="Toast_wrapper" style={styles.toastStyle}>
+                    {this.props.message}
+                    {closeButton}
+                </div>
             </div>
         );
     }
