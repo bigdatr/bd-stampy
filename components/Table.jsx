@@ -42,7 +42,7 @@ var Table = React.createClass({
             sortDescending: direction
         });
     },
-    render: function() {        
+    render: function() {
         this.classes = this.ClassMixin_getClass('Table');
         switch (this.props.type) {
             case 'data':
@@ -61,21 +61,19 @@ var Table = React.createClass({
         );
     },
     renderSimpleHeadings: function (a) {
-
         if(this.props.headings) {
             return _.map(a.split(','), function(i, key){
                 if(key[0] !== '_') {
                     var data_heading =  (this.props.headingData) ? this.props.headingData[key] : '';
                     return <th key={"t-" + i} data-heading={data_heading} onClick={this.props.onClick}>{i}</th>;
                 }
-            }, this);            
+            }, this);
         }
     },
     renderDataTable: function() {
         if(!this.props.children.length) {
             return this.props.empty;
         }
-        
 
         var filter = this.props.filter.toLowerCase();
         var search = this.props.search.toLowerCase();
@@ -103,7 +101,7 @@ var Table = React.createClass({
                             var compareTerm = (item.filter || item.sort || item).toString().toLowerCase();
                             if(!(compareTerm.indexOf(filter) !== -1 && compareTerm.indexOf(search) !== -1)) {
                                 nullCount++;
-                            }                            
+                            }
                         }
                         return <Td key={key+_id} data={item.value || item}></Td>;
                     }
@@ -124,7 +122,7 @@ var Table = React.createClass({
             rows = rows.reverse();
         }
         return (
-            <table className={this.classes.className}>                
+            <table className={this.classes.className}>
                 {this.renderThead()}
                 <tbody>{rows}</tbody>
             </table>
@@ -133,7 +131,7 @@ var Table = React.createClass({
     renderThead: function () {
         if(this.props.renderHeadings) {
             var headings = _.map(this.props.children[0], function(item, key) {
-                
+
                 if(key[0] !== '_') {
                     var name = key;
                     var tableClass = new ClassBuilder();
@@ -141,8 +139,8 @@ var Table = React.createClass({
 
                     if (this.state.sortBy === name) {
                         tableClass.add('Table-sort')
-                            .add(this.state.sortDescending, 'is-descending', 'is-ascending');                                   
-                    }           
+                            .add(this.state.sortDescending, 'is-descending', 'is-ascending');
+                    }
 
                     return <th key={key} className={tableClass.className} onClick={_.bind(this.onSort, this, name)} style={{width: width}}>{name}</th>;
                 }

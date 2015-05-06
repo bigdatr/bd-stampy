@@ -23,7 +23,8 @@ var DataTable = React.createClass({
         })),
         pagination: React.PropTypes.bool,
         paginationLength: React.PropTypes.number,
-        paginationPage: React.PropTypes.number
+        paginationPage: React.PropTypes.number,
+        empty: React.PropTypes.element
     },
     getDefaultProps() {
         return {
@@ -31,7 +32,8 @@ var DataTable = React.createClass({
             pagination: false,
             search: '',
             paginationLength: 10,
-            paginationPage: 0
+            paginationPage: 0,
+            empty: <div className="Table_empty">No Results</div>,
         };
     },
     getInitialState() {
@@ -114,6 +116,9 @@ var DataTable = React.createClass({
         });
     },
     renderTableBody(rowsCollection) {
+        if(rowsCollection.length === 0) {
+            return <tr><td colSpan={this.props.schema.length}>{this.props.empty}</td></tr>
+        }
         return  rowsCollection.map((row, key) => {
             var columns = this.props.schema.map((schemaItem, key) => {
                 // if the user supplies a render function, call that with the current row's data

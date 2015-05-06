@@ -9,7 +9,11 @@ var Input = React.createClass({
         PureRenderMixin
     ],
     propTypes: {
-        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+        value: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number,
+            React.PropTypes.bool
+        ]),
         type: React.PropTypes.string,
         name: React.PropTypes.string.isRequired
     },
@@ -36,10 +40,10 @@ var Input = React.createClass({
     },
     render() {
         var classes = this.ClassMixin_getClass('Input').modifier(this.props.type);
-        return <input 
-            {...this.props} 
-            ref="input" 
-            className={classes.className} 
+        return <input
+            {...this.props}
+            ref="input"
+            className={classes.className}
             onChange={this.onChange}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
