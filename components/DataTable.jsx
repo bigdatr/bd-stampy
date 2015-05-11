@@ -69,8 +69,6 @@ var DataTable = React.createClass({
             .sortByOrder(this.state.sort, this.state.sortDirection)
         .value();
 
-
-
         return rows;
     },
     getPaginateRows(data){
@@ -117,13 +115,13 @@ var DataTable = React.createClass({
     },
     renderTableBody(rowsCollection) {
         if(rowsCollection.length === 0) {
-            return <tr><td colSpan={this.props.schema.length}>{this.props.empty}</td></tr>
+            return <tr><td colSpan={this.props.schema.length}>{this.props.empty}</td></tr>;
         }
         return  rowsCollection.map((row, key) => {
-            var columns = this.props.schema.map((schemaItem, key) => {
+            var columns = this.props.schema.map((schemaItem, columnKey) => {
                 // if the user supplies a render function, call that with the current row's data
                 var content = (schemaItem.render) ? schemaItem.render(row) : row[schemaItem.filter];
-                return <td key={key}>{content}</td>;
+                return <td key={columnKey}>{content}</td>;
             });
             return <tr key={key}>{columns}</tr>;
         });
