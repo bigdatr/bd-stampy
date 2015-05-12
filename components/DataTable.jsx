@@ -62,7 +62,7 @@ var DataTable = React.createClass({
                 var dataString;
                 if(this.props.search.length) {
                     dataString = _(data).pick(props).values().join('').toLowerCase();
-                    return dataString.indexOf(this.props.search.toLowerCase()) === -1;
+                    return dataString.indexOf(this.props.search.toLowerCase()) !== -1;
                 }
                 return true;
             })
