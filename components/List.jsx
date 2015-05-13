@@ -31,7 +31,7 @@ var List = React.createClass({
                 return <li>{value}</li>;
             })
             .compact()
-            .value(); 
+            .value();
     },
     showHiddenItems:function () {
         this.setState({viewHiddenItems: true});
@@ -41,15 +41,15 @@ var List = React.createClass({
         switch (this.props.view) {
             case 'hiddenItems':
                 return this.renderHiddenItems();
-            default: 
+            default:
                 return this.renderDefault();
         }
     },
     renderDefault: function () {
         var content;
-        
-        var classes = this.ClassMixin_getClass();
-        classes.modifier(this.props.type);  
+
+        var classes = this.ClassMixin_getClass('List');
+        classes.modifier(this.props.type);
 
         if (this.props.transition) {
             content = (
@@ -63,7 +63,7 @@ var List = React.createClass({
                 .map(function (value) {
                     return <li>{value}</li>;
                 })
-                .compact(); 
+                .compact();
 
             content = <ul className={classes.className}>{children}</ul>;
 
@@ -73,7 +73,7 @@ var List = React.createClass({
                <ul className={classes.className}>
                    {this.props.children}
                </ul>
-           ); 
+           );
         }
 
         return content;
@@ -87,7 +87,7 @@ var List = React.createClass({
         } else {
             items = this.props.children.slice(0, this.props.showAmmount);
             if (extraCount > 0) {
-                moreButton = <a className="t-hero" onClick={this.showHiddenItems}>+ {extraCount} more</a>;                
+                moreButton = <a className="t-hero" onClick={this.showHiddenItems}>+ {extraCount} more</a>;
             }
         }
 

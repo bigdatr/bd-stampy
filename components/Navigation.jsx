@@ -16,7 +16,7 @@ var Navigation = React.createClass({
         }
     },
     render: function() {
-        var classes = this.ClassMixin_getClass()
+        var classes = this.ClassMixin_getClass('Navigation')
             .modifier(this.props.open)
         ;
 

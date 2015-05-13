@@ -9,7 +9,7 @@ var ListItemProperty = React.createClass({
         name: React.PropTypes.string.isRequired,
     },
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('ListItemProperty');
 
         return (
             <li className={classes.className}>

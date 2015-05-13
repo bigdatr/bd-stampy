@@ -56,7 +56,7 @@ var Modal = React.createClass({
         }
     },
     render: function() {
-        var modalClasses = this.ClassMixin_getClass()
+        var modalClasses = this.ClassMixin_getClass('Modal')
             .modifier(this.props.type)
             .modifier(this.props.width)
             .is(true,'focusable')

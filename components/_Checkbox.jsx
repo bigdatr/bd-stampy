@@ -17,18 +17,18 @@ var Checkbox = React.createClass({
         }
     },
     render: function() {
-    	var classes = this.ClassMixin_getClass()
+    	var classes = this.ClassMixin_getClass('Checkbox')
     	    .add(this.props.value, 'is-active');
 
         console.warn('stampy::Checkbox is being used!');
 
-        return (  
+        return (
             <span className={classes.className} onClick={this.handleClick}>
-                <input 
-                    className={classes.child('input')} 
-                    type="checkbox" 
-                    name={this.props.name} 
-                    onChange={this.onChange} 
+                <input
+                    className={classes.child('input')}
+                    type="checkbox"
+                    name={this.props.name}
+                    onChange={this.onChange}
                     checked={this.props.value}
                     defaultChecked={this.props.value}
                 />

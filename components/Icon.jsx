@@ -55,7 +55,7 @@ var Icon = React.createClass({
         };
     },
     getClasses() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('Icon');
         classes.modifier(this.props.size);
 
         if(this.props.name) {

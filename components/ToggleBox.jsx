@@ -61,7 +61,7 @@ var ToggleBox = React.createClass({
         // Need to stub this so react warnings go. Check implementation in onClick
     },
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('ToggleBox');
         classes.is(this.state.focused, 'focused');
 
 

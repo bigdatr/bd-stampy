@@ -94,7 +94,7 @@ var Input = React.createClass({
         return clearButton;
     },
     render: function() {
-        var classes = this.ClassMixin_getClass()
+        var classes = this.ClassMixin_getClass('Input')
             .add((this.props.isValid === false || this.props.error), 'is-error')
             .modifier(this.props.type)
         ;

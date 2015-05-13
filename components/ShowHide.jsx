@@ -40,7 +40,7 @@ var ShowHide = React.createClass({
         }
     },
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('ShowHide');
 
         if (this.state.active) {
             classes.modifier('active');
@@ -50,7 +50,7 @@ var ShowHide = React.createClass({
             classes.modifier('disabled');
         }
 
-        
+
         if(this.props.button) {
             var newButton = React.addons.cloneWithProps(this.props.button, {onClick: this.onClick});
             return <div className={classes.className}>

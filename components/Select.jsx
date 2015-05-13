@@ -5,17 +5,11 @@ var Select = React.createClass({
     displayName: 'Select',
     mixins: [
         require('../mixins/ClassMixin'),
-        require('../mixins/FormEventMixin'),
-        PureRenderMixin
+        require('../mixins/FormEventMixin')
     ],
     propTypes: {
         value: React.PropTypes.string,
         name: React.PropTypes.string.isRequired
-    },
-    getDefaultProps() {
-        return {
-
-        };
     },
     getDetails() {
         var el = this.refs.select.getDOMNode();

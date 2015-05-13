@@ -264,7 +264,7 @@ var Typeahead = React.createClass({
         }.bind(this));
     },
     render: function() {
-        var classes = this.ClassMixin_getClass()
+        var classes = this.ClassMixin_getClass('Typeahead')
             .add(this.props.isValid === false, 'is-error')
             .add('relative')
             .is(this.props.multiple, 'multiple')
@@ -277,21 +277,21 @@ var Typeahead = React.createClass({
         var text_input = null;
         var inputClass = 'is-value';
         if (this.props.multiple || this.props.values.length === 0) {
-            inputClass = '';  
+            inputClass = '';
         }
 
         text_input = (
-            <Input 
-                name={this.props.name} 
-                onChange={this.onChange} 
+            <Input
+                name={this.props.name}
+                onChange={this.onChange}
                 onFocus={this.onFocus}
-                onBlur={this.onBlur} 
-                value={value} 
+                onBlur={this.onBlur}
+                value={value}
                 autoComplete="off"
                 modifier={this.props.inputModifier}
                 className={inputClass}
                 tabIndex={this.props.tabIndex}
-                onKeyDown={this.onKeyDown} 
+                onKeyDown={this.onKeyDown}
                 onKeyUp={this.onKeyUp}
                 placeholder={this.props.placeholder}
                 focus={this.props.focus}
@@ -342,7 +342,7 @@ var Typeahead = React.createClass({
             }
 
             return (
-                <Choice 
+                <Choice
                     key={v.key + '--' + v.value}
                     modifier={v.key}
                     selected={isSelected}
@@ -389,8 +389,8 @@ var Typeahead = React.createClass({
         var showHeaders = this.props.results.length ? false : true;
 
         var results = [],
-            groupCount = 0;       
-        
+            groupCount = 0;
+
 
         var selectedResult = this.getSelectedResult();
 

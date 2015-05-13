@@ -19,7 +19,6 @@ var ClassMixin = {
         ])
     },
     ClassMixin_getClass: function(className){
-        className = className || this._currentElement.type.displayName;
         var classBuilder = new ClassBuilder(className);
 
         classBuilder = this.ClassMixin_applyModifiers(classBuilder);

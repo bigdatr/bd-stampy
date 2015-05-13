@@ -16,12 +16,12 @@ var Media = React.createClass({
         };
     },
     render: function() {
-        var classes = this.ClassMixin_getClass()
+        var classes = this.ClassMixin_getClass('Media')
             .modifier(this.props.align)
         ;
 
         return this.props.component({
-                className: classes.className, 
+                className: classes.className,
                 onClick: this.props.onClick
             },
             <div className="Media_image">{this.props.image}</div>,

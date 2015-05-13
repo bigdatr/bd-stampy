@@ -73,7 +73,7 @@ var Toast = React.createClass({
     },
     render: function() {
         // TODO: This is just a prototype component, needs lots of refactoring
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('Toast');
 
         var styles = {
             wrapper: {

@@ -20,7 +20,7 @@ var ViewManager = React.createClass({
         window.scroll(0,0);
     },
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('ViewManager');
 
         return (
             <div className={classes.className}>{this.renderChildren()}</div>

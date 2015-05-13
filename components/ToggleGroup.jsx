@@ -69,7 +69,7 @@ var ToggleGroup = React.createClass({
             var match = _.find(values, function(v) {
                 return v  === t.value;
             });
-            
+
             if (match) {
                 selected[t.value] = true;
             }
@@ -100,7 +100,7 @@ var ToggleGroup = React.createClass({
         if (selected[toggle.value] !== undefined) {
             selected[toggle.value] = buttonState.checked;
         }
-        
+
         this.setState({selected: selected});
         if (this.props.onChange) {
             this.props.onChange(e, {
@@ -109,9 +109,9 @@ var ToggleGroup = React.createClass({
             });
         }
     },
-    render: function() {        
-        var classes = this.ClassMixin_getClass();
-        
+    render: function() {
+        var classes = this.ClassMixin_getClass('ToggleGroup');
+
         if (this.props.grouped) {
             classes.modifier('grouped');
             return (
@@ -126,7 +126,7 @@ var ToggleGroup = React.createClass({
                 {this.renderToggles()}
             </div>
         );
-        
+
     },
     renderToggles: function() {
         var selected = this.state.selected;
@@ -134,11 +134,11 @@ var ToggleGroup = React.createClass({
         var toggles = this.props.toggles.map(function(t) {
             return <ToggleBox key={t.value} checked={selected[t.value]} disabled={this.props.disabled} onChange={this.onToggle.bind(this, t)}>{t.label || t.value}</ToggleBox>;
         }.bind(this));
-        
+
         var allSelected = !_.contains(selected, true);
 
         if(this.props.defaultToggle) {
-            toggles.unshift(<ToggleBox key={this.props.defaultToggle} checked={allSelected} onChange={this.onToggle.bind(this, this.props.defaultToggle)}>{this.props.defaultToggle}</ToggleBox>); 
+            toggles.unshift(<ToggleBox key={this.props.defaultToggle} checked={allSelected} onChange={this.onToggle.bind(this, this.props.defaultToggle)}>{this.props.defaultToggle}</ToggleBox>);
         }
 
         return toggles;

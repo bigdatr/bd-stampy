@@ -158,7 +158,7 @@ var DatePicker = React.createClass({
         return isInRange;
     },
     render: function() {
-        var classes = this.ClassMixin_getClass(),
+        var classes = this.ClassMixin_getClass('DatePicker'),
             value = this.state.value ? moment(this.state.value).format('D MMM YY') : '';
 
         classes.add(!this.props.isValid, 'is-error');

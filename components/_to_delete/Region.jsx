@@ -43,12 +43,12 @@ var Region = React.createClass({
         }
     },
     render: function() {
-		var classes = this.ClassMixin_getClass()
+		var classes = this.ClassMixin_getClass('Region')
             .add(this.props.toolbar, 'is-toolbar')
             .is(this.props.hasExternalActions, 'externalActions')
         ;
 
-        
+
         var style = {
             'margin-left': this.props.left + '%',
             'width': this.props.width + '%',

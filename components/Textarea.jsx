@@ -28,7 +28,7 @@ var Textarea = React.createClass({
             } catch (e) {
                 console.log('Cant get selection text');
             }
-        } 
+        }
         // For IE
         if (document.selection && document.selection.type !== "Control") {
             return document.selection.createRange().text;
@@ -71,17 +71,17 @@ var Textarea = React.createClass({
             error = <div className="Input_error">{this.props.error}</div>;
         }
 
-        var classes = this.ClassMixin_getClass()
+        var classes = this.ClassMixin_getClass('Textarea')
             .add((this.props.isValid === false || this.props.error), 'is-error')
         ;
 
         return (
             <div>
-                <textarea 
+                <textarea
                     {...this.props}
                     className={classes.className}
                     ref="text"
-                    placeholder={this.props.placeholder} 
+                    placeholder={this.props.placeholder}
                     value={this.props.value}
                     onMouseUp={this.onChange}
                     onChange={this.onChange}

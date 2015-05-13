@@ -16,13 +16,13 @@ var Loader = React.createClass({
             test: null
         };
     },
-    render: function() {    
+    render: function() {
         if (this.props.test) {
             return this.testLoaded(this.props.test, this.props.children);
         }
 
 
-        var classes = this.ClassMixin_getClass().modifier(this.props.type);
+        var classes = this.ClassMixin_getClass('Loader').modifier(this.props.type);
         switch (this.props.type) {
             case 'spinner':
                 return this.renderSpinner(classes);
@@ -30,12 +30,12 @@ var Loader = React.createClass({
                 return this.renderCover(classes);
             case 'blank':
                 return null;
-            default: 
+            default:
                 return this.renderDefault(classes);
         }
     },
     renderDefault: function (classes) {
-        classes.modifier('default');  
+        classes.modifier('default');
         return (
             <div className={classes.className} style={this.props.style}>
                 <div className="Loader_unit"></div>
@@ -45,7 +45,7 @@ var Loader = React.createClass({
         );
     },
     renderCover: function (classes) {
-        classes.modifier('cover');  
+        classes.modifier('cover');
         return (
             <div className={classes.className} style={this.props.style}>
                 <div className="Loader_unit"></div>
@@ -74,8 +74,8 @@ var Loader = React.createClass({
             </div>
         );
     },
-    testLoaded: function (test, callback) {    
-        var classes = this.ClassMixin_getClass().modifier(this.props.type);    
+    testLoaded: function (test, callback) {
+        var classes = this.ClassMixin_getClass('Loader').modifier(this.props.type);
         if (test < 1) {
             return this.renderDefault(classes);
         }

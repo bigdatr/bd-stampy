@@ -21,7 +21,7 @@ var Badge = React.createClass({
         color: React.PropTypes.string
     },
     render: function() {
-        var classes = this.ClassMixin_getClass();
+        var classes = this.ClassMixin_getClass('Badge');
         classes.modifier(this.props.color);
         classes.is(this.props.disabled, 'disabled');
 
