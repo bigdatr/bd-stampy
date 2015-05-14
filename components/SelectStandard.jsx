@@ -6,6 +6,7 @@ var ClassBuilder = require('../utils/ClassBuilder');
 
 var SelectStandard = React.createClass({
     displayName: 'SelectStandard',
+    mixins: [require('../mixins/ClassMixin')],
     propTypes: {
         options: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -65,7 +66,7 @@ var SelectStandard = React.createClass({
         this.onBlur(e);
     },
     render: function() {
-        var classes = new ClassBuilder('Select').is(this.state.results.length, 'active');
+        var classes = this.ClassMixin_getClass('Select').is(this.state.results.length, 'active');
 
         return (
             <div className={classes.className}>

@@ -13,7 +13,10 @@ var DataTable = React.createClass({
         data: React.PropTypes.array.isRequired,
         search: React.PropTypes.string,
         schema: React.PropTypes.arrayOf(React.PropTypes.shape({
-            filter: React.PropTypes.string,
+            filter: React.PropTypes.oneOfType([
+                React.PropTypes.string,
+                React.PropTypes.func
+            ]),
             heading: React.PropTypes.string,
             render: React.PropTypes.func,
             width: React.PropTypes.oneOfType([
