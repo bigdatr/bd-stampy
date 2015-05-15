@@ -27,6 +27,7 @@ var Video = React.createClass({
     },
     getDefaultProps: function() {
         return {
+            minVideoHeight: 480,
             controls: true,
             playIcon:           <Icon modifier="button" name="play"></Icon>,
             pauseIcon:          <Icon modifier="button" name="pause"></Icon>,
@@ -175,6 +176,18 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     },
     render: function() {
+        var style = {};
+        if (this._video) {  // setup video height.
+            var videoHeight = this._video.offsetHeight;
+            var pageHeight = this.props.maxHeight;
+
+            if ((pageHeight && pageHeight < videoHeight) || (videoHeight < this.props.minVideoHeight)) {
+                videoHeight = this.props.maxHeight;
+            }
+
+            style = {"height" : videoHeight};
+        }
+
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
         classes.is(this.state.isDarkVideo, 'dark');
@@ -188,6 +201,7 @@ var Video = React.createClass({
                     poster={this.props.poster}
                     autoPlay={this.props.autoPlay}
                     controls={false}
+                    style={style}
                     >
                     Sorry, your browser does not support embedded videos. <a href={this.props.src}>Download Instead</a>
                 </video>
