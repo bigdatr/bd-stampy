@@ -93,11 +93,8 @@ var Video = React.createClass({
     },
     onScrub: function(e) {
         this.setState({dragging: true});
-        if (this.state.fullscreen){
-            this.updatePosition(e.clientX);
-        } else {
-            this.updatePosition(e.clientX - this.getDOMNode().offsetLeft);
-        }
+        var rect = this._video.getBoundingClientRect();
+        this.updatePosition(e.clientX -  rect.left);
         document.addEventListener('mousemove', this.onScrubDrag, false);
         document.addEventListener('mouseup', this.onScrubEnd, false);
     },
