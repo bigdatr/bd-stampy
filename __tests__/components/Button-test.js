@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 
 var base_path = '../../';
 var path = base_path + 'components/Button.jsx';

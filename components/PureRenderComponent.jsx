@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 

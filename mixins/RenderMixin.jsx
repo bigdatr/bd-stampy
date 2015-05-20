@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var Loader = require('../components/Loader.jsx');
 
 var RenderMixin = {

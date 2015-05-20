@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /*global XMLHttpRequest, FormData*/
 var React = require('react');
 var Button = require('./Button.jsx');
