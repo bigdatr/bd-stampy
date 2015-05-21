@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var Icon = require('../components/Icon.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;

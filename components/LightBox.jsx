@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var Modal = require('./Modal.jsx'),
     Button = require('./Button.jsx'),

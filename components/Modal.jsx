@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var Toolbar = require('./Toolbar.jsx');
 var Button = require('./Button.jsx');
