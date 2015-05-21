@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var NavMixin = {
 	getInitialState: function() {
         return {

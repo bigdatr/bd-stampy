@@ -1,5 +1,5 @@
 
-/** @jsx React.DOM */
+
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 // require('../../../../client/sass/StampyUI/modules/_ToggleBox.scss');

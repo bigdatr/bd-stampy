@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /* global document, window */
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');

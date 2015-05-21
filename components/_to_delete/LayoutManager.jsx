@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /*global window*/
 
 var React = require('react/addons'),
