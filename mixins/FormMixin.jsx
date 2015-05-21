@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var _ = require('lodash');
 
 var FormMixin = {

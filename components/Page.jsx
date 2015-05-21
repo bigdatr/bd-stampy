@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /* global document */
 
 var React = require('react');
