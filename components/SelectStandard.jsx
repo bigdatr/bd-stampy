@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var _ = require('lodash');
 
@@ -24,10 +24,10 @@ var SelectStandard = React.createClass({
             value: this.props.value || option.value
         };
     },
-    componentWillReceiveProps: function (nextProps) {
-        var option = nextProps.options[0];
-        this.setState({value: nextProps.value || option.value});
-    },
+    // componentWillReceiveProps: function (nextProps) {
+    //     var option = nextProps.options[0];
+    //     this.setState({value: nextProps.value || option.value});
+    // },
     getDetails: function () {
         return {
             key: this.props.name,
@@ -57,7 +57,7 @@ var SelectStandard = React.createClass({
         var option = this.props.options[key];
         this.setState({
             value: option.value,
-            label: option.label || option.value,
+            label: option.label
         });
         this.onChange(e, {
             key: this.props.name,
@@ -85,7 +85,7 @@ var SelectStandard = React.createClass({
         }
     },
     renderValue: function () {
-        var option =  _.find(this.props.options, {'value': this.state.value}) || this.props.options[0];
+        var option =  _.find(this.props.options, {value: this.state.value}) || this.props.options[0];
         return option.label;
     }
 });

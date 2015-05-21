@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /* global FileReader */
 
 var React = require('react');

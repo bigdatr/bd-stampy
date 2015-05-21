@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /*global window */
 var EventEmitter = require('../utils/EventEmitter');
 

@@ -1,7 +1,9 @@
-/** @jsx React.DOM */
-var React = require('react');
+var React = require('react/addons');
 var Col = React.createClass({
     displayName: 'Col',
+    mixins: [
+        React.addons.PureRenderMixin
+    ],
     propTypes: {
         width: React.PropTypes.number
     },

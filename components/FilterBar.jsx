@@ -41,14 +41,17 @@ var FilterBar = React.createClass({
         return this.props.filters.map(function(filter, i){
             var activeClassName = (active === filter) ? this.props.activeClass: '';
 
-            return <Icon
-                key={i}
-                className={activeClassName}
-                modifier="inline"
-                style={cursorStyle}
-                name={filter}
-                onClick={this.onClick.bind(this, filter)}
-            />;
+            return <span className="Tooltip" ariaLabel={'rad'}>
+                <Icon
+                    key={i}
+                    className={`${activeClassName} `}
+                    modifier="inline"
+
+                    style={cursorStyle}
+                    name={filter}
+                    onClick={this.onClick.bind(this, filter)}
+                />
+            </span>;
         }.bind(this));
     }
 });

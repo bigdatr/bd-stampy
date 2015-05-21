@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 /*global Image*/
 
 var React = require('react');
