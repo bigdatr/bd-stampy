@@ -106,7 +106,7 @@ var Pagination = React.createClass({
         if (item === '...') {
             return <li key={key} className={className}>...</li>;
         }
-        return <li key={key} className={`${className} ${isActive}`} onClick={this.onClick.bind(this, item)}><a>{item}</a></li>;
+        return <li key={key} className={`${className} ${isActive}`} onClick={this.onClick.bind(this, item)}><a>{item + this.props.offset}</a></li>;
     }
 });
 
