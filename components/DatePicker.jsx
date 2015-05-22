@@ -118,6 +118,10 @@ var DatePicker = React.createClass({
             });
         }
         this.setState({visible: false, value: value});
+
+        this.refs.input.getDOMNode()
+            .getElementsByClassName('DatePicker_input')[0]
+            .blur();
     },
     onDateShift: function(unit, direction, e) {
         e.preventDefault();
