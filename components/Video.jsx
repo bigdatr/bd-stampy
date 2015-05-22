@@ -23,7 +23,15 @@ var Video = React.createClass({
         src: React.PropTypes.string,
         autoPlay: React.PropTypes.bool,
         poster: React.PropTypes.string,
-        controls: React.PropTypes.bool
+        controls: React.PropTypes.bool,
+        minVideoHeight: React.PropTypes.number,
+        maxHeight: React.PropTypes.number,
+        playIcon: React.PropTypes.element,
+        pauseIcon: React.PropTypes.element,
+        unfullscreenIcon: React.PropTypes.element,
+        fullscreenIcon:React.PropTypes.element,
+        mutedIcon: React.PropTypes.element,
+        unmutedIcon: React.PropTypes.element
     },
     getDefaultProps: function() {
         return {
