@@ -16,7 +16,7 @@ var InputForm = React.createClass({
         }
 
         return (
-            <div>
+            <div className={this.props.className}>
                 <Input
                     {...this.props}
                     value={value}
