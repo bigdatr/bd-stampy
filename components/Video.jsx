@@ -181,24 +181,34 @@ var Video = React.createClass({
         this.setState({muted: this._video.muted});
     },
     render: function() {
-        var style = {};
+        var style = {
+            width: '100%'
+        };
+
+        var videoStyle = {};
+
         if (this._video) {  // setup video height.
-            var videoHeight = this._video.offsetHeight;
-            var pageHeight = this.props.maxHeight;
+            var videoHeight = this._video.videoHeight;
+            var videoWidth = this._video.videoWidth;
+            var wrapperHeight = this.refs.wrapper.getDOMNode().offsetHeight;
 
-            if ((pageHeight && pageHeight < videoHeight) || (videoHeight < this.props.minVideoHeight)) {
-                videoHeight = this.props.maxHeight;
+            if(videoHeight > videoWidth) {
+                style = {};
+                if(videoHeight > wrapperHeight) {
+                    videoStyle = {
+                        height: wrapperHeight
+                    };
+                }
             }
-
-            style = {"height" : videoHeight};
         }
 
         var classes = this.ClassMixin_getClass('Video');
         classes.is(!this.state.paused, 'playing');
+        classes.is(this.state.fullscreen, 'fullscreen');
         classes.is(this.state.isDarkVideo, 'dark');
 
         return (
-            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()} tabIndex='0' >
+            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()} tabIndex='0' style={style}>
                 <video ref="video"
                     {...this.props}
                     onClick={this.onPlayPause}
@@ -206,7 +216,7 @@ var Video = React.createClass({
                     poster={this.props.poster}
                     autoPlay={this.props.autoPlay}
                     controls={false}
-                    style={style}
+                    style={videoStyle}
                     >
                     Sorry, your browser does not support embedded videos. <a href={this.props.src}>Download Instead</a>
                 </video>
