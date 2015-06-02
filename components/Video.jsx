@@ -208,7 +208,7 @@ var Video = React.createClass({
         classes.is(this.state.isDarkVideo, 'dark');
 
         return (
-            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} style={this.renderStyle()} tabIndex='0' style={style}>
+            <div className={classes.className} ref="wrapper" onKeyUp={this.onKeyUp} tabIndex='0' style={style}>
                 <video ref="video"
                     {...this.props}
                     onClick={this.onPlayPause}
@@ -271,12 +271,6 @@ var Video = React.createClass({
                 </div>
             </div>
         );
-    },
-    renderStyle: function () {
-        // console.log(this.props.maxHeight);
-        // return {
-        //     height: this.props.maxHeight
-        // }
     }
 
 });
