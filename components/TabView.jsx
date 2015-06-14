@@ -72,7 +72,7 @@ var TabView = React.createClass({
             this.props.onChange(tabindex, this.updateChildProps(tabindex));
         }
 
-        this.props.direction = (tabindex > this.state.tabindex) ? 'left' : 'right';
+        // this.props.direction = (tabindex > this.state.tabindex) ? 'left' : 'right';
 
         this.setState({tabindex: tabindex});
     },
@@ -148,16 +148,6 @@ var TabView = React.createClass({
         }.bind(this));
     },
     renderTabContent: function(content) {
-        // if (this.props.transition) {
-        //     // var transitionName = "slide-" + this.props.direction;
-
-        //     return (
-        //         <Transition transitionName="opacity" className="TabContentGroup" component={'div'}>
-        //             {content}
-        //         </Transition>
-        //     );
-        // }
-
         return content;
     }
 });

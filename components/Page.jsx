@@ -1,6 +1,4 @@
-
 /* global document */
-
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder.js');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
