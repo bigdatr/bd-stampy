@@ -26,10 +26,16 @@ var InputRow = React.createClass({
 
         var labelWidth = 100 - this.props.width;
 
+        function widthStyle(width) {
+            return {
+                width: `${width}%`
+            };
+        }
+
         return (
             <div className={classes.className} style={this.props.style}>
-                <div className={"InputRow_label "+"l-"+labelWidth}><Label>{this.props.label}</Label></div>
-                <div className={"InputRow_input "+"l-"+this.props.width}>{this.props.children}</div>
+                <div className="InputRow_label" style={widthStyle(labelWidth)}><Label>{this.props.label}</Label></div>
+                <div className="InputRow_input" style={widthStyle(this.props.width)}>{this.props.children}</div>
             </div>
         );
     }
