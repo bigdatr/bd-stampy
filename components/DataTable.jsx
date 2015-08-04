@@ -3,7 +3,6 @@ var _ = require('lodash');
 
 var Paginate = require('../utils/Paginate');
 var Pagination = require('./Pagination');
-var PureRenderComponent = require('./PureRenderComponent');
 var ClassBuilder = require('../utils/ClassBuilder');
 
 var DataTable = React.createClass({
