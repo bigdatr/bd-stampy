@@ -1,14 +1,11 @@
-
 var React = require('react');
-var Color = require('../utils/Color.jsx');
 
 var ProgressBar = React.createClass({
     displayName: 'ProgressBar',
     propTypes: {
         value: React.PropTypes.number,
         color: React.PropTypes.string,
-        width: React.PropTypes.string,
-        colorTo: React.PropTypes.string
+        width: React.PropTypes.string
     },
     getDefaultProps: function() {
         return {
@@ -18,8 +15,11 @@ var ProgressBar = React.createClass({
         };
     },
     render: function() {
+        if(this.props.colorTo) {
+            console.warn('<ProgressBar colorTo={color}/> is no longer supported');
+        }
         var barStyle = {
-            backgroundColor:    this.renderColor(),
+            backgroundColor:    this.props.color,
             width:              this.props.value + '%',
             transitionDuration: this.props.duration
         };
@@ -29,19 +29,6 @@ var ProgressBar = React.createClass({
                 <div className="ProgressBar_color" style={barStyle}></div>
             </div>
         );
-    },
-    renderColor: function () {
-        var returnColor;
-        var startColor = Color(this.props.color);
-
-
-        if(this.props.colorTo) {
-            returnColor = startColor.mix(Color(this.props.colorTo), this.props.value / 100);
-        } else {
-            returnColor = startColor;
-        }
-
-        return returnColor.hexString();
     }
 });
 
