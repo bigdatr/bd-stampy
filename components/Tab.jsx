@@ -8,7 +8,7 @@ var React = require('react/addons');
 var Tab = React.createClass({
     displayName: 'Tab',
     type: 'Tab',
-    mixins: [PureRenderMixin.addons.PureRenderMixin],
+    mixins: [React.addons.PureRenderMixin],
     propTypes: {
         text: React.PropTypes.string
     },
