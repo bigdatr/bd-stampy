@@ -18,14 +18,14 @@ var ComponentsView = React.createClass({
         );
     },
     renderNav() {
-        return this.props.components.map((cc,key) => {
+        return this.props.components.map((cc, key) => {
             return <li key={key}>
                 <a href={`#${cc.data.displayName}`}>{cc.data.displayName}</a>
             </li>;
         });
     },
     renderComponents() {
-        return this.props.components.map((cc,key) => {
+        return this.props.components.map((cc, key) => {
             return <li key={key} id={""+cc.data.displayName}>
                 <h2>{cc.data.displayName}</h2>
 
@@ -53,9 +53,9 @@ var ComponentsView = React.createClass({
                         var type = (pp.type) ? <code>{pp.type}</code> : '';
 
                         return <tr key={key}>
-                            <td className="l-20"><strong>{key}</strong></td>
-                            <td className="l-20">{type}</td>
-                            <td className="l-20">{defaultValue}</td>
+                            <td className="w20"><strong>{key}</strong></td>
+                            <td className="w20">{type}</td>
+                            <td className="w20">{defaultValue}</td>
                             <td >{pp.description}</td>
                         </tr>;
                 })}

@@ -23,7 +23,6 @@ var Checkbox = React.createClass({
         var checkbox = this.refs.checkbox.getDOMNode();
         checkbox.checked = !checkbox.checked;
         ee.preventDefault();
-
         if (this.props.onChange) {
             this.props.onChange(ee, {
                 key: this.props.name,
@@ -33,6 +32,7 @@ var Checkbox = React.createClass({
     },
     render: function () {
         var classes = this.ClassMixin_getClass('Checkbox');
+        classes.is(this.props.checked, 'checked');
         return (
             <label className={classes.className} onClick={this.onClick}>
                 <Input
@@ -40,6 +40,7 @@ var Checkbox = React.createClass({
                     ref="checkbox"
                     className={classes.child('input')}
                     name={this.props.name}
+                    onClick={this.onClick}
                     checked={this.props.checked}
                     defaultChecked={this.props.checked || false}
                 />

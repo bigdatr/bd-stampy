@@ -103,7 +103,7 @@ var Table = React.createClass({
                                 nullCount++;
                             }
                         }
-                        return <Td key={key+_id} data={item.value || item}></Td>;
+                        return <Td key={key + _id} data={item.value || item}></Td>;
                     }
                     nullCount++;
                 }, this);

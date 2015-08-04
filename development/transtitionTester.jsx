@@ -41,8 +41,8 @@ var TranstionTester = React.createClass({
                         </Transition>
                     </Col>
                     <Col>
-                        <Input name="currentItemIndex" type="number" onChange={this.FormMixin_onFormChange} className="l-50"></Input>
-                        <Button className="l-50" onClick={this.onToggleClass}>Toggle</Button>
+                        <Input name="currentItemIndex" type="number" onChange={this.FormMixin_onFormChange} className="w50"></Input>
+                        <Button className="w50" onClick={this.onToggleClass}>Toggle</Button>
                     </Col>
                 </Grid>
             </div>

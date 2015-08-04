@@ -55,7 +55,7 @@ var ShowHide = React.createClass({
             var newButton = React.addons.cloneWithProps(this.props.button, {onClick: this.onClick});
             return <div className={classes.className}>
                 {newButton}
-                {this.props.component({className:'ShowHide_content'},this.props.children)}
+                {this.props.component({className:'ShowHide_content'}, this.props.children)}
             </div>;
 
         }
@@ -63,7 +63,7 @@ var ShowHide = React.createClass({
         return this.props.component({
             className: classes.className,
             onClick: this.onClick
-        },this.props.children);
+        }, this.props.children);
     }
 });
 

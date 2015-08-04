@@ -14761,9 +14761,9 @@
                             var type = (pp.type) ? React.createElement("code", null, pp.type) : '';
 
                             return React.createElement("tr", {key: key}, 
-                                React.createElement("td", {className: "l-20"}, React.createElement("strong", null, key)), 
-                                React.createElement("td", {className: "l-20"}, type), 
-                                React.createElement("td", {className: "l-20"}, defaultValue), 
+                                React.createElement("td", {className: "w20"}, React.createElement("strong", null, key)), 
+                                React.createElement("td", {className: "w20"}, type), 
+                                React.createElement("td", {className: "w20"}, defaultValue), 
                                 React.createElement("td", null, pp.description)
                             );
                     })

@@ -17,7 +17,7 @@ var ViewManager = React.createClass({
         };
     },
     componentDidMount: function () {
-        window.scroll(0,0);
+        window.scroll(0, 0);
     },
     render: function() {
         var classes = this.ClassMixin_getClass('ViewManager');

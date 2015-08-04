@@ -4,7 +4,7 @@ var sImage = require('./Img.jsx');
 
 var Carousel = React.createClass({
     displayName: 'Carousel',
-    propTypes: {         
+    propTypes: {
         // src: React.PropTypes.string.isRequired
     },
     getInitialState: function() {
@@ -28,22 +28,22 @@ var Carousel = React.createClass({
             animating: false,
             bouncing: false
         });
-        
-        
+
+
         // Setup Scroller
         var rect = container.getBoundingClientRect();
-        scroller.setPosition(rect.left+container.clientLeft, rect.top+container.clientTop);
+        scroller.setPosition(rect.left + container.clientLeft, rect.top + container.clientTop);
         scroller.setDimensions(container.clientWidth, container.clientHeight, content.offsetWidth, content.offsetHeight);
 
 
         if ('ontouchstart' in window) {
-        
+
             container.addEventListener("touchstart", function(e) {
                 // Don't react if initial down happens on a form element
                 if (e.target.tagName.match(/input|textarea|select/i)) {
                     return;
                 }
-                
+
                 scroller.doTouchStart(e.touches, e.timeStamp);
                 e.preventDefault();
             }, false);
@@ -56,7 +56,7 @@ var Carousel = React.createClass({
                 scroller.doTouchEnd(e.timeStamp);
             }, false);
         } else {
-            
+
             var mousedown = false;
 
             container.addEventListener("mousedown", function(e) {
@@ -64,7 +64,7 @@ var Carousel = React.createClass({
                 if (e.target.tagName.match(/input|textarea|select/i)) {
                     return;
                 }
-                
+
                 scroller.doTouchStart([{
                     pageX: e.pageX,
                     pageY: e.pageY
@@ -95,7 +95,7 @@ var Carousel = React.createClass({
 
                 mousedown = false;
             }, false);
-            
+
         }
     },
     render: function() {
@@ -117,7 +117,7 @@ var Carousel = React.createClass({
         };
 
         var cells = this.props.images.map(function(i) {
-            return <li style={cell}><sImage src={i} width="400" /></li>
+            return <li style={cell}><Image src={i} width="400" /></li>
         });
 
 

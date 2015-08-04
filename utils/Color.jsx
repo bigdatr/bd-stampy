@@ -12,7 +12,7 @@ var _colors = [
 	{name: 'aqua', hex:'#76D4B7'},
 	{name: 'red', hex:'#f76861'},
 	{name: 'orange', hex:'#ffaa76'},
-	{name: 'blue', hex:'#82b3e5'},
+    {name: 'blue', hex:'#82b3e5'},
 	{name: 'pink', hex:'#EB92C0'},
 	{name: 'yellow', hex:'#FCCF5B'},
 	{name: 'teal', hex:'#51CFAC'},
@@ -22,7 +22,7 @@ var _colors = [
 function _getColorByString(name) {
 	var l = name.length + name.charCodeAt(0);
 	var cl = _colors.length;
-	
+
 	while (l > cl) {
         l -= cl;
     }
