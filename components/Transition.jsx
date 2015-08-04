@@ -1,4 +1,4 @@
-
+console.warn('Warning Transition.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var _ = require('lodash');
 // var ReactTransition = React.addons.CSSTransitionGroup;
@@ -36,7 +36,7 @@ var Transition = React.createClass({
         style.height = this.state.height + 'px !important'; // 20px !important
 
         var component = React.DOM[this.props.component];
-        
+
         var props = _.defaults({className:'TransitionItem', ref:"item", style:style}, this.props);
         return component(props, this.props.children);
     }

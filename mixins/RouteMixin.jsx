@@ -1,4 +1,4 @@
-
+console.warn('Warning RouteMixin.jsx will be deprecated in the next minor version.');
 var React = require('react'),
     _ = require('lodash'),
     BrowserHistory = require('../utils/History'),
@@ -13,7 +13,7 @@ function getRoutes(routes) {
 
 function getHashParams(hash) {
     if (hash && hash !== '') {
-        
+
         // Ignore query string
         if (hash.indexOf('?') !== -1) {
             hash = hash.split('?')[0];
@@ -70,7 +70,7 @@ function getRouteHistory(history, nextState) {
 function getRouteState(hash, _routes, history) {
     if (!hash && typeof window !== 'undefined') {
         hash = BrowserHistory.location.hash;
-        
+
     }
 
     var route = {},
@@ -96,7 +96,7 @@ function getRouteState(hash, _routes, history) {
 }
 
 var RouteMixin = {
-    propTypes: {         
+    propTypes: {
         hash: React.PropTypes.string
     },
     getDefaultProps: function() {

@@ -1,4 +1,4 @@
-
+console.warn('Warning RenderMixin.jsx will be deprecated in the next minor version.');
 var Loader = require('../components/Loader.jsx');
 
 var RenderMixin = {

@@ -1,3 +1,5 @@
+console.warn('Warning Frame.jsx will be deprecated in the next minor version.');
+
 var React = require('react');
 
 var opposites = {

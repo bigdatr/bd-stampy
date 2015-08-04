@@ -1,4 +1,4 @@
-
+console.warn('Warning Modal.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var Toolbar = require('./Toolbar.jsx');
 var Button = require('./Button.jsx');

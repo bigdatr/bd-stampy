@@ -1,4 +1,4 @@
-
+console.warn('Warning Compare.jsx will be deprecated in the next minor version.');
 //
 // Tools for comparing objects in certain ways
 //

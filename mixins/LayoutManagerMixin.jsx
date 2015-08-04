@@ -1,4 +1,4 @@
-
+console.warn('Warning LayoutManagerMixin.jsx will be deprecated in the next minor version.');
 /*global window */
 var EventEmitter = require('../utils/EventEmitter');
 

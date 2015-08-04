@@ -1,13 +1,14 @@
+console.warn('Warning Fullscreen.js will be deprecated in the next minor version.');
 /*global document*/
 
 var Fullscreen = {
     enabled: function () {
         return (
-            document.fullscreenEnabled || 
-            document.webkitFullscreenEnabled || 
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
             document.mozFullScreenEnabled ||
             document.msFullscreenEnabled
-        );        
+        );
     },
     active: function () {
         return (

@@ -1,4 +1,4 @@
-
+console.warn('Warning Dates.js will be deprecated in the next minor version.');
 var moment = require('moment');
 
 var Dates = {

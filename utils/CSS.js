@@ -1,3 +1,4 @@
+console.warn('Warning CSS.js will be deprecated in the next minor version.');
 /*global document*/
 // var CssPrefix = require('./CssPrefix');
 var el;
@@ -52,7 +53,7 @@ var getVendorPrefix = function getVendorPrefix(property) {
             return temp;
         }
     }
-            
+
     return property[0].toLowerCase() + property.slice(1);
 };
 
@@ -63,7 +64,7 @@ var getVendorPrefix = function getVendorPrefix(property) {
 
 //
 // CSS Object
-// 
+//
 
 var _ = require('lodash');
 
@@ -83,7 +84,7 @@ CSS.prototype.prefix = function prefix() {
 
     for (var key in this.styles) {
         if(cache[key] === undefined){
-            cache[key] = getVendorPrefix(key);  
+            cache[key] = getVendorPrefix(key);
         }
         result[cache[key]] = this.styles[key];
     }
@@ -94,7 +95,7 @@ CSS.prototype.prefix = function prefix() {
 
 //
 // Shortcuts
-// 
+//
 
 CSS.prototype.translateY = function translateY(value) {
     this.rule('transform', 'translateY('+ value +')');

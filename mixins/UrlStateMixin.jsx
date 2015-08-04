@@ -1,3 +1,4 @@
+console.warn('Warning UrlStateMixin.jsx will be deprecated in the next minor version.');
 /*
     UrlStateMixin_params: {
         price: {initial: 0, parse: function(val) { return parseInt(val, 10)}}
@@ -31,7 +32,7 @@ var UrlStateMixin = {
         if (state_params) {
             var url_params = paramsToArray(Url.getQueryParams());
             state_params = paramsToArray(state_params);
-            
+
             state_params.forEach(function(s) {
                 var match = _.find(url_params, function(u) {
                     return s.key === u.key;

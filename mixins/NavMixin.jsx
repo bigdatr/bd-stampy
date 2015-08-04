@@ -1,4 +1,4 @@
-
+console.warn('Warning NavMixin.jsx will be deprecated in the next minor version.');
 var NavMixin = {
 	getInitialState: function() {
         return {

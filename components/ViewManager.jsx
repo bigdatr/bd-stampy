@@ -1,4 +1,4 @@
-
+console.warn('Warning ViewManager.jsx will be deprecated in the next minor version.');
 
 var React = require('react/addons');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;

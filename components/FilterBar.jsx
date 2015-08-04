@@ -1,12 +1,8 @@
-/**
- * @jsx React.DOM
- */
+console.warn('Warning FilterBar.jsx will be deprecated in the next minor version.');
 
 var React = require('react');
 var Icon = require('./Icon');
 
-
-console.warn('bd-stampy/components/FilterBar.jsx', 'Will be deprecated soon');
 
 var FilterBar = React.createClass({
     displayName: 'FilterBar',

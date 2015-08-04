@@ -1,4 +1,4 @@
-
+console.warn('Warning ToggleBox.jsx will be deprecated in the next minor version.');
 
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');

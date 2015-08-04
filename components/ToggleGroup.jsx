@@ -1,4 +1,4 @@
-
+console.warn('Warning ToggleGroup.jsx will be deprecated in the next minor version.');
 var React = require('react'),
     _ = require('lodash');
 

@@ -1,4 +1,4 @@
-
+console.warn('Warning Datetime.jsx will be deprecated in the next minor version.');
 var React = require('react'),
     moment = require('moment');
 
@@ -24,20 +24,20 @@ var Datetime = React.createClass({
     },
     render: function() {
         var divs;
-        
+
         if (this.props.timeSensitive) {
             if(moment().subtract(1, 'days').isAfter(this.props.value || this.props.children)){
                 this.props.color = 'red';
-            }  
+            }
         }
-        
+
 
         var classes = new ClassBuilder('Datetime')
             .modifier(this.props.type)
             .is(this.props.nowrap, 'nowrap')
             .add(this.props.color, 't-'+this.props.color)
         ;
-        
+
         if (this.props.type === 'stacked') {
             var currentYear = this.formatDate('format', new Date(), 'YYYY');
             var testYear = this.formatDate('format', this.props.value || this.props.children, 'YYYY');
@@ -47,10 +47,10 @@ var Datetime = React.createClass({
                 top = this.renderDateString('MMM');
                 bottom = this.renderDateString('YYYY');
             } else {
-                top = this.renderDateString('D');  
+                top = this.renderDateString('D');
                 bottom = this.renderDateString('MMM');
             }
-        
+
             return (
                 <div className={classes.className} {...this.props}>
                     <strong className="Datetime_day">{top}</strong>
@@ -62,7 +62,7 @@ var Datetime = React.createClass({
                 <span className={classes.className} {...this.props}>{this.renderDateString(this.props.format)}</span>
             );
         }
-        
+
     },
     renderDateString:function(format){
         var d = moment(this.props.value || this.props.children);

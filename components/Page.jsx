@@ -1,4 +1,5 @@
 /* global document */
+console.warn('Warning Page.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder.js');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;

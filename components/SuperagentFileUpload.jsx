@@ -1,4 +1,4 @@
-
+console.warn('Warning SuperagentFileUpload.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var request = require('superagent');
 

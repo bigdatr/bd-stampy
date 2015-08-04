@@ -1,3 +1,4 @@
+console.warn('Warning Toast.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;

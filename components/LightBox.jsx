@@ -1,4 +1,4 @@
-
+console.warn('Warning LightBox.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var Modal = require('./Modal.jsx'),
     Button = require('./Button.jsx'),

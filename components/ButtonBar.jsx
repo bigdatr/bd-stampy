@@ -1,4 +1,4 @@
-
+console.warn('Warning ButtonBar.jsx will be deprecated in the next minor version.');
 var React = require('react');
 
 var opposites = require('../constants/Opposites');
@@ -23,7 +23,7 @@ var ButtonBar = React.createClass({
             styles[opposites[this.props.attach]] = 'auto';
         }
 
-        return (  
+        return (
         	<div className={classes.className} style={styles}>{this.props.children}</div>
         );
     }

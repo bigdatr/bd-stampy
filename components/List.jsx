@@ -1,4 +1,4 @@
-
+console.warn('Warning List.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var _ = require('lodash');
 var Transition = React.addons.CSSTransitionGroup;

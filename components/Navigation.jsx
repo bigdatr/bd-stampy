@@ -1,4 +1,4 @@
-
+console.warn('Warning Navigation.jsx will be deprecated in the next minor version.');
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 

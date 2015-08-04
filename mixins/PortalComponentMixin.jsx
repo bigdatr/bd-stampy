@@ -1,3 +1,4 @@
+console.warn('Warning PortalComponentMixin.jsx will be deprecated in the next minor version.');
 /*global document*/
 var React = require('react');
 
@@ -6,7 +7,7 @@ var PortalComponentMixin = {
         this._unrenderLayer();
         if(!this.props.portal){
             document.body.removeChild(this._target);
-        } 
+        }
     },
     componentDidUpdate: function() {
         this._renderLayer();

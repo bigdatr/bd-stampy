@@ -1,3 +1,4 @@
+console.warn('Warning Col.jsx will be deprecated in the next minor version.');
 var React = require('react/addons');
 var Col = React.createClass({
     displayName: 'Col',

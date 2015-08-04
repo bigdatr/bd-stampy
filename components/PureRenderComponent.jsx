@@ -1,4 +1,4 @@
-
+console.warn('Warning PureRenderComponent.jsx will be deprecated in the next minor version.');
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 

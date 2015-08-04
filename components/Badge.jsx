@@ -10,6 +10,7 @@
  * @requires async
  * @requires fs
  */
+console.warn('Warning `Badge.jsx` will be deprecated in the next minor version.');
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;

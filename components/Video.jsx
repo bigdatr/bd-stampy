@@ -1,4 +1,4 @@
-
+console.warn('Warning Video.jsx will be deprecated in the next minor version.');
 /*global document*/
 
 var React = require('react');

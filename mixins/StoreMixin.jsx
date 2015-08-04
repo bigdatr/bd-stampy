@@ -1,3 +1,4 @@
+console.warn('Warning StoreMixin.jsx will be deprecated in the next minor version.');
 var StoreMixin = {
     updateState: function(key, value) {
     	// console.warn('StoreMixin:updateState', 'DEPRECATED');
@@ -6,7 +7,7 @@ var StoreMixin = {
         state[key + 'Fetching'] = false;
 
         setTimeout(function() {
-        	this.setState(state);	
+        	this.setState(state);
         }.bind(this), 10);
     }
 };

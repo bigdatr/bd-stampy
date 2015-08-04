@@ -1,3 +1,4 @@
+console.warn('Warning IconStore.js will be deprecated in the next minor version.');
 /* global window, document */
 
 var _DEFAULT_ICON_PATH = ['M0 0 h 16 v 16 h -16 Z'];
