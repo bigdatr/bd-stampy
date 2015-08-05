@@ -42,6 +42,7 @@
     "webpack": "^1.9.11"
   },
   "devDependencies": {
+    "eslint-plugin-jasmine": "^1.1.0",
     "jest-cli": "^0.4.0",
     "jest-reporters": "0.0.2",
     "stalactite": "0.0.5",
