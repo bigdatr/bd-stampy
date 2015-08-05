@@ -5,7 +5,7 @@ var React = require('react'),
     moment = require('moment'),
     _ = require('lodash');
 
-var Input = require('./Input.jsx');
+var Input = require('./Input');
 
 var ClassMixin = require('../mixins/ClassMixin.jsx'),
     ClassBuilder = require('../utils/ClassBuilder');
