@@ -25,11 +25,7 @@
     "Atridge D'Costa"
   ],
   "dependencies": {
-    "babel-core": "^5.5.8",
-    "babel-loader": "^5.1.4",
-    "color": "^0.7.2",
     "json-loader": "^0.5.1",
-    "jsx-loader": "^0.13.2",
     "lodash": "^3.6.0",
     "moment": "^2.9.0",
     "node-jsx": "^0.13.3",
@@ -38,14 +34,22 @@
     "react-modal": "^0.2.0",
     "react-router": "^0.13.3",
     "react-tools": "^0.13.3",
-    "url-pattern": "^0.7.0",
-    "webpack": "^1.9.11"
+    "url-pattern": "^0.7.0"
   },
   "devDependencies": {
+    "babel": "^5.8.20",
+    "babel-core": "^5.8.20",
+    "babel-eslint": "^4.0.5",
+    "babel-loader": "^5.3.2",
+    "eslint": "^1.0.0",
+    "eslint-loader": "^0.14.2",
+    "eslint-plugin-jasmine": "^1.1.0",
+    "eslint-plugin-react": "^3.2.0",
     "jest-cli": "^0.4.0",
     "jest-reporters": "0.0.2",
     "stalactite": "0.0.5",
-    "superagent": "^1.1.0"
+    "superagent": "^1.1.0",
+    "webpack": "^1.10.5"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/setup-jasmine-env.js",

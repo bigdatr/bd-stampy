@@ -1,4 +1,3 @@
-
 /**
  * Input
  *
@@ -7,7 +6,7 @@
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var Label = require('../components/Label.jsx');
-var Icon = require('../components/Icon.jsx');
+// var Icon = require('../components/Icon.jsx');
 
 var Input = React.createClass({
     displayName: 'Input',
@@ -28,7 +27,8 @@ var Input = React.createClass({
             isValid: true,
             readOnly: false,
             type: 'text',
-            closeIcon: <Icon  name="cross" size="small" ></Icon>
+            // closeIcon: <Icon  name="cross" size="small" ></Icon>
+            closeIcon: <span>X</span>
         };
     },
     componentDidMount: function () {

@@ -1,4 +1,7 @@
-console.warn('Warning CSS.js will be deprecated in the next minor version.');
+var _err = new Error('Warning CSS.js will be deprecated in the next minor version.');
+console.warn(_err.stack);
+
+
 /*global document*/
 // var CssPrefix = require('./CssPrefix');
 var el;
