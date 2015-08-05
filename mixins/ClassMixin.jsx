@@ -1,10 +1,6 @@
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder');
 
-function splits (string) {
-    return string.split(/[\s,]+/);
-}
-
 var ClassMixin = {
     propTypes: {
         type: React.PropTypes.string,
