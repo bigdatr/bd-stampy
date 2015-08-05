@@ -43,7 +43,7 @@ BrowserHistory.prototype = {
 
             // Remove hash prefix
             if (h.substr(0, 1) === '#') {
-                h = h.substr(1, h.length-1);
+                h = h.substr(1, h.length - 1);
             }
 
             // Remove any query params
