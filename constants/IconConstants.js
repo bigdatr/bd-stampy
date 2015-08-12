@@ -1,3 +1,4 @@
+/*eslint-disable */
 module.exports = {
     approval:       ['\uE085',          '\uE085'        ],
     bomb:           ['\ud83d\udca3'                     ],

@@ -1,4 +1,4 @@
-/* global window */
+/*eslint-disable */
 
 var _History = require('../utils/History');
 var _ = require('lodash');

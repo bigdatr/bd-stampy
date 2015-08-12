@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 var ClassBuilder = function (baseName) {
     this.displayName = baseName || '';
     this.className = baseName || '';

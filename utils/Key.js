@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 var _SpecialKeys = {
     backspace: 8,
     tab: 9,

@@ -1,3 +1,4 @@
+/*eslint-disable */
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var BrowserHistory = require('../utils/BrowserHistory');
