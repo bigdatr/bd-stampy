@@ -103,11 +103,11 @@ CSS.prototype.prefix = function prefix() {
 //
 
 CSS.prototype.translateY = function translateY(value) {
-    this.rule('transform', 'translateY('+ value +')');
+    this.rule('transform', 'translateY(' + value + ')');
 };
 
 CSS.prototype.rotate = function translateY(value) {
-    this.rule('transform', 'rotate('+ (value * 3.6) +'deg)');
+    this.rule('transform', 'rotate(' + (value * 3.6) + 'deg)');
 };
 
 
