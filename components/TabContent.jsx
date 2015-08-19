@@ -23,9 +23,14 @@ var TabContent = React.createClass({
         };
     },
     render: function() {
+        if(!this.props.visible) {
+            return null;
+        }
+
     	var classes = new ClassBuilder('TabContent')
     	    .add(this.props.padded, 'padding-hard')
             .add(this.props.visible, 'is-active', 'is-hidden');
+
 
         return (
             <div className={classes.className}>

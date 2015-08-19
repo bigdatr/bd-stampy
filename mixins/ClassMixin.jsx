@@ -15,6 +15,10 @@ var ClassMixin = {
         ])
     },
     ClassMixin_getClass: function(className){
+        console.warn('`this.ClassMixin_getClass()` is deprecated. Use `this.createClassName()` instead');
+        return ClassMixin.createClassName(className);
+    },
+    createClassName: function (className) {
         var classBuilder = new ClassBuilder(className);
 
         classBuilder = this.ClassMixin_applyModifiers(classBuilder);
