@@ -35,7 +35,7 @@ var DataTable = React.createClass({
             search: '',
             paginationLength: 10,
             paginationPage: 0,
-            empty: <div className="Table_empty">No Results</div>,
+            empty: <div className="Table_empty">No Results</div>
         };
     },
     getInitialState() {

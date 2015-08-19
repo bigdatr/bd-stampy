@@ -32,7 +32,7 @@ var Table = React.createClass({
             sortDescending: false
         };
     },
-    shouldComponentUpdate: function (nextProps, nextState) {
+    shouldComponentUpdate: function () {
         return true;
     },
     onSort: function (sortBy) {
@@ -54,7 +54,7 @@ var Table = React.createClass({
     },
     renderSimpleTable: function() {
         return (
-        	<table className={this.classes.className}>
+            <table className={this.classes.className}>
                 <thead>{this.renderSimpleHeadings(this.props.headings)}</thead>
                 <tbody>{this.props.children}</tbody>
             </table>

@@ -8,7 +8,7 @@ var InputRow = React.createClass({
     propTypes: {
         label: React.PropTypes.oneOfType([
           React.PropTypes.string,
-          React.PropTypes.object,
+          React.PropTypes.object
         ]),
         width: React.PropTypes.number,
         visible: React.PropTypes.bool

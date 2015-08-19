@@ -28,8 +28,7 @@ var RadioButton = React.createClass({
                 <span className={classes.child('label')}>{this.props.children}</span>
             </label>
         );
-    },
-
+    }
 });
 
 module.exports = RadioButton;

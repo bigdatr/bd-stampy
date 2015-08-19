@@ -13,7 +13,7 @@ var TabContent = React.createClass({
     type: 'TabContent',
     mixins: [PureRenderMixin],
     propTypes: {
-		padded: React.PropTypes.bool,
+        padded: React.PropTypes.bool,
         visible: React.PropTypes.bool
     },
     getDefaultProps: function() {
@@ -27,8 +27,8 @@ var TabContent = React.createClass({
             return null;
         }
 
-    	var classes = new ClassBuilder('TabContent')
-    	    .add(this.props.padded, 'padding-hard')
+        var classes = new ClassBuilder('TabContent')
+            .add(this.props.padded, 'padding-hard')
             .add(this.props.visible, 'is-active', 'is-hidden');
 
 

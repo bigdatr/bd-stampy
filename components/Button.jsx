@@ -69,7 +69,7 @@ var Button = React.createClass({
         var props = _.defaults({
                 className: classes.className,
                 onClick: this.onClick,
-                type: this.props.type,
+                type: this.props.type
             }, this.props);
 
         return ButtonComponent(props, this.props.children);
