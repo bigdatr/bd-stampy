@@ -31,7 +31,7 @@ var Checkbox = React.createClass({
         }
     },
     render: function () {
-        var classes = this.ClassMixin_getClass('Checkbox');
+        var classes = this.createClassName('Checkbox');
         classes.is(this.props.checked, 'checked');
         return (
             <label className={classes.className} onClick={this.onClick}>

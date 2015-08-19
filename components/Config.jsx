@@ -66,7 +66,7 @@ var Config = React.createClass({
     render: function() {
         // var height = document.getElementById('AppView').offsetHeight - 48;
         var active = this.props.active || this.state.active;
-        var classes = this.ClassMixin_getClass('Config')
+        var classes = this.createClassName('Config')
             .is(active, 'active');
 
         if(this.props.right) {

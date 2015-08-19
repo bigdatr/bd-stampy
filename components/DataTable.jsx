@@ -84,7 +84,7 @@ var DataTable = React.createClass({
             return null;
         }
 
-        var classes = this.ClassMixin_getClass('Table');
+        var classes = this.createClassName('Table');
         var data = this.getBodyData();
 
         return (

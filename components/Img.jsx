@@ -123,13 +123,20 @@ var Img = React.createClass({
     },
     renderImage: function (src, height, width) {
         var errorClass = (this.state.error) ? 'is-error' : '';
-        var classes = this.ClassMixin_getClass('Img')
+        var classes = this.createClassName('Img')
             .add(this.props.block, 'block')
             .add(this.props.className)
             .add(errorClass);
 
         if(_.isString(src)) {
-            return <img className={classes.className} src={src} height={height} width={width} alt={this.props.alt} title={this.props.title} />;
+            return <img
+                className={classes.className}
+                src={src}
+                height={height}
+                width={width}
+                alt={this.props.alt}
+                title={this.props.title}
+            />;
         }
 
         return React.addons.cloneWithProps(src, {className: errorClass + ' ' + this.props.className});

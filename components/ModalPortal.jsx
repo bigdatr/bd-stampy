@@ -44,7 +44,7 @@ var Modal = React.createClass({
             return null;
         }
 
-        var modalClasses = this.ClassMixin_getClass('Modal')
+        var modalClasses = this.createClassName('Modal')
             .modifier(this.props.transitionName);
 
         return (

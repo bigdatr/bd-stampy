@@ -71,7 +71,7 @@ var Textarea = React.createClass({
             error = <div className="Input_error">{this.props.error}</div>;
         }
 
-        var classes = this.ClassMixin_getClass('Textarea')
+        var classes = this.createClassName('Textarea')
             .add((this.props.isValid === false || this.props.error), 'is-error')
         ;
 

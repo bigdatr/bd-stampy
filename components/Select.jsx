@@ -19,7 +19,7 @@ var Select = React.createClass({
         };
     },
     render() {
-        var classes = this.ClassMixin_getClass('Select_element');
+        var classes = this.createClassName('Select_element');
         return <select onChange={this.onChange} name={this.props.name} ref="select" className={classes.className} value={this.props.value}>
             {this.props.children}
         </select>;

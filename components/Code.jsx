@@ -21,7 +21,7 @@ var Input = React.createClass({
     },
 
     render: function() {
-        var classes = this.ClassMixin_getClass('Code')
+        var classes = this.createClassName('Code')
             .modifier(this.props.language)
             .modifier(this.props.colorScheme);
         return (

@@ -66,7 +66,7 @@ var SelectStandard = React.createClass({
         this.onBlur(e);
     },
     render: function() {
-        var classes = this.ClassMixin_getClass('Select').is(this.state.results.length, 'active');
+        var classes = this.createClassName('Select').is(this.state.results.length, 'active');
 
         return (
             <div className={classes.className}>

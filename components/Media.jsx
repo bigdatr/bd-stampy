@@ -16,7 +16,7 @@ var Media = React.createClass({
         };
     },
     render: function() {
-        var classes = this.ClassMixin_getClass('Media')
+        var classes = this.createClassName('Media')
             .modifier(this.props.align)
         ;
 

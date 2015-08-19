@@ -58,7 +58,7 @@ var Button = React.createClass({
         }
     },
     render: function() {
-        var classes = this.ClassMixin_getClass('Button').modifier(this.props.color);
+        var classes = this.createClassName('Button').modifier(this.props.color);
 
         if ((this.props.toggle && !this.state.checked) || this.props.disabled) {
             classes.modifier('grey');

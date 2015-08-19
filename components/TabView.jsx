@@ -117,7 +117,7 @@ var TabView = React.createClass({
     },
     render: function() {
         var groups = this.updateChildProps();
-        var classes = this.ClassMixin_getClass('TabGroup');
+        var classes = this.createClassName('TabGroup');
 
         return (
             <div className="TabView">

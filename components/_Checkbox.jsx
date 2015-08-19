@@ -17,7 +17,7 @@ var Checkbox = React.createClass({
         }
     },
     render: function() {
-    	var classes = this.ClassMixin_getClass('Checkbox')
+    	var classes = this.createClassName('Checkbox')
     	    .add(this.props.value, 'is-active');
 
         console.warn('stampy::Checkbox is being used!');

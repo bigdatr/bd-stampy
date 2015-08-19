@@ -40,7 +40,7 @@ var ShowHide = React.createClass({
         }
     },
     render: function() {
-        var classes = this.ClassMixin_getClass('ShowHide');
+        var classes = this.createClassName('ShowHide');
 
         if (this.state.active) {
             classes.modifier('active');

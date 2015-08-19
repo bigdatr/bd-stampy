@@ -7,7 +7,7 @@ var RadioButton = React.createClass({
         require('../mixins/ClassMixin')
     ],
     render: function () {
-        var classes = this.ClassMixin_getClass('Radio');
+        var classes = this.createClassName('Radio');
         var defaultChecked = this.props.defaultChecked;
         if(this.props.defaultCheckedFromValue === this.props.value) {
             defaultChecked = true;

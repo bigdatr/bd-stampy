@@ -30,7 +30,7 @@ var Pagination = React.createClass({
     },
     render: function () {
         var numberOfPages = Math.ceil(this.props.length / this.props.ammount);
-        this.classes = this.ClassMixin_getClass('Pagination');
+        this.classes = this.createClassName('Pagination');
 
         if(numberOfPages === 1) {
             return null;

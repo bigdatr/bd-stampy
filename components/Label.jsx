@@ -8,7 +8,7 @@ var Label = React.createClass({
         React.addons.PureRenderMixin
     ],
     render: function() {
-        var classes = this.ClassMixin_getClass('Label');
+        var classes = this.createClassName('Label');
         return <label className={classes.className} htmlFor={this.props.htmlFor}>{this.props.children}</label>;
     }
 });

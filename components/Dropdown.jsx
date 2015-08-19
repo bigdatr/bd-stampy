@@ -30,7 +30,7 @@ var Dropdown = React.createClass({
         }
     },
     render() {
-        var classes = this.ClassMixin_getClass('Dropdown').is(this.state.active, 'active');
+        var classes = this.createClassName('Dropdown').is(this.state.active, 'active');
         return (
             <div className={classes.className} onClick={this.openDropdown}>
                 <div ref="button" className={classes.child('button')}>{this.props.button}</div>

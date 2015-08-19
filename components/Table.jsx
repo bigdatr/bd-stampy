@@ -43,7 +43,7 @@ var Table = React.createClass({
         });
     },
     render: function() {
-        this.classes = this.ClassMixin_getClass('Table');
+        this.classes = this.createClassName('Table');
         switch (this.props.type) {
             case 'data':
                 return this.renderDataTable();

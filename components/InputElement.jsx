@@ -39,7 +39,7 @@ var Input = React.createClass({
         };
     },
     render() {
-        var classes = this.ClassMixin_getClass('Input').modifier(this.props.type);
+        var classes = this.createClassName('Input').modifier(this.props.type);
         return <input
             {...this.props}
             ref="input"

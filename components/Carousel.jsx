@@ -18,7 +18,7 @@ var Carousel = React.createClass({
         };
     },
     render: function () {
-        var classes = this.ClassMixin_getClass('Carousel');
+        var classes = this.createClassName('Carousel');
         return (
             <div className={classes.className}>
                 {this.renderImages()}
