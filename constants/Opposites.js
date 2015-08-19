@@ -1,3 +1,4 @@
+/*eslint-disable */
 var opposites = {
     top: 'bottom',
     bottom: 'top',
