@@ -86,7 +86,6 @@ var DatePicker = React.createClass({
     onFocus: function() {
         if (!this.props.disabled) {
             this.setState({visible: true});
-            this.props.reactEvent = true;
 
             document.addEventListener("mousedown", this.onClose, false);
         }
