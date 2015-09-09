@@ -135,14 +135,15 @@ var DatePicker = React.createClass({
 
         this.setState({displayDate: displayDate});
     },
-    onClearDate: function (e) {
-        this.setState({value: ''});
-
-        if (this.props.onChange) {
-            this.props.onChange(e, {
-                key: this.props.name,
-                value: ''
-            });
+    onClearDate: function (e, details) {
+        if(details.value === '') {
+            this.setState({value: ''});
+            if (this.props.onChange) {
+                this.props.onChange(e, {
+                    key: this.props.name,
+                    value: ''
+                });
+            }
         }
     },
     getIsInRange: function(day) {
@@ -173,7 +174,6 @@ var DatePicker = React.createClass({
             <div className={classes.className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
                 <Input
                     className="DatePicker_input"
-                    readOnly={true}
                     ref="input"
                     name={this.props.name}
                     onBlur={this.onBlur}
