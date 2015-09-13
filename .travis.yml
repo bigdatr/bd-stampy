@@ -1,10 +1,3 @@
 language: node_js
 node_js:
 - '0.10'
-# before_install: npm install -g stalactite
-# script:
-# - stalactite build
-# - npm run docs
-# env:
-#   global:
-#   - secure: cyYlSFRglBLceEpaoig6U077EwzrA0VruYymjH0dwL3KgZtubxbrYYvEACqbWA83AUN3hhybOvaXvuiQuoSiy7Iu3kHVSAbD0Y8JTeaI7Z6OR5sMtEjQjY603Or1EwH03Ly1bvIGuSYzJDwMVOFlpslCjvtctWLvHKjhtNz3jGA=
