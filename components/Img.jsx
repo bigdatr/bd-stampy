@@ -103,8 +103,19 @@ var Img = React.createClass({
             }
         }
 
+        // Same for width
+        if (imageRatio <= aspectRatio) {
+            if (this.state.width > this.props.maxWidth) {
+                width = this.props.maxWidth;
+            }
+        }
+
         if(this.props.height) {
             height = this.props.height;
+        }
+
+        if(this.props.height) {
+            width = this.props.height;
         }
 
 
