@@ -31,7 +31,6 @@
     "node-libs-browser": "^0.5.2",
     "react": "^0.13.3",
     "react-modal": "^0.2.0",
-    "react-router": "^0.13.3",
     "react-tools": "^0.13.3",
     "url-pattern": "^0.7.0"
   },
