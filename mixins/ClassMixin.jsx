@@ -30,8 +30,13 @@ var ClassMixin = {
         return classBuilder;
     },
     ClassMixin_applyModifiers: function (classBuilder) {
-        if (this.props.modifier) {
+        if (!this.props) {
+            var _err = new Error('bd-stampy:ClassMixin_applyModifiers::Props do no exist, skipping.');
+            console.log(_err.stack);
+            return classBuilder;
+        }
 
+        if (this.props.modifier) {
             // Apply the modifiers
             this.props.modifier.split(' ').forEach(function(e) {
                 classBuilder.modifier(e);
