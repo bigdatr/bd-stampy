@@ -15,7 +15,7 @@ var ClassMixin = {
         ])
     },
     ClassMixin_getClass: function(className){
-        return ClassMixin.createClassName(className);
+        return this.createClassName(className);
     },
     createClassName: function (className) {
         var classBuilder = new ClassBuilder(className);
