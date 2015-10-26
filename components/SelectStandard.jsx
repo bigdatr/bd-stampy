@@ -3,10 +3,11 @@ var React = require('react');
 var _ = require('lodash');
 
 var ClassBuilder = require('../utils/ClassBuilder');
+var ClassMixin = require('../mixins/ClassMixin');
 
 var SelectStandard = React.createClass({
     displayName: 'SelectStandard',
-    mixins: [require('../mixins/ClassMixin')],
+    mixins: [ClassMixin],
     propTypes: {
         options: React.PropTypes.arrayOf(
             React.PropTypes.shape({
