@@ -1,7 +1,7 @@
 /*eslint-disable */
 
-var _err = new Error('Warning CSS.js will be deprecated in the next minor version.');
-console.warn(_err.stack);
+// var _err = new Error('Warning CSS.js will be deprecated in the next minor version.');
+// console.warn(_err.stack);
 
 
 /*global document*/
