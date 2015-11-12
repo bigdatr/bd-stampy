@@ -72,7 +72,7 @@ var FileUpload = React.createClass({
         }
     },
     onChange: function(e) {
-        var files = this.refs.files.getDOMNode();
+        var files = this.refs.files;
         var file = files.files[0];
         var preventUpload;
 

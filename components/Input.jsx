@@ -44,7 +44,7 @@ var Input = React.createClass({
     getDetails: function() {
         return {
             key: this.props.name,
-            value: this.refs.input.getDOMNode().value
+            value: this.refs.input.value
         };
     },
     onChange: function(e) {
@@ -69,7 +69,7 @@ var Input = React.createClass({
         else if (e.keyCode === 27) {
             // Stop Esc key from closing modal's
             e.stopPropagation();
-            this.getDOMNode().blur();
+            this.refs.input.blur();
         }
     },
     onClearValue: function (e) {
@@ -81,7 +81,7 @@ var Input = React.createClass({
         }
     },
     focusInput: function () {
-        this.refs.input.getDOMNode().focus();
+        this.refs.input.focus();
     },
     renderClearButton() {
         var clearButton = null;

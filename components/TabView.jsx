@@ -33,7 +33,7 @@
 var React = require('react/addons');
 var Key = require('../utils/Key');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 var ARIAMixin = require('../mixins/ARIAMixin');
 
 var TabView = React.createClass({
@@ -88,7 +88,7 @@ var TabView = React.createClass({
             var type = c.type.displayName || c.type;
 
             if (type === 'Tab' && !c.props.exclude) {
-                var nextTab = React.addons.cloneWithProps(c, {
+                var nextTab = React.cloneElement(c, {
                     tabindex: tabGroup.length - 1,
                     onTabChange: _this.onTabChange
                 });
@@ -100,7 +100,7 @@ var TabView = React.createClass({
             }
             else if (type === 'TabContent') {
                 var key = tabContentGroup.length + 1;
-                var nextTabContent = React.addons.cloneWithProps(c, {
+                var nextTabContent = React.cloneElement(c, {
                     visible: key === tabindex,
                     key: key
                 });

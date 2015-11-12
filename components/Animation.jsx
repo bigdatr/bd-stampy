@@ -1,5 +1,5 @@
 
-var React = require('react/addons');
+var React = require('react');
 
 /**
  * General component description.
@@ -7,7 +7,7 @@ var React = require('react/addons');
 var Animation = React.createClass({
     displayName: 'Animation',
     componentDidMount: function () {
-        var el = this.refs.animation.getDOMNode();
+        var el = this.refs.animation;
 
         var first = el.getBoundingClientRect();
 
@@ -43,11 +43,10 @@ var Animation = React.createClass({
         // el.addEventListener('transitionend', tidyUpAnimations);
     },
     render: function () {
-        var clonedComponent = React.addons.cloneWithProps(this.props.children, {
+        return React.cloneElement(this.props.children, {
             ref: 'animation',
-            className: this.props.name
+            className: this.props.names
         });
-        return clonedComponent
     }
 });
 

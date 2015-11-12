@@ -1,5 +1,5 @@
 var React = require('react');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 var Input = require('./InputElement');
 var ClassMixin = require('../mixins/ClassMixin');
@@ -20,7 +20,7 @@ var Checkbox = React.createClass({
     ],
     onClick: function (ee) {
         // Manual toggle hack. Somtimes the lable clickevent will auto scroll to nowhere...
-        var checkbox = this.refs.checkbox.getDOMNode();
+        var checkbox = this.refs.checkbox;
         checkbox.checked = !checkbox.checked;
         ee.preventDefault();
         if (this.props.onChange) {

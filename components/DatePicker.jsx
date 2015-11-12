@@ -72,9 +72,9 @@ var DatePicker = React.createClass({
         if (e.keyCode === 27 ) { // esc
             e.stopPropagation();
             this.onClose();
-            this.refs.input.getDOMNode()
-                        .getElementsByClassName('DatePicker_input')[0]
-                        .blur();
+            this.refs.input
+                .getElementsByClassName('DatePicker_input')[0]
+                .blur();
         }
     },
     onMouseDown: function () {
@@ -118,7 +118,7 @@ var DatePicker = React.createClass({
         }
         this.setState({visible: false, value: value});
 
-        this.refs.input.getDOMNode()
+        this.refs.input
             .getElementsByClassName('DatePicker_input')[0]
             .blur();
     },
