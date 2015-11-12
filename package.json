@@ -30,6 +30,7 @@
     "node-libs-browser": "^0.5.2",
     "react-addons-pure-render-mixin": "^0.14.2",
     "react-modal": "^0.3.0",
+    "react": "^0.14.0",
     "url-pattern": "^0.7.0"
   },
   "devDependencies": {
@@ -57,7 +58,6 @@
     "webpack": "^1.10.5"
   },
   "peerDependencies": {
-    "react": "^0.14.0",
     "lodash": ">=3.6.0",
     "moment": ">=2.9.0"
   }
