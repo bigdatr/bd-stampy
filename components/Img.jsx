@@ -150,7 +150,7 @@ var Img = React.createClass({
             />;
         }
 
-        return React.addons.cloneWithProps(src, {className: errorClass + ' ' + this.props.className});
+        return React.cloneElement(src, {className: errorClass + ' ' + this.props.className});
     }
 });
 

@@ -4,11 +4,11 @@ var React = require('react');
 var Iframe = React.createClass({
     displayName: 'Iframe',
     componentDidMount: function () {
-        var iframe = this.refs.iframe.getDOMNode();
+        var iframe = this.refs.iframe;
         if (iframe.attachEvent){
             iframe.attachEvent("onload", this.onLoad);
         } else {
-          iframe.onload = this.onLoad;
+            iframe.onload = this.onLoad;
         }
     },
     onLoad(e) {

@@ -2,7 +2,7 @@
 HTMLElement = typeof HTMLElement === 'undefined' ? function(){} : HTMLElement;
 
 var React = require('react');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 // TODO: This is due to a limitation of react-modal. Hopefully they fix it soon!

@@ -1,5 +1,5 @@
-var React = require('react');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 var Input = React.createClass({
     displayName: 'Input',
@@ -23,7 +23,7 @@ var Input = React.createClass({
         };
     },
     getDetails() {
-        var el = this.refs.input.getDOMNode();
+        var el = this.refs.input;
         var value;
 
         if (this.props.type === 'checkbox') {

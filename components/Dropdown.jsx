@@ -25,7 +25,7 @@ var Dropdown = React.createClass({
         this.setState({active: true});
     },
     closeDropdown(e) {
-        if(!this.refs.button.getDOMNode().contains(e.target)) {
+        if(!this.refs.button.contains(e.target)) {
             this.setState({active: false});
         }
     },

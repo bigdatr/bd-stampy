@@ -52,7 +52,7 @@ var ShowHide = React.createClass({
 
 
         if(this.props.button) {
-            var newButton = React.addons.cloneWithProps(this.props.button, {onClick: this.onClick});
+            var newButton = React.cloneElement(this.props.button, {onClick: this.onClick});
             return <div className={classes.className}>
                 {newButton}
                 {this.props.component({className:'ShowHide_content'}, this.props.children)}

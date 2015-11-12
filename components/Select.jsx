@@ -11,10 +11,9 @@ var Select = React.createClass({
         name: React.PropTypes.string.isRequired
     },
     getDetails() {
-        var el = this.refs.select.getDOMNode();
         return {
             key: this.props.name,
-            value: el.value
+            value: this.refs.select.value
         };
     },
     render() {

@@ -28,10 +28,10 @@ function getBreakpointName(width) {
     }
     else if (width < breakpoint.large) {
         mediaClassName = 'large';
-    }    
+    }
     else { // width > breakpoint.large
         mediaClassName = 'huge';
-    } 
+    }
 
     return mediaClassName;
 }
@@ -51,8 +51,7 @@ var ElementQueryMixin = {
         }
     },
     ElementQueryMixin_updateDimensions: function() {
-        var eqRef = this.refs.elementToQuery || this;
-        var el = eqRef.getDOMNode();
+        var el = this.refs.elementToQuery;
 
         if (el) {
             this.setState({elementQuery: getBreakpointName(el.clientWidth)});

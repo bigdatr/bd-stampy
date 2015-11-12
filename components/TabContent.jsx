@@ -6,7 +6,7 @@
  */
 var React = require('react');
 var ClassBuilder = require('../utils/ClassBuilder');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 var TabContent = React.createClass({
     displayName: 'TabContent',

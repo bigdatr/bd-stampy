@@ -3,7 +3,7 @@
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 var _ = require('lodash');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 function validateLengthOf2(props, propName, componentName) {
     if(props[propName].length !== 2) {
@@ -72,7 +72,7 @@ var Config = React.createClass({
         if(this.props.right) {
             classes.modifier('right');
         }
-        
+
         var sidebarStyles = _.merge(this.renderChildProps(1), {
             marginTop: this.state.sidebarTop,
             // height: height
@@ -90,7 +90,7 @@ var Config = React.createClass({
     },
     renderToggleButton: function (button) {
         if (this.props.toggleButton) {
-            return React.addons.cloneWithProps(button, {
+            return React.cloneElement(button, {
                 onClick: this.onClick,
                 className: 'Config_toggleButton'
             });
@@ -110,16 +110,16 @@ var Config = React.createClass({
                     // marginLeft: 'calc(100% - ' + this.props.width[num] + ')'
                 };
             }
-            
+
         }
-        //Percentage Widths 
+        //Percentage Widths
         else {
             return {
                 width: this.props.width[num],
                 marginLeft: this.props.width[num - 1] || 0
             };
-        }       
-        
+        }
+
     }
 });
 

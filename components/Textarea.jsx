@@ -41,7 +41,7 @@ var Textarea = React.createClass({
         };
     },
     onChange:function(e){
-        this.lastValue = this.refs.text.getDOMNode().value;
+        this.lastValue = this.refs.text.value;
         if (this.props.onSelection) {
             this.onSelection();
         }
@@ -53,13 +53,13 @@ var Textarea = React.createClass({
         }
     },
     onSelection: function () {
-        this.props.onSelection(this.getSelection(this.refs.text.getDOMNode()));
+        this.props.onSelection(this.getSelection(this.refs.text));
     },
     onKeyUp: function(e) {
         if (e.keyCode === 27) {
             // Stop Esc key from closing modal's
             e.stopPropagation();
-            this.getDOMNode().blur();
+            this.refs.text.blur();
         }
 
         this.onChange(e);
