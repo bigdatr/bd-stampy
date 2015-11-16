@@ -31,7 +31,9 @@
     "react-addons-pure-render-mixin": "^0.14.2",
     "react-modal": "^0.3.0",
     "react": "^0.14.0",
-    "url-pattern": "^0.7.0"
+    "url-pattern": "^0.7.0",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6"
   },
   "devDependencies": {
     "babel": "^5.8.20",
@@ -58,7 +60,7 @@
     "webpack": "^1.10.5"
   },
   "peerDependencies": {
-    "lodash": ">=3.6.0",
-    "moment": ">=2.9.0"
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6"
   }
 }
