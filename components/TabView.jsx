@@ -30,7 +30,7 @@
     </TabView>
 
  */
-var React = require('react/addons');
+var React = require('react');
 var Key = require('../utils/Key');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 import PureRenderMixin from 'react-addons-pure-render-mixin';
