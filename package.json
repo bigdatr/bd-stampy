@@ -28,12 +28,8 @@
     "json-loader": "^0.5.1",
     "node-jsx": "^0.13.3",
     "node-libs-browser": "^0.5.2",
-    "react-addons-pure-render-mixin": "^0.14.2",
-    "react-modal": "^0.3.0",
-    "react": "^0.14.0",
-    "url-pattern": "^0.7.0",
-    "lodash": "^3.10.1",
-    "moment": "^2.10.6"
+    "react-modal": "^0.6.1",
+    "url-pattern": "^0.7.0"
   },
   "devDependencies": {
     "babel": "^5.8.20",
@@ -57,10 +53,16 @@
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
     "superagent": "^1.1.0",
-    "webpack": "^1.10.5"
+    "webpack": "^1.10.5",
+    "react": "^0.14.2",
+    "react-addons-pure-render-mixin": "^0.14.2",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6"
   },
   "peerDependencies": {
     "lodash": "^3.10.1",
-    "moment": "^2.10.6"
+    "moment": "^2.10.6",
+    "react": "^0.14.2",
+    "react-addons-pure-render-mixin": "^0.14.2"
   }
 }
