@@ -52,17 +52,19 @@
     "karma-mocha-reporter": "^1.0.2",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
-    "superagent": "^1.1.0",
-    "webpack": "^1.10.5",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
     "react": "^0.14.2",
     "react-addons-pure-render-mixin": "^0.14.2",
-    "lodash": "^3.10.1",
-    "moment": "^2.10.6"
+    "react-dom": "^0.14.2",
+    "superagent": "^1.1.0",
+    "webpack": "^1.10.5"
   },
   "peerDependencies": {
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "react-addons-pure-render-mixin": "^0.14.2"
   }
 }
