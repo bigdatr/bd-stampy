@@ -145,7 +145,7 @@ var Table = React.createClass({
                     return <th key={key} className={tableClass.className} onClick={_.bind(this.onSort, this, name)} style={{width: width}}>{name}</th>;
                 }
             }, this);
-            return <thead>{headings}</thead>;
+            return <thead><tr>{headings}</tr></thead>;
         }
     }
 });
