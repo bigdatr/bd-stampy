@@ -62,12 +62,14 @@ var Table = React.createClass({
     },
     renderSimpleHeadings: function (a) {
         if(this.props.headings) {
-            return _.map(a.split(','), function(i, key){
+            var _headings = _.map(a.split(','), function(i, key){
                 if(key[0] !== '_') {
                     var data_heading =  (this.props.headingData) ? this.props.headingData[key] : '';
                     return <th key={"t-" + i} data-heading={data_heading} onClick={this.props.onClick}>{i}</th>;
                 }
             }, this);
+
+            return <tr>{_headings}</tr>;
         }
     },
     renderDataTable: function() {
