@@ -35,7 +35,7 @@ var Input = React.createClass({
 
         return {
             key: this.props.name,
-            value: value
+            value: (this.props.type === 'number') ? parseInt(value, 10) : value
         };
     },
     render() {
