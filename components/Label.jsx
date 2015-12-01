@@ -1,11 +1,13 @@
-var React = require('react/addons');
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
+
 var ClassMixin = require('../mixins/ClassMixin.jsx');
 
 var Label = React.createClass({
     displayName: 'Label',
     mixins: [
         ClassMixin,
-        React.addons.PureRenderMixin
+        PureRenderMixin
     ],
     render: function() {
         var classes = this.createClassName('Label');

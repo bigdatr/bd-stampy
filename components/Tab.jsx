@@ -3,12 +3,13 @@
  *
  * @param {String} example  <p>See TabView for demo</p>
  */
-var React = require('react/addons');
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 
 var Tab = React.createClass({
     displayName: 'Tab',
     type: 'Tab',
-    mixins: [React.addons.PureRenderMixin],
+    mixins: [PureRenderMixin],
     propTypes: {
         text: React.PropTypes.string
     },
