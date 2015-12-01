@@ -29,3 +29,4 @@ node_modules
 
 # Ignore test results
 test-output
+*.orig
