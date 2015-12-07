@@ -61,10 +61,10 @@
     "webpack": "^1.10.5"
   },
   "peerDependencies": {
-    "lodash": "^3.10.1",
-    "moment": "^2.10.6",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "react-addons-pure-render-mixin": "^0.14.2"
+    "lodash": ">=3.10.1",
+    "moment": ">=2.10.6",
+    "react": ">=0.14.2",
+    "react-dom": ">=0.14.2",
+    "react-addons-pure-render-mixin": ">=0.14.2"
   }
 }
