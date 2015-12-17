@@ -52,7 +52,8 @@ var Modal = React.createClass({
                 className={modalClasses.className}
                 isOpen={this.props.isOpen}
                 onRequestClose={this.props.onRequestClose}
-                closeTimeoutMS={this.props.transitionDuration}>
+                closeTimeoutMS={this.props.transitionDuration}
+                style={this.props.style}>
                 {this.props.children}
             </ReactModal>
         );
