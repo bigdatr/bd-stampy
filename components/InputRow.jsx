@@ -15,6 +15,7 @@ var InputRow = React.createClass({
     },
     getDefaultProps: function() {
         return {
+            width: 70,
             visible: true
         };
     },
@@ -22,12 +23,19 @@ var InputRow = React.createClass({
         var classes = new ClassBuilder('InputRow');
         classes.add(!this.props.visible, 'is-disabled');
         classes.add(this.props.className);
+
+        var labelWidth = 100 - this.props.width;
+
+        function widthStyle(width) {
+            return {
+                width: `${width}%`
+            };
         }
 
         return (
-            <div className={classes.className}>
-                <div className="InputRow_label"><Label>{this.props.label}</Label></div>
-                <div className="InputRow_input">{this.props.children}</div>
+            <div className={classes.className} style={this.props.style}>
+                <div className="InputRow_label" style={widthStyle(labelWidth)}><Label>{this.props.label}</Label></div>
+                <div className="InputRow_input" style={widthStyle(this.props.width)}>{this.props.children}</div>
             </div>
         );
     }
