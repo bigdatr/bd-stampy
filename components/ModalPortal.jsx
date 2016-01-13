@@ -14,6 +14,31 @@ if (typeof window !== 'undefined') {
     // ReactModal.injectCSS();
 }
 
+var styleReset = {
+    overlay: {
+        // position        : null,
+        // top             : null,
+        // left            : null,
+        // right           : null,
+        // bottom          : null,
+        backgroundColor : null
+    },
+    content: {
+        position                : null,
+        top                     : null,
+        left                    : null,
+        right                   : null,
+        bottom                  : null,
+        border                  : null,
+        background              : null,
+        overflow                : null,
+        WebkitOverflowScrolling : null,
+        borderRadius            : null,
+        outline                 : null,
+        padding                 : null
+    }
+}
+
 var Modal = React.createClass({
     displayName: 'Modal',
     mixins: [ClassMixin, PureRenderMixin],
@@ -53,7 +78,8 @@ var Modal = React.createClass({
                 isOpen={this.props.isOpen}
                 onRequestClose={this.props.onRequestClose}
                 closeTimeoutMS={this.props.transitionDuration}
-                style={this.props.style}>
+                style={styleReset}
+                >
                 {this.props.children}
             </ReactModal>
         );
