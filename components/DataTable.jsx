@@ -44,6 +44,9 @@ var DataTable = React.createClass({
             sortDirection: false
         };
     },
+    getFilterValue(item, filter) {
+        return (typeof filter === 'function') ? filter.call(this, item) : item[filter];
+    },
     onSort(sortValue) {
         // only toggle direction if the user is clicking on the same heading
         var direction = (this.state.sort === sortValue) ? !this.state.sortDirection : true;
@@ -57,15 +60,13 @@ var DataTable = React.createClass({
         // 2. Sort Direction
         // 3. Truncate to pagination
 
-        var props = _.pluck(this.props.schema, 'filter');
-
+        var schemaItemWithFilter = _.pluck(this.props.schema, 'filter');
         var rows = _(this.props.data)
             .filter((data) => {
                 var dataString;
                 if(this.props.search.length) {
-                    dataString = _(data).pick(props).values().join('').toLowerCase();
-
-                    console.log(dataString);
+                    // console.log(_(data).pick(schem`aItemWithFilter).values());
+                    dataString = _(data).pick(schemaItemWithFilter).values().join('').toLowerCase();
                     return dataString.indexOf(this.props.search.toLowerCase()) !== -1;
                 }
                 return true;
@@ -88,7 +89,6 @@ var DataTable = React.createClass({
 
         var classes = this.createClassName('Table');
         var data = this.getBodyData();
-
         return (
             <div>
                 <table className={classes.className}>
@@ -121,10 +121,10 @@ var DataTable = React.createClass({
         if(rowsCollection.length === 0) {
             return <tr><td colSpan={this.props.schema.length}>{this.props.empty}</td></tr>;
         }
-        return  rowsCollection.map((row, key) => {
+        return rowsCollection.map((row, key) => {
             var columns = this.props.schema.map((schemaItem, columnKey) => {
                 // if the user supplies a render function, call that with the current row's data
-                var content = (schemaItem.render) ? schemaItem.render(row) : row[schemaItem.filter];
+                var content = (schemaItem.render) ? schemaItem.render(row) : this.getFilterValue(row, schemaItem.filter);
                 return <td key={columnKey}>{content}</td>;
             });
             return <tr key={key}>{columns}</tr>;
