@@ -67,7 +67,7 @@ var Table = React.createClass({
                     var data_heading =  (this.props.headingData) ? this.props.headingData[key] : '';
                     return <th key={"t-" + i} data-heading={data_heading} onClick={this.props.onClick}>{i}</th>;
                 }
-            }, this);
+            }.bind(this));
 
             return <tr>{_headings}</tr>;
         }
@@ -92,7 +92,7 @@ var Table = React.createClass({
                     }
                     return null;
                 }
-            }, this)
+            }.bind(this))
             .map(function(item){
                 var _id = item._id;
                 var nullCount = 0;
@@ -108,12 +108,12 @@ var Table = React.createClass({
                         return <Td key={key + _id} data={item.value || item}></Td>;
                     }
                     nullCount++;
-                }, this);
+                }.bind(this));
                 if(nullCount === _.size(this.props.children[0])) {
                     return null;
                 }
                 return <Tr key={_id}>{tds}</Tr>;
-            }, this)
+            }.bind(this))
         .value();
 
         if(_.compact(rows).length === 0) {
@@ -144,9 +144,9 @@ var Table = React.createClass({
                             .add(this.state.sortDescending, 'is-descending', 'is-ascending');
                     }
 
-                    return <th key={key} className={tableClass.className} onClick={_.bind(this.onSort, this, name)} style={{width: width}}>{name}</th>;
+                    return <th key={key} className={tableClass.className} onClick={this.onSort.bind(this, name)} style={{width: width}}>{name}</th>;
                 }
-            }, this);
+            }.bind(this));
             return <thead><tr>{headings}</tr></thead>;
         }
     }
