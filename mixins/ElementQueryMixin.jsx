@@ -52,7 +52,6 @@ var ElementQueryMixin = {
     },
     ElementQueryMixin_updateDimensions: function() {
         var el = this.refs.elementToQuery;
-
         if (el) {
             this.setState({elementQuery: getBreakpointName(el.clientWidth)});
         }
