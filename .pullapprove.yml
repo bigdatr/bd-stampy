@@ -1,0 +1,17 @@
+approve_by_comment: true
+approve_regex: '^[aA]pprove'
+reject_regex: '^(No|Reject)'                                                                                                                                 '
+reset_on_push: true
+author_approval: ignored
+reviewers:
+    -
+        name: developers
+        required: 1
+        members:
+            - atridgedcosta
+            - allanhortle
+            - chuan-lim
+            - thepont
+        conditions:
+            branches:
+                - master  # only need to approve if merging to master
