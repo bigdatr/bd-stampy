@@ -60,19 +60,37 @@ var DataTable = React.createClass({
         // 2. Sort Direction
         // 3. Truncate to pagination
 
-        var schemaItemWithFilter = _.pluck(this.props.schema, 'filter');
-        var rows = _(this.props.data)
+
+        let schemaItemWithFilter = this.props.schema.map(value => value['filter']);
+
+        var rows = this.props.data
             .filter((data) => {
                 var dataString;
                 if(this.props.search.length) {
-                    // console.log(_(data).pick(schem`aItemWithFilter).values());
+                    //console.log(_(data).pick(schemaItemWithFilter).values());
                     dataString = _(data).pick(schemaItemWithFilter).values().join('').toLowerCase();
                     return dataString.indexOf(this.props.search.toLowerCase()) !== -1;
                 }
                 return true;
             })
-            .sortByOrder(this.state.sort, this.state.sortDirection)
-        .value();
+            // replace with localeCompare > IE11
+            .sort((a, b) => {
+
+                let sortKey = this.state.sort || 'fullname';
+                let current = a[sortKey].toLowerCase();
+                let next = b[sortKey].toLowerCase();
+
+                let sortDirection = this.state.sortDirection ? 1 : -1;
+
+                //console.log(a[sortKey], b[sortKey]);
+                //console.log(this.state.sortDirection);
+
+                if ( current < next )
+                    return -1 * sortDirection;
+                if ( current > next )
+                    return 1 * sortDirection;
+                return 0;
+            });
 
         return rows;
     },
@@ -93,12 +111,12 @@ var DataTable = React.createClass({
             <div>
                 <table className={classes.className}>
                     <thead>
-                        <tr>
-                            {this.renderTableHead()}
-                        </tr>
+                    <tr>
+                        {this.renderTableHead()}
+                    </tr>
                     </thead>
                     <tbody>
-                        {this.renderTableBody(this.getPaginateRows(data))}
+                    {this.renderTableBody(this.getPaginateRows(data))}
                     </tbody>
                 </table>
                 {this.renderPagination(data.length)}
