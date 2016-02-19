@@ -3,9 +3,6 @@ bd-stampy  [![Build Status](https://travis-ci.org/bigdatr/bd-stampy.svg?branch=m
 
 React UI Component Library
 
-[docs](http://bigdatr.github.io/bd-stampy/)
-
-
 ## Install
 
 ```sh
