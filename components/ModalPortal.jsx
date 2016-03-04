@@ -16,11 +16,6 @@ if (typeof window !== 'undefined') {
 
 var styleReset = {
     overlay: {
-        // position        : null,
-        // top             : null,
-        // left            : null,
-        // right           : null,
-        // bottom          : null,
         backgroundColor : null
     },
     content: {
@@ -65,7 +60,7 @@ var Modal = React.createClass({
         }
     },
     render: function() {
-        if (!this.state.loaded && !this.props.isOpen) {
+        if (!this.state.loaded) {
             return null;
         }
 
