@@ -1,3 +1,8 @@
+describe("A suite", function() {
+    it("contains spec with an expectation", function() {
+        expect(true).toBe(true);
+    });
+});
 // var base_path = '../../';
 // var path = base_path + 'utils/BrowserHistory';
 
