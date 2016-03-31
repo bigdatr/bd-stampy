@@ -60,10 +60,6 @@ var Modal = React.createClass({
         };
     },
     render: function() {
-
-        // console.log('this.state.loaded', this.state.loaded);
-        // console.log('this.props.isOpen', this.props.isOpen);
-
         if (!this.state.loaded && !this.props.isOpen) {
             return null;
         }
