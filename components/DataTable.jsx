@@ -60,7 +60,7 @@ var DataTable = React.createClass({
         // 2. Sort Direction
         // 3. Truncate to pagination
 
-        var schemaItemWithFilter = _.pluck(this.props.schema, 'filter');
+        var schemaItemWithFilter = _.map(this.props.schema, 'filter');
         var rows = _(this.props.data)
             .filter((data) => {
                 var dataString;
@@ -71,7 +71,7 @@ var DataTable = React.createClass({
                 }
                 return true;
             })
-            .sortByOrder(this.state.sort, this.state.sortDirection)
+            .orderBy(this.state.sort, this.state.sortDirection)
         .value();
 
         return rows;
