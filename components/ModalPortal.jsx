@@ -55,7 +55,7 @@ var Modal = React.createClass({
         };
     },
     render: function() {
-        if (!this.state.loaded) {
+        if (!this.state.loaded && !this.props.isOpen) {
             return null;
         }
         var modalClasses = this.createClassName('Modal')
