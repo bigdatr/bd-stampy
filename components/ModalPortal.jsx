@@ -55,9 +55,6 @@ var Modal = React.createClass({
         };
     },
     render: function() {
-        if (!this.state.loaded) {
-            return null;
-        }
         var modalClasses = this.createClassName('Modal')
             .modifier(this.props.transitionName);
 
