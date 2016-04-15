@@ -42,39 +42,23 @@ var DatePicker = React.createClass({
         };
     },
     getInitialState: function() {
-        var value = null;
-
-        if (this.props.value) {
-            var type = typeof this.props.value;
-
-            if (type === 'number') {
-                value = parseInt(this.props.value, 10);
-            }
-        }
-
         return {
             displayDate: moment(this.props.displayDate || new Date()),
             visible: false,
-            value: value
+            value: this.props.value
         };
     },
     componentWillReceiveProps: function (nextProps) {
-        if (nextProps.value !== this.props.value) {
-            var d = parseInt(nextProps.value, 10);
-
-            this.setState({
-                displayDate: moment(d || new Date()),
-                value: d
-            });
-        }
+        this.setState({
+            displayDate: moment(this.props.value || new Date()),
+            value: nextProps.value
+        });
     },
     onKeyUp: function(e){
         if (e.keyCode === 27 ) { // esc
             e.stopPropagation();
             this.onClose();
-            this.refs.input
-                .getElementsByClassName('DatePicker_input')[0]
-                .blur();
+            this.refs.input.blur();
         }
     },
     onMouseDown: function () {
@@ -116,11 +100,10 @@ var DatePicker = React.createClass({
                 value: value
             });
         }
+
         this.setState({visible: false, value: value});
 
-        this.refs.input
-            .getElementsByClassName('DatePicker_input')[0]
-            .blur();
+        this.refs.input.blur();
     },
     onDateShift: function(unit, direction, e) {
         e.preventDefault();
