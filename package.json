@@ -1,6 +1,6 @@
 {
   "name": "bd-stampy",
-  "version": "0.4.20",
+  "version": "0.5.0",
   "description": "React UI Component Library",
   "main": "stampy.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "Atridge D'Costa"
   ],
   "dependencies": {
+    "classnames": "^2.2.0",
     "immutable": "^3.7.6",
     "json-loader": "^0.5.1",
     "node-jsx": "^0.13.3",
