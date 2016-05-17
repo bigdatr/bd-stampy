@@ -10,7 +10,7 @@
  * @param {number} page - the number of the page to show, starting from page 1 (not 0!)
  */
 
-function paginate(array, amount, page) {
+export default function paginate(array, amount, page) {
     // make sure invalid page values are dealt with as this is often set from a query string
     if(!Number.isInteger(page)) {
         page = 1;
