@@ -30,6 +30,7 @@ import classnames from 'classnames';
  * @param {string} [previousButton] - set the text in the 'previous' button
  * @param {boolean} [ellipsis=false] - whether to show ellipsis (...) next to page selection number links or not
  *
+ *
  */
 
 class Pagination extends Component {
