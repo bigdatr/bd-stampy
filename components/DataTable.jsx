@@ -1,97 +1,110 @@
-var React = require('react');
-var _ = require('lodash');
+import React, { Component, PropTypes } from 'react';
+import {fromJS} from 'immutable';
+import classnames from 'classnames';
 
-var Paginate = require('../utils/Paginate');
-var Pagination = require('./Pagination');
-var ClassBuilder = require('../utils/ClassBuilder');
+import componentClassNames from '../utils/ComponentClassNames';
+import Paginate from '../utils/Paginate';
+import Pagination from './Pagination';
 
-var DataTable = React.createClass({
-    displayName: 'DataTable',
-    mixins:[require('../mixins/ClassMixin')],
-    propTypes: {
-        data: React.PropTypes.array.isRequired,
-        search: React.PropTypes.string,
-        schema: React.PropTypes.arrayOf(React.PropTypes.shape({
-            filter: React.PropTypes.oneOfType([
-                React.PropTypes.string,
-                React.PropTypes.func
-            ]),
-            heading: React.PropTypes.string,
-            render: React.PropTypes.func,
-            width: React.PropTypes.oneOfType([
-                React.PropTypes.string,
-                React.PropTypes.number
-            ])
-        })),
-        pagination: React.PropTypes.bool,
-        paginationLength: React.PropTypes.number,
-        paginationPage: React.PropTypes.number,
-        empty: React.PropTypes.element
-    },
-    getDefaultProps() {
-        return {
-            showIndexes: false,
-            pagination: false,
-            search: '',
-            paginationLength: 10,
-            paginationPage: 0,
-            empty: <div className="Table_empty">No Results</div>
-        };
-    },
-    getInitialState() {
-        return {
+class DataTable extends Component {
+
+    constructor(props) {
+        super(props);
+
+        // initial state
+        this.state = {
             sort: null,
             sortDirection: false
         };
-    },
+    }
+    
     getFilterValue(item, filter) {
         return (typeof filter === 'function') ? filter.call(this, item) : item[filter];
-    },
-    onSort(sortValue) {
-        // only toggle direction if the user is clicking on the same heading
-        var direction = (this.state.sort === sortValue) ? !this.state.sortDirection : true;
+    }
+
+    onSort(newSort) {
+        const { sort, sortDirection } = this.state;
+        var newDirection = true;
+        // sort on a column that's already being sorted on
+        if(sort == newSort) {
+            // already sorting forward? reverse it
+            if(sortDirection) {
+                newDirection = false;
+            } else {
+                // already sorting backward? remove the sort
+                newSort = null;
+            }
+        }
+
         this.setState({
-            sort: sortValue,
-            sortDirection: direction
+            sort: newSort,
+            sortDirection: newDirection
         });
-    },
+    }
+
     getBodyData() {
-        // 1. Filter search.
-        // 2. Sort Direction
+        // 1. Filter search
+        // 2. Sort direction
         // 3. Truncate to pagination
 
-        var schemaItemWithFilter = _.map(this.props.schema, 'filter');
-        var rows = _(this.props.data)
-            .filter((data) => {
-                var dataString;
-                if(this.props.search.length) {
-                    // console.log(_(data).pick(schem`aItemWithFilter).values());
-                    dataString = _(data).pick(schemaItemWithFilter).values().join('').toLowerCase();
-                    return dataString.indexOf(this.props.search.toLowerCase()) !== -1;
-                }
-                return true;
-            })
-            .orderBy(this.state.sort, this.state.sortDirection)
-        .value();
+        const { search, data, schema } = this.props;
+        const { sort, sortDirection } = this.state;
 
-        return rows;
-    },
+        var rows = fromJS(data);
+
+        // filter search on keyword
+        if(search.length) {
+            const searchLowercase = search.toLowerCase();
+            const filters = schema.map(ii => ii.filter);
+            rows = rows.filter(row => {
+                const rowJS = row.toJS();
+                return filters
+                    .map(filter => {
+                        if(typeof filter == 'function') {
+                            return filter(rowJS);
+                        }
+                        return row.get(filter, '');
+                    })
+                    .join('|')
+                    .toLowerCase()
+                    .indexOf(searchLowercase) !== -1;
+            });
+        }
+
+        // sort results        
+        if(sort) {
+            var sortFunction = ii => ii[sort];
+            if(typeof sort == 'function') {
+                sortFunction = sort;
+            }
+
+            rows = rows.sortBy(ii => sortFunction(ii.toJS()));
+
+            // reverse sort direction if applicable
+            if(!sortDirection) {
+                rows = rows.reverse();
+            }
+        }
+
+        return rows.toJS();
+    }
+
     getPaginateRows(data){
         if(this.props.pagination) {
             return Paginate(data, this.props.paginationLength, this.props.paginationPage);
         }
         return data;
-    },
+    }
+
     render() {
         if(!this.props.data) {
             return null;
         }
 
-        var classes = this.createClassName('Table');
-        var data = this.getBodyData();
+        const data = this.getBodyData();
         return (
             <div>
-                <table className={classes.className}>
+                <table className={componentClassNames('Table', this.props)}>
                     <thead>
                         <tr>
                             {this.renderTableHead()}
@@ -104,19 +117,29 @@ var DataTable = React.createClass({
                 {this.renderPagination(data.length)}
             </div>
         );
-    },
+    }
+
     renderTableHead() {
         return  this.props.schema.map((column, key) => {
-            var tableHeadingClass = new ClassBuilder();
-            var sortAction = (column.filter) ? this.onSort.bind(null, column.filter) : null;
-
-            if (this.state.sort === column.filter) {
-                tableHeadingClass.add('Table-sort').add(this.state.sortDirection, 'is-ascending', 'is-descending');
+            var sortAction = (column.filter) ? this.onSort.bind(this, column.filter) : null;
+            
+            var className = null;
+            if(this.state.sort === column.filter) {
+                className = classnames('Table-sort', this.state.sortDirection ? 'is-ascending' : 'is-descending');
             }
 
-            return <th key={key} className={tableHeadingClass.className} style={{width: column.width}} onClick={sortAction}>{column.heading || ''}</th>;
+            return (
+                <th
+                    key={key}
+                    className={className}
+                    style={{width: column.width}}
+                    onClick={sortAction}>
+                    {column.heading || ''}
+                </th>
+            );
         });
-    },
+    }
+
     renderTableBody(rowsCollection) {
         if(rowsCollection.length === 0) {
             return <tr><td colSpan={this.props.schema.length}>{this.props.empty}</td></tr>;
@@ -129,12 +152,53 @@ var DataTable = React.createClass({
             });
             return <tr key={key}>{columns}</tr>;
         });
-    },
+    }
+
     renderPagination(length) {
-        if (this.props.pagination) {
-            return <Pagination length={length} page={this.props.paginationPage} ammount={this.props.paginationLength} onClick={this.props.onPagingate}/>;
+        if(this.props.pagination) {
+            return (
+                <Pagination 
+                    length={length}
+                    page={this.props.paginationPage} 
+                    amount={this.props.paginationLength}
+                    onClick={this.props.onPagingate}
+                />
+            );
         }
     }
-});
+}
 
-module.exports = DataTable;
+DataTable.defaultProps = {
+    showIndexes: false,
+    pagination: false,
+    search: '',
+    paginationLength: 10,
+    paginationPage: 1,
+    empty: <div className="Table_empty">No Results</div>
+};
+
+DataTable.propTypes = {
+    data: PropTypes.array.isRequired,
+    search: PropTypes.string,
+    schema: PropTypes.arrayOf(PropTypes.shape({
+        filter: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.func
+        ]),
+        heading: PropTypes.string,
+        render: PropTypes.func,
+        width: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ])
+    })),
+    pagination: PropTypes.bool,
+    paginationLength: PropTypes.number,
+    paginationPage: PropTypes.number,
+    empty: PropTypes.element,
+    modifier: PropTypes.string
+};
+
+export default DataTable;
+
+
