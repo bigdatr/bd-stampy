@@ -104,7 +104,7 @@ class DataTable extends Component {
         const data = this.getBodyData();
         return (
             <div>
-                <table className={componentClassNames('Table', this.props)}>
+                <table className={componentClassNames(this.props, 'Table')}>
                     <thead>
                         <tr>
                             {this.renderTableHead()}

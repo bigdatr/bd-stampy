@@ -62,7 +62,7 @@ class Pagination extends Component {
         var list = this.renderPageList();
 
         return (
-            <div className={componentClassNames('Pagination', this.props)}>
+            <div className={componentClassNames(this.props, 'Pagination')}>
                 {buttons}
                 <ul className="Pagination_list">
                     {list}

@@ -5,7 +5,7 @@ This wraps that usage up in a function
 
 import classnames from 'classnames';
 
-const componentClassNames = (name, props, ...additionalClassnamesArguments) => classnames(
+const componentClassNames = (props, name, ...additionalClassnamesArguments) => classnames(
     name, 
     props.modifier ? props.modifier.split(' ').map(cc => `${name}-${cc}`) : null,
     props.className,
