@@ -1,7 +1,6 @@
 
 import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
-// ^ as we move to es6 and mixins are no longer supported, use the classnames package instead of the class mixin
+import componentClassNames from '../utils/ComponentClassNames';
 
 /**
  * Pagination
@@ -55,12 +54,6 @@ class Pagination extends Component {
     render() {
         var numberOfPages = this.numberOfPages();
 
-        var classes = classnames(
-            "Pagination",
-            this.props.className,
-            this.props.modifier ? this.props.modifier.split(' ').map(ii => `Pagination-${ii}`) : false
-        );
-
         if(numberOfPages === 1) {
             return null;
         }
@@ -69,7 +62,7 @@ class Pagination extends Component {
         var list = this.renderPageList();
 
         return (
-            <div className={classes}>
+            <div className={componentClassNames(this.props, 'Pagination')}>
                 {buttons}
                 <ul className="Pagination_list">
                     {list}
@@ -126,7 +119,7 @@ class Pagination extends Component {
     }
 
     renderPageListItem(pageNumber) {
-        var isActive = pageNumber === this.currentPage() ? 'Pagination_listItem-isActive' : '';
+        var isActive = pageNumber === this.currentPage() ? 'Pagination_listItem-active is-active' : '';
         return <li key={pageNumber} className={`Pagination_listItem ${isActive}`} onClick={this.onClick.bind(this, pageNumber)}><a>{pageNumber}</a></li>;
     }
 
