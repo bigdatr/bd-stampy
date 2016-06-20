@@ -17,6 +17,7 @@ module.exports = function(config) {
         webpack: {
             devtool: 'inline-source-map',
             resolve: {
+                fallback: path.resolve('./src'),
                 extensions: ['', '.js', '.jsx', '.md']
             },
             module: {

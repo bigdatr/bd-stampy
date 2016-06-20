@@ -1,6 +1,4 @@
 /* global document, HTMLElement */
-HTMLElement = typeof HTMLElement === 'undefined' ? function(){} : HTMLElement;
-
 var React = require('react');
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 var ClassMixin = require('../mixins/ClassMixin.jsx');
