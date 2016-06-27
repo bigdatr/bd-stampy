@@ -1,79 +1,87 @@
+import React, { Component, PropTypes } from 'react';
+import componentClassNames from '../utils/ComponentClassNames';
 
+class Button extends Component {
 
-var React = require('react');
-var _ = require('lodash');
-var ClassMixin = require('../mixins/ClassMixin.jsx');
-
-var Button = React.createClass({
-    displayName: 'Button',
-    mixins: [ClassMixin],
-    propTypes: {
-
-        /**
-         * Color name string
-         */
-        color: React.PropTypes.string,
-        component: React.PropTypes.string, //Has some validation issues
-        onClick: React.PropTypes.func,
-        toggle: React.PropTypes.bool,
-        type: React.PropTypes.string,
-        checked: React.PropTypes.bool,
-        disabled: React.PropTypes.bool
-    },
-    getDefaultProps: function () {
-        return {
-            component: 'button',
-            toggle: false,
-            type: 'button',
-            checked: false,
-            disabled: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: props.checked
         };
-    },
-    getInitialState: function() {
-        return {
-            checked: this.props.checked
-        };
-    },
-    getDOMComponent: function() {
-        if (this.props.href){
+    }
+
+    getDOMComponent() {
+        if(this.props.href){
             return React.DOM.a;
         }
-
         return React.DOM[this.props.component];
-    },
-    onClick: function(e) {
-        if (this.props.disabled) {
+    }
+
+    handleClick(e) {
+        if(this.props.disabled) {
             return false;
         }
 
         var state;
-
-        if (this.props.toggle) {
+        if(this.props.toggle) {
             state = { checked: !this.state.checked };
             this.setState(state);
         }
 
-        if (this.props.onClick) {
+        if(this.props.onClick) {
             this.props.onClick(e, state);
         }
-    },
-    render: function() {
-        var classes = this.createClassName('Button').modifier(this.props.color);
+    }
 
-        if ((this.props.toggle && !this.state.checked) || this.props.disabled) {
-            classes.modifier('grey');
+    render() {
+        const {
+            color,
+            type,
+            disabled,
+            toggle,
+            children,
+            className
+        } = this.props;
+
+        const ButtonComponent = this.getDOMComponent();
+
+        // add modifiers based on props
+        const isGrey = (toggle && !this.state.checked) || disabled;
+
+        var additionalModifiers = { grey: isGrey };
+
+        if(color && !isGrey) {
+            additionalModifiers[color] = true;
         }
 
-        var ButtonComponent = this.getDOMComponent();
+        // build props
+        const props = Object.assign({}, this.props, {
+            className: componentClassNames(this.props, 'Button', additionalModifiers),
+            onClick: this.handleClick.bind(this),
+            type
+        });
 
-        var props = _.defaults({
-                className: classes.className,
-                onClick: this.onClick,
-                type: this.props.type
-            }, this.props);
-
-        return ButtonComponent(props, this.props.children);
+        return ButtonComponent(props, children);
     }
-});
+}
 
-module.exports = Button;
+Button.propTypes = {
+    color: PropTypes.string, // used the same way as modifier, kept for legacy reasons
+    component: PropTypes.string, // string specifying type of HTML element to create. Has some validation issues
+    onClick: PropTypes.func, // callback function when button is clicked, provides one argument (mouse event)
+    toggle: PropTypes.bool, // set to true to use this as a toggle - button will keep its own state and appear greyed out when not checked
+    type: PropTypes.string, // <button> type attribute
+    checked: PropTypes.bool, // only used when toggle is true
+    disabled: PropTypes.bool, // button will be disabled and appear greyed out
+    href: PropTypes.string // if provided, this button will be a link that appears as a button
+};
+
+Button.defaultProps = {
+    component: 'button',
+    toggle: false,
+    type: 'button',
+    checked: false,
+    disabled: false
+};
+
+export default Button;
