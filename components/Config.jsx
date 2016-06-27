@@ -2,7 +2,6 @@
 /* global document, window */
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
-var _ = require('lodash');
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 function validateLengthOf2(props, propName, componentName) {
@@ -73,10 +72,8 @@ var Config = React.createClass({
             classes.modifier('right');
         }
 
-        var sidebarStyles = _.merge(this.renderChildProps(1), {
-            marginTop: this.state.sidebarTop,
-            // height: height
-        });
+        var sidebarStyles = this.renderChildProps(1);
+        sidebarStyles.marginTop = this.state.sidebarTop;
 
         return (
             <div className={classes.className}>
