@@ -1,6 +1,4 @@
 /*eslint-disable */
-var _ = require('lodash');
-
 
 // Backbone.History
   // ----------------
@@ -12,7 +10,7 @@ var _ = require('lodash');
   // falls back to polling.
   var History = function() {
     this.handlers = [];
-    _.bindAll(this, 'checkUrl');
+    this.checkUrl.bind(this);
 
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== 'undefined') {
@@ -197,14 +195,14 @@ var _ = require('lodash');
     // returns `false`.
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
-      // return _.any(this.handlers, function(handler) {
-      // FIXME: Changed any to foreach. Should be sorted elsewhere. Allan.
-      return _.forEach(this.handlers, function(handler) {
+      for(var i = 0; i < this.handlers.length; i++) {
+        var handler = this.handlers[i];
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
         }
-      });
+      }
+      return false;
     },
 
     // Save a fragment into the hash history, or replace the URL state if the
