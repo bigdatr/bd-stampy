@@ -10,7 +10,7 @@
   // falls back to polling.
   var History = function() {
     this.handlers = [];
-    this.checkUrl.bind(this);
+    this.checkUrl = this.checkUrl.bind(this);
 
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== 'undefined') {
