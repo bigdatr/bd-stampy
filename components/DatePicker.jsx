@@ -2,8 +2,7 @@
 /*global document */
 
 var React = require('react'),
-    moment = require('moment'),
-    _ = require('lodash');
+    moment = require('moment');
 
 var Input = require('./Input');
 
@@ -270,14 +269,13 @@ var DatePicker = React.createClass({
             calendarOffset = 0;
 
         // Calculate offset at start of calendar
-        _.find(moment.weekdaysShort(), function(w, i) {
-            if (w === firstDay) {
+        var weekdays = moment.weekdaysShort();
+        for(var i = 0; i < weekdays.length; i++) {
+            if(weekdays[i] === firstDay) {
                 calendarOffset = i;
-                return true;
+                break;
             }
-
-            return false;
-        });
+        }
 
         var startOfWeek = moment(startOfMonth).subtract(calendarOffset-1, 'days'),
             weeks = [];

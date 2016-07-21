@@ -1,6 +1,4 @@
 /*eslint-disable */
-var _ = require('lodash');
-
 
 // Backbone.History
   // ----------------
@@ -12,7 +10,7 @@ var _ = require('lodash');
   // falls back to polling.
   var History = function() {
     this.handlers = [];
-    _.bindAll(this, 'checkUrl');
+    this.checkUrl = this.checkUrl.bind(this);
 
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== 'undefined') {
@@ -34,7 +32,7 @@ var _ = require('lodash');
   History.started = false;
 
   // Set up all inheritable **Backbone.History** properties and methods.
-  _.extend(History.prototype, {
+  Object.assign(History.prototype, {
 
     // The default interval to poll for hash changes, if necessary, is
     // twenty times a second.
@@ -86,7 +84,7 @@ var _ = require('lodash');
 
       // Figure out the initial configuration. Do we need an iframe?
       // Is pushState desired ... is it available?
-      this.options          = _.extend({root: '/'}, this.options, options);
+      this.options          = Object.assign({root: '/'}, this.options, options);
       this.root             = this.options.root;
       this._wantsHashChange = this.options.hashChange !== false;
       this._hasHashChange   = 'onhashchange' in window;
@@ -197,14 +195,14 @@ var _ = require('lodash');
     // returns `false`.
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
-      // return _.any(this.handlers, function(handler) {
-      // FIXME: Changed any to foreach. Should be sorted elsewhere. Allan.
-      return _.forEach(this.handlers, function(handler) {
+      for(var i = 0; i < this.handlers.length; i++) {
+        var handler = this.handlers[i];
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
         }
-      });
+      }
+      return false;
     },
 
     // Save a fragment into the hash history, or replace the URL state if the

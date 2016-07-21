@@ -2,7 +2,6 @@
 /*global Image*/
 
 var React = require('react');
-var _ = require('lodash');
 
 var Img = React.createClass({
     displayName: 'Img',
@@ -139,7 +138,7 @@ var Img = React.createClass({
             .add(this.props.className)
             .add(errorClass);
 
-        if(_.isString(src)) {
+        if(typeof src == "string") {
             return <img
                 className={classes.className}
                 src={src}

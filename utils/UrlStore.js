@@ -2,14 +2,13 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var BrowserHistory = require('../utils/BrowserHistory');
-var _ = require('lodash');
 var urlPattern = require('url-pattern');
 
 var UrlStore = function () {};
 
 util.inherits(UrlStore, EventEmitter);
 
-UrlStore.prototype = _.defaults(UrlStore.prototype, {
+Object.assign(UrlStore.prototype, {
     _onRouteChange: function(route) {
         // console.debug('route:change', route);
         this.emit('route:change');
@@ -41,33 +40,32 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
     paramsToQueryString: function(params) {
         // Add params to an array so they can be sorted
         var paramList = [];
+        for(var k in params) {
+            paramList.push({key: k, value: params[k]});
+        }
 
-        _.forIn(params, function(v, k) {
-            paramList.push({key: k, value: v});
+        paramList.sort(function(a, b) {
+            var x = a.key.toLowerCase();
+            var y = b.key.toLowerCase();
+            return x<y ? -1 : x>y ? 1 : 0;
         });
 
-        var queryString = _.chain(paramList)
-                            .sortBy(function(p) { return p.key; })
-                            .map(function(p) {
-                                var val;
-
-                                if (typeof p.value === 'object' && p.value.length) {
-                                    // Convert arrays to pipe delimited strings
-                                    val = _.chain(p.value)
-                                                .map(function(f) {
-                                                    return encodeURIComponent(f);
-                                                })
-                                                .join('|')
-                                                .value();
-                                }
-                                else {
-                                    val = encodeURIComponent(p.value);
-                                }
-
-                                return p.key + '=' + val;
-                            })
-                            .join('&')
-                            .value();
+        var queryString = paramList
+            .map(function(p) {
+                var val;
+                if (typeof p.value === 'object' && p.value.length) {
+                    // Convert arrays to pipe delimited strings
+                    val = p.value
+                        .map(function(f) {
+                            return encodeURIComponent(f);
+                        })
+                        .join('|');
+                } else {
+                    val = encodeURIComponent(p.value);
+                }
+                return p.key + '=' + val;
+            })
+            .join('&');
 
         return queryString.length > 0 ? queryString : '';
     },
@@ -92,17 +90,16 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
         var currentParams = this.getQueryParams();
 
         // // Merge existing parameters with those which have been provided
-        var _toParams = _.defaults(params, currentParams);
+        var _toParams = Object.assign({}, params, currentParams);
 
         // // Ignore all null values
         var nextParams = {};
-        _.forIn(_toParams, function(v, k) {
+        for(var k in _toParams) {
+            var v = _toParams[k];
             if (k !== '' && v) {
                 nextParams[k] = v;
             }
-        });
-
-
+        }
 
         var currentQueryString = BrowserHistory.getQueryString();
         var nextQueryString = this.paramsToQueryString(nextParams);
@@ -116,7 +113,7 @@ UrlStore.prototype = _.defaults(UrlStore.prototype, {
                 nextPath += '?' + nextQueryString;
             }
 
-            var options = _.defaults(config || {}, {
+            var options = Object.assign({}, config || {}, {
                 addHistoryEvent: true,      // Create a new event in the browser's history
                 trigger: true
             });

@@ -1,7 +1,6 @@
 /*eslint-disable */
 
 var _History = require('../utils/History');
-var _ = require('lodash');
 
 var BrowserHistory = function () {
     this._hash = '';
@@ -21,7 +20,7 @@ BrowserHistory.prototype = {
         }
     },
     navigate: function(path, options) {
-        var opt = _.defaults(options, {trigger: true});
+        var opt = Object.assign({trigger: true}, options);
 
         return _History.navigate(path, opt);
     },
