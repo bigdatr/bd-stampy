@@ -1,6 +1,5 @@
 
-var BrowserHistory = require('../utils/History'),
-    _ = require('lodash');
+var BrowserHistory = require('../utils/History');
 
 var Url = {
     getQueryParams: function() {
@@ -40,7 +39,7 @@ var Url = {
 
         params = params || {};
 
-        var options = _.defaults(config || {}, {
+        var options = Object.assign({}, config || {}, {
             addHistoryEvent: true,      // Create a new event in the browser's history
             trigger: true
         });
@@ -52,16 +51,16 @@ var Url = {
             hashComponents = hash.split('?');
 
         // Merge existing parameters with those which have been provided
-        params = _.defaults(params, currentParams);
+        params = Object.assign({}, params, currentParams);
 
         // Ignore all null values
         var nextParams = {};
-
-        _.forIn(params, function(v, k) {
+        for(var k in params) {
+            var v = params[k];
             if (k !== '' && v) {
                 nextParams[k] = encodeURI(v);
             }
-        });
+        }
 
         var currentBasePath = hashComponents[0],
             currentQueryString = '?' + hashComponents[1],
@@ -76,19 +75,23 @@ var Url = {
     paramsToQuery: function(params) {
         // Sort the params
         var paramList = [];
-        _.forIn(params, function(v, k) {
-            paramList.push({key: k, value: v});
+        for(var k in params) {
+            paramList.push({key: k, value: params[k]});
+        }
+
+        paramList.sort(function(a, b) {
+            var x = a.key.toLowerCase();
+            var y = b.key.toLowerCase();
+            return x<y ? -1 : x>y ? 1 : 0;
         });
 
-        var queryString = _.chain(paramList)
-            .sortBy(function(p) { return p.key; })
+        var queryString = paramList
             .map(function(p) {
                 return p.key + '=' + encodeURIComponent(p.value);
             })
-            .join('&')
-            .value();
+            .join('&');
 
-        return queryString.length > 0 ? '?' + queryString : '';
+        return queryString.length > 0 ? queryString : '';
     }
 };
 
