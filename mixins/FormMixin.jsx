@@ -1,9 +1,8 @@
-
-var _ = require('lodash');
+var Immutable = require('immutable');
 
 var FormMixin = {
 	getInitialState: function() {
-        var formData = _.cloneDeep(this.props.formData || {});
+        var formData = Immutable.fromJS(this.props.formData).toJS();
         var formErrors = this.props.formData ? this.FormMixin_validateAll(formData) : {};
 
         var nextState = {
@@ -67,7 +66,7 @@ var FormMixin = {
         return true;
     },
     FormMixin_getData: function() {
-        var data = _.clone(this.state.formData);
+        var data = Immutable.fromJS(this.state.formData).toJS();
 
         if (this.transformData) {
             for (var key in this.transformData) {
