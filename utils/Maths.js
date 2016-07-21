@@ -6,21 +6,9 @@
 // Feel free to think of a better one.
 // 
 
-var _ = require('lodash');
-
 var Maths = {
     extent: function (data) {
-        var sorted = _.sortBy(data);
-
-        // Sorts array and returns as [first, last]
-        // var sorted = data.sort(function (a,b) {
-        //     return a - b;               
-        // });
-
-        var min = sorted[0];
-        var max = sorted[sorted.length - 1];
-
-        return [min, max];
+        return [Math.min.apply(null, data), Math.max.apply(null, data)];
     },
     normalize: function (rawValue, min, max) {
         // return 100 - Math.round((ammount / max) * 100);
@@ -42,7 +30,26 @@ var Maths = {
 
         // return a range from base to the max at steps of the tickSpace.
         // Must add 1 becuase the last tick's height is really a zero value
-        return _.range(min, max + tickSpace, tickSpace).reverse();
+        return this.range(min, max + tickSpace, tickSpace).reverse();
+    },
+    range: function(start, end, step) {
+        // from lodash 3.10.1
+        start = +start || 0;
+        step = step == null ? 1 : (+step || 0);
+        if (end == null) {
+            end = start;
+            start = 0;
+        } else {
+            end = +end || 0;
+        }
+        var index = -1,
+            length = Math.max(Math.ceil((end - start) / (step || 1)), 0),
+            result = Array(length);
+        while (++index < length) {
+            result[index] = start;
+            start += step;
+        }
+        return result;
     },
     autoDecimalPlaces: function (value, fixed, cutoff) {
         cutoff = cutoff || 0.1;

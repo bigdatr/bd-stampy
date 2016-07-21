@@ -2,7 +2,6 @@
 
 var React = require('react');
 var ClassMixin = require('../mixins/ClassMixin.jsx');
-var _ = require('lodash');
 
 
 
@@ -41,7 +40,11 @@ var Input = React.createClass({
         }
 
         json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        return _.map(json.match(/(\s+)|("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)|([:,\{\}])/g), function(match) {
+        var matches = json.match(/(\s+)|("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)|([:,\{\}])/g);
+        if(!matches) {
+            return;
+        }
+        return matches.map(function(match) {
             var cls = 'char';
             if (/^"/.test(match)) {
                 if (/:$/.test(match)) {
@@ -59,7 +62,6 @@ var Input = React.createClass({
 
             return <span className={cls}>{match}</span>
         });
-
     }
 });
 
