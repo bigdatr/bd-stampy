@@ -1,6 +1,5 @@
 
 var React = require('react');
-var _ = require('lodash');
 
 var ClassBuilder = require('../utils/ClassBuilder');
 var ClassMixin = require('../mixins/ClassMixin');
@@ -78,7 +77,7 @@ var SelectStandard = React.createClass({
     },
     renderOptions: function () {
         if(this.state.results.length) {
-            var options =  _.map(this.state.results, function (option, key){
+            var options =  this.state.results.map(function (option, key){
                 return <li key={key} onMouseDown={this.onSelect.bind(this, key)} value={option.value}>{option.label}</li>;
             }.bind(this));
 
@@ -86,8 +85,12 @@ var SelectStandard = React.createClass({
         }
     },
     renderValue: function () {
-        var option =  _.find(this.props.options, {value: this.state.value}) || this.props.options[0];
-        return option.label;
+        for(var i = 0; this.props.options.length; i++) {
+            if(this.props.options[i].value == this.state.value) {
+                return this.props.options[i].label;
+            }
+        }
+        return this.props.options[0].label;
     }
 });
 
