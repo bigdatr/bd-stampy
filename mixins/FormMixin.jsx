@@ -2,7 +2,7 @@ var Immutable = require('immutable');
 
 var FormMixin = {
 	getInitialState: function() {
-        var formData = Immutable.fromJS(this.props.formData).toJS();
+        var formData = this.props.formData ? Immutable.fromJS(this.props.formData).toJS() : {};
         var formErrors = this.props.formData ? this.FormMixin_validateAll(formData) : {};
 
         var nextState = {
@@ -66,7 +66,7 @@ var FormMixin = {
         return true;
     },
     FormMixin_getData: function() {
-        var data = Immutable.fromJS(this.state.formData).toJS();
+        var data = this.state.formData ? Immutable.fromJS(this.state.formData).toJS() : {};
 
         if (this.transformData) {
             for (var key in this.transformData) {
