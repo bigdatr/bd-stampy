@@ -155,13 +155,26 @@ class DataTable extends Component {
     }
 
     renderPagination(length) {
-        if(this.props.pagination) {
+        const {
+            pagination,
+            paginationPage,
+            paginationLength,
+            onPaginate,
+            onPagingate
+        } = this.props;
+
+        if(pagination) {
+            const handleClick = (a,b) => {
+                onPaginate && onPaginate(a,b);
+                onPagingate && onPagingate(a,b);
+            };
+
             return (
                 <Pagination 
                     length={length}
-                    page={this.props.paginationPage} 
-                    amount={this.props.paginationLength}
-                    onClick={this.props.onPagingate}
+                    page={paginationPage} 
+                    amount={paginationLength}
+                    onClick={handleClick}
                 />
             );
         }
@@ -195,6 +208,8 @@ DataTable.propTypes = {
     pagination: PropTypes.bool,
     paginationLength: PropTypes.number,
     paginationPage: PropTypes.number,
+    onPagingate: PropTypes.func, // legacy
+    onPaginate: PropTypes.func, // corrected spelling
     empty: PropTypes.element,
     modifier: PropTypes.string
 };
