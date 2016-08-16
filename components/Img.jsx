@@ -111,11 +111,15 @@ var Img = React.createClass({
         }
 
         if(this.props.height) {
-            height = this.props.height;
+
+            // Is this intended ?!
+            // Remove or refactor to proportional prop
+            // as setting height has unexpected results
+            width = this.props.height;
         }
 
-        if(this.props.height) {
-            width = this.props.height;
+        if(this.props.maxWidth) {
+            width = this.props.maxWidth;
         }
 
 
