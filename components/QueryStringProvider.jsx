@@ -3,8 +3,8 @@ import { fromJS, List } from 'immutable';
 
 //
 // QueryStringProvider higher order component
-// Allows you to pass a prop of the query string to this HOC's children and set or update the query string, and also allows for array parameters
-// Provides the following props:
+// Allows you to get and set the query string object by providing a child component with props, using react-router. It also allows for array parameters.
+// it provides the following props:
 //
 // + query - the object representing the query string. Change this props name using config.queryPropName
 // + updateQuery - a function to updates only parts of the query at once. Good at not demolishing other query params not set by this component
