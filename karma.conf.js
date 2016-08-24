@@ -5,10 +5,10 @@ module.exports = function(config) {
         browsers: ['Firefox'],
         frameworks: ['jasmine'],
         files: [
-            './testsEntry.js'
+            '__tests__/**/*.js'
         ],
         preprocessors: {
-            './testsEntry.js': 'webpack'
+            '__tests__/**/*.js': 'webpack'
         },
         reporters: ['mocha', 'coverage'],
         singleRun: true,

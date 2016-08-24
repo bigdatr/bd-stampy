@@ -4,8 +4,7 @@
   "description": "React UI Component Library",
   "main": "stampy.js",
   "scripts": {
-    "test": "karma start karma.conf.js",
-    "coverage": "istanbul cover __tests__/components/Button-test.js"
+    "test": "echo 'no tests provided'"
   },
   "repository": {
     "type": "git",
