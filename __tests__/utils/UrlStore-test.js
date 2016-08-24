@@ -4,6 +4,12 @@
 // jest.dontMock(path);
 // jest.mock(base_path + 'utils/BrowserHistory');
 
+describe('TestTest', function(){
+	it('passes the test', function() {
+		expect(true).toBe(false);
+	});
+});
+
 
 // describe('UrlStore.getQueryParams', function() {
 //     var BrowserHistory = require(base_path + 'utils/BrowserHistory');
