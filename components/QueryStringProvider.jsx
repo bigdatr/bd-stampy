@@ -11,7 +11,7 @@ import AutoRequest from 'bd-stampy/components/AutoRequest';
 // + updateQuery - a function to updates only parts of the query at once. Good at not demolishing other query params not set by this component
 // + setQuery - a function to set the query
 //
-// This higher order component accepts a config object to pass conguration options in
+// This higher order component accepts a config object to pass configuration options in
 // Valid options are
 // + queryPropName - optional string, sets the name of the query prop. Defaults to "query"
 // + replaceState - optional boolean, setting this to true will make query changes use replaceState instead of pushState
@@ -36,7 +36,7 @@ export default (config, onChangeFunction) => (ComposedComponent) => {
 
     const PreparedComposedComponent = !onChangeFunction
         ? ComposedComponent
-        : AutoRequest(['query'], (props) => {
+        : AutoRequest([queryPropName], (props) => {
             onChangeFunction(props[queryPropName], props);
         })(ComposedComponent);
 
