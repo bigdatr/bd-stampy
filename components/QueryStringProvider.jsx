@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Immutable, { fromJS, List } from 'immutable';
+import Immutable, { fromJS, List, Map } from 'immutable';
 import AutoRequest from 'bd-stampy/components/AutoRequest';
 
 //
@@ -13,6 +13,7 @@ import AutoRequest from 'bd-stampy/components/AutoRequest';
 //
 // This higher order component accepts a config object to pass configuration options in
 // Valid options are
+// + defaultQuery - optional object, these defaults will be passed down in the query prop if they aren't present in the actual query string
 // + queryPropName - optional string, sets the name of the query prop. Defaults to "query"
 // + replaceState - optional boolean, setting this to true will make query changes use replaceState instead of pushState
 // + arrayParams - optional array, if you have certain query parameters that you always want to return as arrays, name them in here
@@ -33,6 +34,7 @@ export default (config, onChangeFunction) => (ComposedComponent) => {
     const replaceState = config && config.replaceState;
     const queryPropName = (config && config.queryPropName) || "query";
     const arrayParams = (config && fromJS(config.arrayParams)) || List();
+    const defaultQuery = (config && fromJS(config.defaultQuery)) || Map();
 
     const PreparedComposedComponent = !onChangeFunction
         ? ComposedComponent
@@ -54,7 +56,7 @@ export default (config, onChangeFunction) => (ComposedComponent) => {
         // gets the query object
 
         getQuery(props = this.props) {
-            const query = fromJS(props.location.query);
+            const query = defaultQuery.merge(fromJS(props.location.query));
 
             // ensures that all arrayParams are returned as arrays (not strings or blank)
             return arrayParams
