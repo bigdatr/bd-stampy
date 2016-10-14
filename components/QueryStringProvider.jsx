@@ -119,7 +119,7 @@ export default (config, onChangeFunction) => (ComposedComponent) => {
     };
     
     QueryStringProvider.contextTypes = {
-        router: React.PropTypes.func // required for react-router v2
+        router: PropTypes.object // required for react-router v2
     };
 
     return QueryStringProvider;
