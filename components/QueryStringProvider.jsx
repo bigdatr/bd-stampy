@@ -86,7 +86,7 @@ export default (config, onChangeFunction) => (ComposedComponent) => {
         setQuery(query) {
             const routerMethod = replaceState ? "replace" : "push";
             const newQuery = fromJS(query)
-                .filter(ii => ii !== "")
+                .filter(ii => ii !== "" && ii != null) // non strict null comparison to catch undefined & null
                 .toJS();
 
             if(this.context.router) {
